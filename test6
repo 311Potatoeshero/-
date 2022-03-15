@@ -1,0 +1,45 @@
+/*#include"stdio.h" 
+//有三个数abc要求按大小顺序输出
+int Max(int a,int b,int c)
+{undefined
+int tmp;
+if(a<b)
+{undefined
+tmp=a;
+a=b;
+b=tmp;
+}
+if(a<c)
+{undefined
+tmp=a;
+a=c;
+c=tmp;
+}
+if(b<c)
+{undefined
+tmp=b;
+b=c;
+c=tmp;
+}
+printf("%d,%d,%d\n",a,b,c);
+return 0;
+}
+int main()
+{undefined
+Max(1,5,2);
+}*/
+#include<stdio.h>
+int main()
+{undefined
+int n;
+scanf("%d",&n);
+if(n%3= =0 && n%5==0) // =中间的空格删掉
+{undefined
+printf(“true\n”);
+}
+else
+{undefined
+printf(“false\n”);
+}
+return 0;
+}
