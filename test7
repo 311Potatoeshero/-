@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+//0到100可以被整除的数
+int main()
+{
+	printf("请输入一个被除数：\n");
+	int num1 = 0;
+	scanf_s("%d",&num1);
+
+	printf("0到100可以被%d整除的数有：\n",num1);
+
+	for (int i = 1; i <= 100; i++)
+	{
+		if (i%num1 == 0)
+			printf("%d\n",i);
+	}
+	system("pause");
+	return 0;
+}
+
+
+#include<stdio.h>
+#include<stdlib.h>
+//鸡兔同笼问题
+int main()
+{
+	int x=0, y=0;		//假设鸡的数量为x，兔的数量为y
+	for (x = 0; x <= 88; x++)
+	{
+		y = 88 - x;
+		if (x * 2 + 4 * y == 244)
+		{
+			printf("鸡的数量为：%d\n兔的数量为：%d\n", x, y);
+		}
+	}
+	system("pause");
+	return 0;
+}
+
+#include<stdio.h>
+#include<stdlib.h>
+//100以内3的倍数和
+int main()
+{
+	int sum = 0;
+	for (int i = 1; i <= 100; i++)
+	{
+		if (i % 3 == 0)
+		{
+			sum += i;
+			printf("sum=%d 当前循环次数为i=%d\n", sum, i / 3);
+		}
+	}
+	printf("结果为%d\n", sum);
+	system("pause");
+	return 0;
+}
+
+
+#include<stdio.h>
+#include<stdlib.h>
+//用*打印三角形
+int main()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j <6-1-i; j++)            //打印空格数
+		{
+			printf(" ");
+		}
+		for (int k = 0; k < 2 * i+1; k++)          //打印*号数
+			printf("*");
+		printf("\n");
+	}
+
+	system("pause");
+	return 0;
+}
+
+#include<stdio.h>
+#include<stdlib.h>
+//给出时间，打印下一秒的时刻
+int main()
+{
+	int a = 0, b = 0, c = 0;
+	printf("请输入时\n");
+	scanf_s("%d",&a);
+	printf("请输入分\n");
+	scanf_s("\n%d", &b);
+	printf("请输入秒\n");
+	scanf_s("\n%d", &c);
+	if ((a >= 0 && a <= 23) && (b >= 0 && b <= 59) && (c >= 0 && c <= 59))
+	{
+		if (c == 59 && b != 59)
+			printf("%.2d:%.2d:00\n", a, b + 1);
+		else if (c == 59 && b == 59 && a != 23)
+			printf("%.2d:00:00\n", a + 1);
+		else if (c == 59 && b == 59 && a == 23)
+			printf("00:00:00\n");
+		else
+			printf("%.2d:%.2d:%d\n",a,b,c+1);
+
+	}
+	else
+	{
+		printf("输入错误！\n");
+	}
+	system("pause");
+	return 0;
+}
