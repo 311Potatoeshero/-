@@ -1,0 +1,81 @@
+//狼追兔子问题
+#include <stdio.h> 
+#include <stdlib.h>     //srand()/rand()
+#include <time.h>       //time()
+
+int main()
+{
+    char choice = '\0'; //菜单选择
+    int ret = 0;
+    //用系统秒数初始化随机数种子
+    srand((unsigned)time(NULL));
+    while(1)
+    {      
+        /* 1.菜单打印 */
+        system("cls");  //清屏--Windows系统
+        printf("======================\n");
+        printf("|     掷骰子游戏     |\n");
+        printf("|  1:掷骰子  0:退出  |\n");
+        if(ret)
+            printf("|     上轮点数:%d     |\n", ret);
+        printf("======================\n");
+
+        /* 2.操作选择 */
+        printf("请选择>>>>>>>\n");
+        scanf(" %c", &choice);    //输入选择
+                                  //" %c" 可以吃前面的空格和回车
+        while(getchar() != '\n'); //吃掉除choice外其它字符
+        ret = 0;                  //初始化点数
+        switch(choice)
+        {
+            case '0': 
+            	printf("Goodbye!\n");
+    			return 0;   //退出
+            //掷骰子(产生1 ~ 6 随机数)
+            case '1':
+             	ret = rand() % 6 + 1;
+                break;
+            default: printf("无效选择!\n");
+        }
+    }
+    return 0;
+}
+
+
+//有数字1,2,3,4 能组成多少个互不相同且无重复数字的三位数？都是多少？
+#include <stdio.h>
+int main(int argc, char* argv[])
+{
+    long int i;
+    int bonus1,bonus2,bonus4,bonus6,bonus10,bonus;
+    printf("请输入利润i：");
+    scanf("%d",&i);
+    bonus1 = 100000 * 0.1;
+    bonus2 =bonus1 + 100000 * 0.075;
+    bonus4 =bonus2 + 200000 * 0.05;
+    bonus6 =bonus4 + 200000 * 0.03;
+    bonus10 =bonus6 + 400000 * 0.015;
+
+    if(i <= 100000)
+        bonus = i * 0.1;
+
+    if(100000 < i <= 200000 )
+        bonus = (i-100000) * 0.075 + bonus1;
+
+    if(200000 < i <= 400000)
+        bonus = (i-200000) * 0.05 + bonus2;
+
+    if(400000 < i <= 600000)
+        bonus = (i-400000) * 0.03 + bonus4;
+
+    if(600000 < i <=1000000)
+        bonus = (i-600000) * 0.015 + bonus6;
+
+    if(i > 1000000)
+    {
+        bonus = (i-1000000) * 0.01 + bonus10;
+
+    }
+
+    printf("%ld",bonus);
+}
