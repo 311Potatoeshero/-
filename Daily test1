@@ -1,0 +1,136 @@
+//#include <stdio.h>
+////%o八进制输出
+////%x十六进制输出
+//int main()
+//{
+//	//int k = 33;
+//	int k = -17;
+//	printf("%d,%o,%x\n", k, 1-k, 1-k);
+//	return 0;
+//}
+
+#include <stdio.h>
+//将1，2，3输入给abc
+//int main()
+//{
+//	/*int a;
+//	float b;
+//	double c;
+//	scanf_s("%d%f%lf", &a, &b, &c);
+//	printf("%d %f %lf\n", a, b, c);
+//	printf("a = %d,b = %f,c = %lf", a, b, c);*/
+//	int c = 2;
+//	double z;
+//	z = 1.2 / c;
+//	printf("%f ", z);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	/*int a = 2;
+//	int b = 2;
+//	int c = 2;
+//	int z = 1 / (a*b*c);
+//	int x = 1.0 / a / b / c;
+//	printf("%d %d", z, x);*/
+//	int x = 010, y = 10;
+//	printf("%d\n", x);
+//	printf("%d,%d\n", ++x, y--);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int fun(int  a[], int  n)
+//{
+//	int i, t;
+//	for (i = 0; i < n/2; i++)//逆置数组的值，将a[0]与a[n-1]对换位置，需要对换n/2次
+//	{
+//		t = a[i];
+//		a[i] = a[n - 1 - i];
+//		a[n - 1 - i] = t;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//		int  b[9] = { 1,2,3,4,5,6,7,8,9 }, i;
+//		printf("\nThe original data  :\n");
+//		for (i = 0; i < 9; i++)
+//			printf("%4d ", b[i]);
+//		printf("\n");
+//		fun(b, 9);
+//		printf("\nThe data after invert  :\n");
+//		for (i = 0; i < 9; i++)
+//			printf("%4d ", b[i]);
+//		printf("\n");
+//}
+//
+//#include    <stdio.h>
+////fun的功能完成数字字符的转换
+//char fun(char  ch)
+//{
+//	if (ch >= '0' && ch <= '9')
+//		return  '9' - (ch - '0');
+//	return  ch;
+//}
+//main()
+//{
+//	char  c1, c2;
+//	printf("\nThe result  :\n");
+//	c1 = '2';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//	c1 = '8';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//	c1 = 'a';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//}
+
+//#include    <stdio.h>
+//#include    <ctype.h>
+////
+//char fun(char  ch)
+//{
+//	if ((ch >= 'a') && (ch <= 'z'))//判断ch是否为小写字母
+//		return  ch - 'a' + 'A';
+//	//大写转换小写，大写转小写ASCII+32
+//	if (isupper(ch))
+//		return  ch + 'a' - 'A';
+//	return ch;
+//	//其他值保持不变，既不大写也不小写
+//}
+//char main()
+//{
+//	char  c1, c2;
+//	printf("\nThe result  :\n");
+//	c1 = 'w';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//	c1 = 'W';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//	c1 = '8';   c2 = fun(c1);
+//	printf("c1=%c    c2=%c\n", c1, c2);
+//}
+
+#include    <stdio.h>
+#include    <math.h>
+double fun(double  x, int  n)
+{
+	double  f, t;      int  i;
+	f = 1.0;
+	t = -1;
+	for (i = 1; i < n; i++)
+	{
+		t *= (-1)*x / i;
+		f += t;
+	}
+	return  f;
+}
+int main()
+{
+	double  x, y;
+	x = 2.5;
+	y = fun(x, 15);
+	printf("\nThe result is :\n");
+	printf("x=%-12.6f    y=%-12.6f\n", x, y);
+}
