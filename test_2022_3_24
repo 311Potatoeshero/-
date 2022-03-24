@@ -1,0 +1,144 @@
+//#include <stdio.h>
+////计算器
+//void menu()
+//{
+//	printf("**************************\n");
+//	printf("*** 1.add        2.sub ***\n");
+//	printf("*** 3.mul        4.div ***\n");
+//	printf("***       0.exit       ***\n");
+//	printf("**************************\n");
+//
+//}
+//int Add(int x ,int y)
+//{
+//	return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//int main()
+//{
+//	int input = 0;
+//	int x = 0;
+//	int y = 0;
+//	do
+//	{
+//		menu();
+//	    printf("请选择：>");
+//	    scanf_s("%d", &input);
+//		switch (input)
+//		{
+//		case 1:
+//			printf("请输入两个操作数：>");
+//			scanf_s("%d%d", &x, &y);
+//			printf("%d\n", Add(x, y));
+//			break;
+//			//加法
+//		case 2:
+//			printf("请输入两个操作数：>");
+//			scanf_s("%d%d", &x, &y);
+//			printf("%d\n", Sub(x, y));
+//			break;
+//			//减法
+//		case 3:
+//			printf("请输入两个操作数：>");
+//			scanf_s("%d%d", &x, &y);
+//			printf("%d\n", Mul(x, y));
+//			break;
+//			//乘法
+//		case 4:
+//			printf("请输入两个操作数：>");
+//			scanf_s("%d%d", &x, &y);
+//			printf("%d\n", Div(x, y));
+//			break;
+//			//除法
+//		case 0:
+//			printf("退出\n");
+//			break;
+//		default:
+//			printf("选择错误\n");
+//			break;
+//		}
+//	} while (input);
+//}
+
+#include <stdio.h>
+#include <math.h>
+//存款
+double one()
+{
+	int n ;
+	int r = 0.015;
+	double x = 1.0;
+	for (n = 1; n <= 5; n++)
+	{
+		x =x * (1 + r);
+	}
+	return x;
+}
+double mypow(int x)
+{
+	double r = 0.035;
+	double result;
+	result = pow((1 + r / 4), 4 * x);
+	return result;
+}
+int main()
+{
+	double r = 0;//年利息
+	int n = 0;//存款年数
+	double p = 0;//本息和
+	double p1 = 0;//2/3年后本息和
+	int x = 0;//活期年份
+	int i = 0;//循环
+	do
+	{
+		printf("请输入存款年数(输入4默认为活期)：>");
+		scanf_s("%d\n",&n);
+		switch (n)
+		{
+		case 5:
+			r = 0.03;
+			p = 1000 * (1 + n * r);
+			printf("该存款方式得金：%lf\n", p);
+			i++;
+			break;
+		case 2:
+			r = 0.021;
+			p = 1000 * (1 + n * r);
+			p1 = p + p * (1 + (5 - n)*0.0275);
+			printf("该存款方式得金：%lf\n", p1);
+			i++;
+			break;
+		case 3:
+			r = 0.0275;
+			p = 1000 * (1 + n * r);
+			p1 = p + p * (1 + (5 - n)*0.021);
+			printf("该存款方式得金：%lf\n", p1);
+			i++;
+			break;
+		case 1:
+			r = 0.015;
+			p = 1000 * one();
+			printf("该存款方式得金：%lf\n", p);
+			i++;
+			break;
+		case 4:
+			r = 0.035;
+			printf("请输入存款年份：>");
+			scanf_s("%d\n", &x);
+			printf("%lf\n", p = 1000 * mypow(x));
+			i++;
+			break;
+		}
+	} while (i<1);
+}
