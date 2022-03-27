@@ -1,0 +1,200 @@
+//#include <stdio.h>
+//#include <string.h>
+////将“China”译成密码
+//int main()
+//{
+//	char c1 = 'C';
+//	char c2 = 'h';
+//	char c3 = 'i';
+//	char c4 = 'n';
+//	char c5 = 'a';
+//	putchar(c1);
+//	putchar(c2);
+//	putchar(c3);
+//	putchar(c4);
+//	putchar(c5);
+//	c1 += 4;
+//	c2 += 4;
+//	c3 += 4;
+//	c4 += 4;
+//	c5 += 4;
+//	printf("\n");
+//	printf("%c%c%c%c%c",c1,c2,c3,c4,c5);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#define P 3.14
+//float Per(float r)
+//{
+//	float per = 0;
+//	return per = 2 * P*r;
+//}
+//float Are(float r)
+//{
+//	float are = 0;
+//	return are = P * (r * r);
+//}
+//float Sup(float r)
+//{
+//	float sup = 0;
+//	return sup = 4 * P * (r * r);
+//}
+//float Bul(float r)
+//{
+//	float bul = 0;
+//	return bul = (3 / 4) * P * (r * r * r);
+//}
+//float Cyl(float r,float h)
+//{
+//	float cyl = 0;
+//	return cyl = P * (r * r) * h;
+//}
+//int main()
+//{
+//	float r = 1.5;
+//	float h = 3;
+//	printf("圆的周长是：%f\n", Per(r));
+//	printf("圆的面积是：%f\n", Are(r));
+//	printf("圆的表面积是：%f\n", Sup(r));
+//	printf("圆的体积是：%f\n", Bul(r));
+//	printf("圆的圆柱是：%f\n", Cyl(r,h));
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <string.h>
+//int main()
+//{
+//	/*char c1 = 'A';
+//	char c2 = 'B';*/
+//	int c1 = 'A';
+//	int c2 = 'B';
+//	//c1,c2可以定义字符型和整型
+//	putchar(c1);
+//	putchar(c2);
+//	printf("\n");
+//	//printf("%c %c", c1, c2);
+//	printf("%d %d", c1, c2);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 3;
+//	int b = 4;
+//	int c = 5;
+//	//printf("%d\n", a || b + c && b - c);
+//	//printf("%d\n", !c);
+//	//printf("%d\n", !(a > b) && !c || 1);
+//	//printf("%d\n", !(x = a) && (y = b) && 0);//x,y为未定义标识符
+//	printf("%d\n", !(a + b) + c - 1 && b + c / 2);
+//	return 0;
+//}
+
+////有3个整数a,b,c,由键盘输入，输出其中最大的数
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	int max = 0;
+//	printf("请输入a,b,c三个整数：");
+//	scanf_s("%d%d%d", &a, &b, &c);
+//	max = a > b ? a : (b > c ? b : c);
+//	printf("%d ", max);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <math.h>
+//int main()
+//{
+//	int i = 0;
+//	int j = 0;
+//	printf("请输入一个小于1000的正数：");
+//	scanf_s("%d", &i);
+//	while(i != 0)
+//	{
+//	if (i >= 1000)
+//	{
+//		printf("输入错误，请重新输入：");
+//		scanf_s("%d\n", &i);
+//	}
+//	else
+//	{
+//		j = sqrt(i);
+//		printf("%d\n", j);
+//		break;
+//	}
+//	return 0;
+//	}
+//}
+
+//#include <stdio.h>
+////输入x的值，求y的值
+//int main()
+//{
+//	int x = 0;
+//	int y = 0;
+//	printf("请输入x的值：");
+//	scanf_s("%d", &x);
+//	if (x < 1)
+//	{
+//		y = x;
+//		printf("y的值是：%d\n", y);
+//	}
+//	else if (x >= 1 && x < 10)
+//	{
+//		y = 2 * x - 1;
+//		printf("y的值是：%d\n", y);
+//	}
+//	else
+//	{
+//		y = 3 * x - 11;
+//		printf("y的值是：%d\n", y);
+//	}
+//	return 0;
+//}
+
+//输出成绩等级
+#include <stdio.h>
+int main()
+{
+	int a = 0;
+	printf("请输入一个百分制成绩：");
+	scanf_s("%d", &a);
+	char c;
+	if (a >= 90)
+		c = 'A';
+	if (a >= 80 && a <= 89)
+		c = 'B';
+	if (a >= 70 && a <= 79)
+		c = 'C';
+	if (a >= 60 && a <= 69)
+		c = 'D';
+	else
+		c = 'E';
+	switch (c)
+	{
+	case 'A':
+		printf("成绩是A\n");
+		break;
+	case 'B':
+		printf("成绩是B\n");
+		break;
+	case 'C':
+		printf("成绩是C\n");
+		break;
+	case 'D':
+		printf("成绩是D\n");
+		break;
+	case 'E':
+		printf("不及格");
+		break;
+	}
+	return 0;
+}
+
