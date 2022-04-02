@@ -1,0 +1,54 @@
+//#include <stdio.h>
+//#include <stdlib.h>
+//struct Student_type
+//{
+//	char name[10];
+//	int num;
+//	int age;
+//	char addr[15];
+//}stud[10];
+//int main()
+//{
+//	int i = 0;
+//	FILE * fp;
+//	if ((fp = fopen("stu.dat", "rb")) == NULL)
+//	{
+//		printf("can not open file\n");
+//		exit(0);
+//	}
+//	for (i = 0; i < 10; i += 2)
+//	{
+//		fseek(fp, i * sizeof(struct Student_type), 0);
+//		fread(&stud[i], sizeof(struct Student_type), 1, fp);
+//		printf("%-10s %4d %4d %-15s\n", stud[i].name, stud[i].num, stud[i].sge, stud[i].addr);
+//	}
+//    fclose(fp);
+//    return 0;
+//}
+
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	FILE* fp1, *fp2;
+//	fp1 = fopen("file1.dat", "r");
+//	fp2 = fopen("file2.dat", "w");
+//	ch = getc(fp1);
+//	while (!feof(fp1))
+//	{
+//		putchar(ch);
+//		ch = getc(fp1);
+//	}
+//	putchar(10);
+//	rewind(fp1);
+//	ch = getc(fp1);
+//	while (!feof(fp1)
+//	{
+//		fputc(ch, fp2);
+//		ch = fgetc(fp1);
+//	}
+//	fclose(fp1);
+//	fclose(fp2);
+//	return 0;
+//}
