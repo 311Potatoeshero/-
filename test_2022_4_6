@@ -1,0 +1,119 @@
+//#include <stdio.h>
+////结构体传参
+//struct S {
+//	int a;
+//	char b;
+//	double c;
+//};
+///*void Init(struct S* ps)
+//{
+//	ps->a = 100;
+//	ps->b = 'w';
+//	ps->c = 3.14;
+//}*/
+//void print1(struct S tmp)
+//{
+//	printf("%d %c %lf\n", tmp.a = 100, tmp.b = 'w', tmp.c = 3.14);
+//}//传值
+//void print2(struct S* ps)
+//{
+//	printf("%d %c %lf", ps->a = 100, ps->b = 'w', ps->c = 3.14);
+//}//传址
+//int main()
+//{
+//	struct S s = { 0 };
+//	//Init(&s);
+//	print1(s);
+//	print2(&s);
+//	/*s.a = 100;
+//	s.b = 'w';
+//	s.c = 3.14;*/
+//	//printf("%d %c %lf", s.a, s.b, s.c);
+//	return 0;
+//}
+
+//#include <stdio.h>
+////位段
+//struct S {
+//	int a : 2;
+//	int b : 5;
+//	int c : 10;
+//	int d : 30;
+//};
+//int main()
+//{
+//	struct S s;
+//	printf("%d\n", sizeof(s));
+//	return 0;
+//}
+
+//#include  <stdio.h>
+//double fun(double  e)
+//{
+//	int  i, k;   
+//	double  s, t, x;
+//	s = 0;  k = 1;  i = 2;
+//	x = 3.0 / 4;
+//	while (x > e)
+//	{
+//		s = s + k * x;
+//		k = k * (-1);
+//		t = 2 * i;
+//		x = (t + 1) / (t*t);
+//		i++;
+//	}
+//	return  s;
+//}
+//main()
+//{
+//	double  e = 1e-3;
+//	printf("\nThe result is: %f\n", fun(e));
+//}
+
+#include <stdio.h>
+void print_ni(int num, int count)
+{
+	if (num > 0)
+	{
+		printf("%d ", num % 10);
+		print_ni(num / 10, ++count);
+		//函数调用
+	}
+}
+void print(int num, int count)
+{
+	if (num > 0)
+	{
+		print(num / 10, ++count);
+		printf("%d", num % 10);
+		++count;
+	}
+	else
+	{
+		printf("共%d位\n", count);
+	}
+}
+int main()
+{
+	while (1) 
+	{
+	int num  = 0;
+	int count = 0;
+	printf("请输入一个不多于5位的整数:");
+	scanf_s("%d", &num);
+	printf("\n");
+	if (num > 99999 || num < 0)
+	{
+		printf("输入错误，请重新输入！\n");
+	}
+	else
+	{
+		print_ni(num, count);
+		printf("\n");
+		print(num, count);
+	}
+	printf("\n");
+	return 0;
+	}
+
+}
