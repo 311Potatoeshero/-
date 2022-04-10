@@ -1,0 +1,79 @@
+/*struct Student{
+	char name[20];	//姓名
+	int age;		//年龄
+	char sex[5];	//性别
+	char id[10];	//学号
+};	//分号不能省略 很重要
+struct Dog{
+	char name[20];
+	double weight;
+}dog;	//声明结构体的同时定义了一个名字为dog的结构体类型变量
+*/
+
+/*匿名结构体声明模板：
+struct {
+	int a;
+	char b;
+	double c;
+}x;
+struct {
+	int a;
+	char b;
+	double c;
+}*p;
+*/
+
+/*
+//错误例子1：
+struct Node{
+	int data;
+	struct Node nextNode;
+};
+//错误例子2：
+struct Node{
+	int data;
+	Node nextNode;
+}x;
+//正确例子：
+struct Node{
+	int data;
+	struct Node* nextNode;	//用于存放其他结构体变量的地址
+};
+*/
+
+/*结构体变量的定义：
+struct Point{
+	int x;
+	int y;
+}p1;		//定义结构体变量p1
+struct Point p2;	//定义结构体变量p2
+
+结构体变量的初始化
+int x = 10,y = 10;
+p1 = {x,y};		//初始化p1
+p2 = {20,20};	//初始化p2
+
+struct Node{
+	int data;
+	struct Node* nextNode;
+}p3 = {10,NULL};	//定义并初始化p3
+*/
+
+
+/*struct Point{
+	int x;
+	int y;
+};
+void initial(struct Point n){
+	int x = 10;
+	int y = 10;
+	n = { x, y };
+}
+int main(){
+	struct Point p = { 15, 15 };
+	initial(p);
+	printf("%d %d\n", p.x, p.y);	//15 15
+
+	return 0;
+}
+*/
