@@ -1,0 +1,72 @@
+//#include <stdio.h>
+//void GetMemory(char **p)
+//{
+//	*p = (char *)malloc(100);
+//}
+//
+//void Test(void)
+//{
+//	char *str = NULL;
+//	GetMemory(&str);
+//	strcpy(str, "hello world");
+//	printf(str);
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	char c1, c2;
+//	c1 = 'A';
+//	c2 = c1 + 32;
+//	printf("%c\n", c2);
+//	printf("%d\n", c2);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <math.h>
+//int main()
+//{
+//	double a, b, c, s, area;
+//	a = 3.67;
+//	b = 5.43;
+//	c = 6.31;
+//	s = (a + b + c) / 2;
+//	area = sqrt(s*(s - a)*(s - b)*(s - c));
+//	printf("a = %f\tb=%f\t%f\n", a, b, c);
+//	printf("area = %f\n", area);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <math.h>
+//int main()
+//{
+//	double a, b, c, disc, x1, x2, p, q;
+//	scanf_s("%lf%lf%lf", &a, &b, &c);
+//	disc = b * b - 4 * a*c;
+//	p = -b / (2.0 *a);
+//	q = sqrt(disc) / (2.0*a);
+//	x1 = p + q;
+//	x2 = p - q;
+//	printf("x1 = %7.2f\nx2=%7.2f\n", x1, x2);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 66;
+//	int b = 79;
+//	int c = 89;
+//	putchar(a);
+//	putchar(b);
+//	putchar(c);
+//	putchar('\n');
+//	return 0;
+//}
