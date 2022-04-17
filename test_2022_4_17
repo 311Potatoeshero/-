@@ -1,0 +1,94 @@
+////输入一行字符，分别统计其中的英文字母、空格、数字和其他字符的个数
+////getchar 获取一个字符，输入多个字符时，使用getchar函数循环读取
+////一行字符串读到\n的时候读完
+//#include <stdio.h>
+////入口函数
+//int main()
+//{
+//	int eng_char = 0;
+//	//英文字符
+//	int space_char = 0;
+//	//空白字符
+//	int digit_char = 0;
+//	//数字字符
+//	int other_char = 0;
+//	//其他字符
+//
+//	//标准输入当中获取
+//	char c;
+//	while ((c = getchar()) != '\n')
+//	{
+//		if (c >= 'a'&&c <= 'z' || c >= 'A'&&c <= 'Z')
+//		{
+//			eng_char++;
+//		}
+//		else if (c == ' ')
+//		{
+//			space_char++;
+//		}
+//		else if (c >= '0'&&c <= '9')
+//		{
+//			digit_char++;
+//		}
+//		else 
+//		{
+//			other_char++;
+//		}
+//	}
+//	printf("英文字符：%d, 空格字符：%d, 数字字符：%d, 其他字符：%d\n ", eng_char, space_char, digit_char, other_char);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <math.h>
+//Sn = 2+22+222+2...2(n个2)
+//int main()
+//{
+//	int n = 0;
+//	double a, signle_num = 0.0, total_num = 0.0;
+//	scanf_s("%d %lf", &n, &a);
+//	int i = 0;
+//	//从标准输入中获取
+//	for (i = 0; i < n; i++)
+//	{
+//		signle_num += a * pow(10, i);
+        //+= 前一项加该项的和
+//		total_num += signle_num;
+//	}
+//	printf("%lf\n", total_num);
+//	return 0;
+//}
+
+////求1~20的阶乘
+////1~20的阶乘之和结果超出了int能够表示的范围，用double
+//#include <stdio.h>
+//int main()
+//{
+//	double total_sum = 0.0;
+//	for (int i = 1; i <= 20; i++)
+//	{
+//		double signle_num = 1.0;
+//		for (int j = i; j > 0; j--)
+//		{
+//			signle_num *= j;
+//			//累乘
+//			//求每个数的阶乘
+//		}
+//		total_sum += signle_num;
+//	}
+//	printf("%lf\n", total_sum);
+//	return 0;
+//}
+
+#include <stdio.h>
+
+//计算斐波那契递归Fibonacci的时间复杂度
+long long Fibonacci(size_t N)
+{
+	return N < 2 ? N : Fibonacci(N - 1) + Fibonacci(N - 2);
+}
+int main()
+{
+	printf("%d\n", Fibonacci(40));
+	return 0;
+}
