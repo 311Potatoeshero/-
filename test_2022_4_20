@@ -1,0 +1,51 @@
+//#include <stdio.h>
+////猴子吃桃问题
+//int main()
+//{
+//	int total_num = 0;
+//	int total_sum = 0;
+//	for (int i = 1; i <= 10; i++)
+//	{
+//		total_num += total_sum / 2 + 1;
+//		total_sum -= total_num == 1;
+//	}
+//	printf("%d\n", total_sum);
+//	return 0;
+//出错，待解
+//}
+
+//#include <stdio.h>
+//int main()
+//{
+//	double x = 0;
+//	printf("请输入x的值：");
+//	scanf_s("%lf", &x);
+//	if (2 * (x*x*x) - 4(x*x) + 3 * x - 6 == 0)
+//		//项不会计算为接受 1 个参数的函数
+//	{
+//		printf("%lf", x);
+//	}
+//	return 0;
+//}
+
+#include <stdio.h>
+int main()
+{
+	int n = 3,a=1;
+	for (int i = 1; i <= 4; i++)
+		//前半部分
+	{
+		for (int j = n; j > 0; j--)
+		{
+			printf(" ");
+		}
+		n--;
+		for (int x = 1; x <= a; x++)
+		{
+			printf("*");
+		}
+		a += 2;
+		printf("\n");
+	}
+	return 0;
+}
