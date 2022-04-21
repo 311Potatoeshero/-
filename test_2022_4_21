@@ -1,0 +1,107 @@
+//#include <stdio.h>
+//int main()
+//{
+//	int day = 9;
+//	//猴子吃桃子的天数
+//	int cur_day = 1;
+//	//最后一天的桃子数
+//	int prev_day;
+//	//前一天的桃子数
+//	while (day > 0)
+//	{
+//		prev_day = (cur_day + 1) * 2;
+//		cur_day = prev_day;
+//		day--;
+//	}
+//	printf("第一天猴子摘得桃子数：%d", prev_day);
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <math.h>
+////用迭代法求x=sqrt(a)
+//int main()
+//{
+//	//1,从标准输入中获取a的值
+//	float a, x0, x1;
+//	//2,计算x0和x1的值
+//	x0 = a / 2;
+//	x1 = (x0 + a / x0) / 2;
+//	//3，判断是否小于10^-5
+//	while (fabs(x0 - x1) >= 1e-5)
+//	{
+//		//更新x0和x1的值
+//		x0 = x1;
+//		x1 = (x0 + a / x0) / 2;
+//	}
+//	printf("[%f]的平方根为[%f]\n", a, x1);
+//	return 0;
+//}
+
+//#include <stdio.h>
+////打印图形
+//int main()
+//{
+//	//打印上半部分
+//	for (int i = 0; i < 4; i++)
+//	{
+//		//打印空格
+//		for (int j = 3 - i; j > 0; j--)
+//		{
+//			printf(" ");
+//		}
+//		//打印星星
+//		for (int j = 2 * i + 1; j > 0; j--)
+//		{
+//			printf("*");
+//		}
+//		printf("\n");
+//	}
+//	//打印下半部分
+//	for (int i = 0; i < 3; i++)
+//	{
+//		for (int j = i + 1; j > 0; j--)
+//		{
+//			printf(" ");
+//		}
+//		for (int j = 7 - 2 * (i + 1); j > 0; j--)
+//		{
+//			printf("*");
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+#include <stdio.h>
+//求1~1000内所有完数
+int main()
+{
+	int fac_num = 0;
+	int fac_sum = 0;
+	for (int data = 2; data <= 1000; data++)
+		//完数是指除自身外所有因子之和等于本身的数
+	{
+		for (int fac_num = 1; fac_num <= data/2; fac_num++)
+		{
+			if (data % fac_num == 0)
+			{
+				fac_sum += fac_num;
+			}
+		}
+		if (fac_sum == data)
+		{
+			printf("%d its factor are", data);
+			for (int fac_num = 1; fac_num <= data / 2; fac_num++)
+			{
+				if (data % fac_num == 0)
+				{
+					printf("%d,", fac_num);
+				}
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}
