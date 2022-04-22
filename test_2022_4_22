@@ -1,0 +1,104 @@
+//#include <stdio.h>
+////找出三对赛手的名单
+//int main()
+//{
+//	int n = 0;
+//	printf("输入任意数字,打印赛手名单：>");
+//	scanf_s("%d", &n);
+//	if (n >= 0)
+//	{
+//		printf("A和Z一起比赛\n");
+//		printf("B和X一起比赛\n");
+//		printf("C和Y一起比赛\n");
+//
+//	}
+//	return 0;
+//}
+
+//#include <stdio.h>
+////求三对赛手的名单,方法二
+//int main()
+//{
+//	int A = 1, B = 2, C = 3;
+//	int X = -1, Y = -2, Z = 0;
+//	if (A + X == 1)
+//	{
+//		printf("A和X是对手\n");
+//	}
+//	else if(A + Y == 1)
+//	{
+//		printf("A和Y是对手\n");
+//	}
+//	else
+//	{
+//		printf("A和Z是对手\n");
+//	}
+//	if (B + X == 1)
+//	{
+//		printf("B和X是对手\n");
+//	}
+//	else if (B + Y == 1)
+//	{
+//		printf("B和Y是对手\n");
+//	}
+//	else
+//	{
+//		printf("B和Z是对手\n");
+//	}
+//	if (C + X == 1)
+//	{
+//		printf("C和X是对手\n");
+//	}
+//	else if (C + Y == 1)
+//	{
+//		printf("C和Y是对手\n");
+//	}
+//	else
+//	{
+//		printf("C和Z是对手");
+//	}
+//	return 0;
+//}
+
+#include <stdio.h>
+//用筛选法求100以内的素数
+int main()
+{
+	int i, j;
+	int array[100];
+	//向array数组中填充1~100所有数据
+	for (i = 0; i < 100; ++i)
+	{
+		array[i] = i + 1;
+	}
+
+	array[0] = 0;
+	//1不是素数，划掉
+
+	for (i = 1; i < 100; ++i)
+	{
+		if (0 == array[i])
+			continue;
+
+		for (j = i + 1; j < 100; ++j)
+		{
+			if (0 != array[j] && array[j] % array[i] == 0)
+			{
+				array[j] = 0;
+				//非零素数用0代替
+			}
+		}
+	}
+	// 输出所有的素数
+	for (i = 0; i < 100; ++i)
+	{
+		if (0 != array[i])
+		{
+			printf("%d ", array[i]);
+		}
+	}
+	printf("\n");
+
+	return 0;
+}
+
