@@ -1,0 +1,63 @@
+//#include <stdio.h>
+////用选择法对10个整数排序
+//int main()
+//{
+//
+//	return 0;
+//}
+
+//#include <stdio.h>
+////求一个3x3的整数矩阵对角线元素之和
+//int main()
+//{
+//	int array[3][3] = { 11,22,33,44,55,66,77,88,99 };
+//	int array_sum = 0;
+//	//元素之和
+//	array_sum = array[0][0] + array[1][1] + array[2][2] + array[2][0] + array[1][1] + array[0][2];
+//	printf("%d", array_sum);
+//	return 0;
+//}
+
+//#include <stdio.h>
+////有一个已排好序的数组，要求输入一个数后，按原来排序规律将他插入数组中
+//int main()
+//{
+//	//如果是顺序
+//	int array[20] = { 1,2,3,4,6,7,8,9 };
+//	int num = 0;
+//	printf("请输入一个数：>");
+//	scanf_s("%d", &num);
+//	for (int i = 0; i <= 10; i++)
+//	{
+//		if (array[i] >= num)
+//		{
+//			array[i + 1] = array[i];
+//			array[i] = num;
+//		}
+//	}
+//	printf("%d ", array);
+//	return 0;
+//}
+
+#include <stdio.h>
+//将数组的值逆序排序
+int main()
+{
+	int array[20] = { 8,6,5,4,1 };
+	int tmp = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			array[j] > array[j + 1] ? array[j] : array[j + 1];
+			if (array[j] > array[j + 1])
+			{
+				array[j] = tmp;
+				array[j] = array[j + 1];
+				array[j + 1] = tmp;
+			}
+		}
+	}
+	printf("%d ", array);
+	return 0;
+}
