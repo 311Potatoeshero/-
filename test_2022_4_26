@@ -1,0 +1,257 @@
+////对10个数组元素依次赋值为0~9，要求按逆序输出
+//#include <stdio.h>
+//int main()
+//{
+//	int i, a[10];
+//	for (i = 0; i <= 9; i++)
+//		a[i] = i;
+//	//对数组a[0]~a[9]赋值
+//	for (i = 9; i >= 0; i--)
+//		//for循环输出数组
+//		printf("%d ", a[i]);
+//	//输出a[9]~a[0]共十个元素
+//	printf("\n");
+//	return 0;
+//}
+
+////用数组输出斐波那契数
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int f[20] = { 1,1 };
+//	//将数组前两个元素初始化
+//	for (int i = 2; i < 20; i++)
+//	{
+//		f[i] = f[i - 2] + f[i - 1];
+//	}
+//	//将斐波那契前二十个元素赋值给数组
+//	for (int i = 0; i < 20; i++)
+//	{
+//		if (i % 5 == 0)
+//			printf("\n");
+//		//每5个元素换组一次
+//		printf("%12d", f[i]);
+//	}
+//	printf("\n");
+//	//打印元素
+//	return 0;
+//}
+
+////用起泡法从小到大排序十个数字
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int i, j,tmp;
+//	int array[10];
+//	printf("请输入十个数字：>");
+//	for (i = 0; i < 10; i++)
+//		scanf_s("%d", &array[i]);
+//	//输入十个元素
+//
+//	printf("排序前的数组是：>");
+//	printf("\n");
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d ", array[i]);
+//	}
+//	for (i = 0; i < 9; i++)
+//		//共需排序9次
+//	{
+//		for (j = 0; j < 9 - i; j++)
+//			//j是需要比较的次数，第一个元素需要比较9次
+//		{
+//			if (array[j] > array[j + 1])
+//			{
+//				tmp = array[j];
+//				array[j] = array[j + 1];
+//				array[j + 1] = tmp;
+//				//如果前一个数大于其后一个数则交换位置
+//			}
+//		}
+//	}
+//	printf("\n");
+//	printf("排序后的数组是：>");
+//
+//	for (j = 0; j < 10; j++)
+//	{
+//		printf("%d ", array[j]);
+//	}
+//	//打印出数组
+//	printf("\n");
+//	return 0;
+//}
+
+////将一个二维数组行和列的元素互换，存在另一个二维数组
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a[2][3] = { { 1,2,3 }, { 4,5,6 } };
+//	int b[3][2], i, j;
+//	printf("array a:\n");
+//	//处理a数组中的一行中各元素
+//	for (i = 0; i <= 1; i++)
+//		//行
+//	{
+//		for (j = 0; j <= 2; j++)
+//			//列
+//		{
+//			printf("%5d", a[i][j]);
+//			//输出a数组中的一个元素
+//			b[j][i] = a[i][j];
+//			//将a数组元素的值赋给b数组相应的元素
+//		}
+//		printf("\n");
+//	}
+//	printf("array b:\n");
+//	//输出b数组各元素
+//	for (i = 0; i <= 2; i++)
+//	{
+//		for (j = 0; j <= 1; j++)
+//		{
+//			printf("%5d", b[i][j]);
+//			//处理b数组中一列中各元素
+//			//输出	
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+////在3×4的矩阵中找出最大的那个数，并标出行号和列号
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int row = 0, colum = 0, max;
+//	//定义行，列和最大数
+//	int array[3][4] = { {1,2,6,8},{12,80,4,5},{-8,-9,45,74} };
+//	max = array[0][0];
+//	//初始化数组和最大值
+//	for (int i = 0; i <= 2; i++)
+//		//处理数组中行中各元素
+//	{
+//		for (int j = 0; j <= 3; j++)
+//			//处理数组中列的各元素
+//		{
+//			if (array[i][j] > max)
+//				//找出数组中的最大值
+//			{
+//				max = array[i][j];
+//				row = i;
+//				colum = j;
+//			}
+//		}
+//	}
+//	printf("max = %d\n row = %d\n colum = %d\n", max, row, colum);
+//	return 0;
+//}
+
+
+////打印一个菱形
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	char diamond[5][5] = {{' ',' ','*'},{' ','*',' ','*',' '}
+//	,{'*',' ',' ',' ','*'},{' ','*',' ','*',' '},{' ',' ','*'} };
+//	for (int i = 0; i <= 4; i++)
+//	{
+//		
+//		for (int j = 0; j <= 4; j++)
+//		{
+//			
+//			printf("%c", diamond[i][j]);
+//			//输出数组
+//		}
+//     printf("\n");
+//     //换行
+//	}
+//	return 0;
+//}
+
+
+////有一个已经排好序的数组，要求输入一个数后，按原来排序的规律将它插入到数组中
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int array[10] = { 0,1,2,3,4,5,6,7,8,9 };
+//	int array_new[11];
+//	//定义一个新的数组，在新的数组中进行排序
+//	int i = 0,tmp=0;
+//	printf("请输入一个数：>");
+//	scanf_s("%d", &array_new[i]);
+//	array_new[0] = array_new[i];
+//	//输入的元素等于新数组的首元素
+//	for (int x = 1; x <= 10; x++)
+//		//将原数组的各元素存入新数组中
+//	{
+//		array_new[x] = array[x - 1];
+//		printf("%d ", array_new[x]);
+//	}
+//	printf("\n");
+//
+//	for (int i = 0; i <= 10; i++)
+//	{
+//		printf("%d ", array_new[i]);
+//	}
+//    for (int j = 1; j <= 11; j++)
+//	{
+//		for(int y = 1;y <= 11-j;y++)
+//		{
+//		if (array_new[y-1] > array_new[y])
+//			//将输入的元素和数组中各元素一一比较，并交换位置
+//		{
+//			tmp = array_new[y-1];
+//			array_new[y-1] = array_new[y];
+//			array_new[y] = tmp;
+//		}
+//		}
+//	}
+//	printf("\n");
+//	for (int i = 0; i <= 10; i++)
+//		//打印结果
+//	{
+//		printf("%d ", array_new[i]);
+//	}
+//	return 0;
+//}
+
+////将一个数组中的值按逆序重新存放
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int array[5] = { 8,6,5,4,1 };
+//	int tmp = 0;
+//	for (int i = 0; i < 5; i++)
+//	{
+//		for (int j = 0; j < 5 - i - 1; j++)
+//			//计算清楚每个元素排序时总共需要比较几次（出错点）
+//		{
+//			if (array[j] > array[j + 1])
+//				//比较并排序
+//			{
+//				tmp = array[j];
+//				array[j] = array[j + 1];
+//				array[j + 1] = tmp;
+//			}
+//		}
+//	}
+//	for (int i = 0; i < 5; i++)
+//	{
+//		printf("%d ", array[i]);
+//	}
+//	printf("\n");
+//	return 0;
+//}
+
