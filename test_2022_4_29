@@ -1,0 +1,100 @@
+////输出杨辉三角
+//
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int array[10][10];
+//	//保存数组元素
+//	int i, j;
+//	for (i = 0; i <= 9; i++)
+//		//打印每一行的元素
+//	{
+//		for (j = 0; j <= i; j++)
+//			//打印每一列的元素
+//		{
+//			if (0 == j || i == j)
+//				//第零列和对角线所有数据都是1
+//			{
+//				array[i][j] = 1;
+//			}
+//			else
+//			{
+//				array[i][j] = array[i - 1][j] + array[i - 1][j - 1];
+//				//其他位置上的数
+//			}
+//		}
+//	}
+//	for (i = 0; i <= 9; i++)
+//	{
+//		for (j = 0; j <= i; j++)
+//		{
+//			printf("%d ", array[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+//
+
+
+#include <stdio.h>
+
+
+#define N 4
+#define M 3
+
+int main()
+{
+	int array[M][N];
+	int i, j;
+	int max, pos, flag = 0;
+	printf("请输入%d行%d列二维数组：\n");
+	for (i = 0; i < M; ++i)
+	{
+		for (j = 0; j < N; j++)
+		{
+			scanf_s("%d", &array[i][j]);
+		}
+	}
+
+	//找鞍点
+	for (i = 0; i < M; ++i)
+	{
+		//1.找该行上最大的元素
+		max = array[i][0];
+		for (j = 0; j < N; ++j)
+		{
+			if (array[i][j] > max)
+			{
+				max = array[i][j];
+				pos = j;
+			}
+		}
+		//2.确认该元素是否在该列上最大的元素
+		for (j = 0; j < M; ++j)
+		{
+			if (array[j][pos] < max)
+			{
+				break;
+			}
+		}
+		//如果在pos列没有发现比max小的元素，说明max是pos列上最小的元素
+		if (j == M)
+		{
+			//找到鞍点
+			printf("该鞍点为：%d行%d列%d", pos, array[i][pos]);
+			flag = 1;
+			break;
+		}
+	}
+
+	if (0 == flag)
+	{
+		printf("没有鞍点\n");
+	}
+	return 0;
+}
