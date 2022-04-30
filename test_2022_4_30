@@ -1,0 +1,199 @@
+//ADT List
+//{
+//    
+//
+//}list;
+//
+//void unionL(List *La, List Lb)
+//{
+//	int La_len, Lb_len, i;
+//
+//	ElemType e;
+//	La_len = ListLength(*La);
+//	Lb_len = ListLength(Lb);
+//
+//	for (i = 1; i <= Lb_len; i++)
+//	{
+//		Getlem(Lb, i, &e);
+//		if (!LocateElem(*La, e))
+//		{
+//			ListInsert(La, ++La_len, e);
+//		}
+//	}
+//}
+
+
+////插入元素
+//typedef struct {
+//	ElemType *e;
+//	int length;
+//	int listsize;
+//}SqList;
+//Status ListInsert(SqList *L, int i, ElemType e)
+//{
+//	int k;
+//
+//	if (L->length == MAXSIZE)
+//	{
+//		return ERROR;
+//	}
+//	if (i<1 || i>L->length + 1)
+//	{
+//		return ERROR;
+//	}
+//	if (i <= L->length)
+//	{
+//		for (k = L->length - 1; k >= i - 1; k--)
+//		{
+//			L->data[k + 1] = L->data[k];
+//		}
+//	}
+//
+//	L->data[i - 1] = e;
+//	L->length++;
+//	return OK;
+//}
+
+
+//#define ERROR 0
+//#define OK 1
+//
+//#include <stdio.h>
+//
+//typedef struct GetElem_L {
+//	ElemType data; //数据域
+//	struct GetElem_L *next; //指针域
+//}GetElem_L,*LinkList;
+//
+//Status GetElem_L(LinkList L, int i, ElemType &e)
+//{
+//	p = L->next;
+//	j = 1;
+//	while (p&&j < i)
+//	{
+//		p = p->next;
+//		++j;
+//	}
+//	if (!p || j > 1)
+//		return ERROR;
+//	e = p->data;
+//	return OK;
+//	return OK;
+//}
+//
+//int main()
+//{
+//	int p, j;
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//
+//int main()
+//{
+//	char string[81];
+//	int i, num = 0, word = 0;
+//	char c;
+//	gets_s(string);
+//	for (i = 0; (c = string[i]) != '\0'; i++)
+//		if (c == ' ')
+//			word = 0;
+//		else if (word == 0)
+//		{
+//			word = 1;
+//			num++;
+//		}
+//	printf("There are %d words in this line.\n", num);
+//	return 0;
+//}
+
+
+////输出图形
+//
+//#include <stdio.h>
+//int main()
+//{
+//	for (int i = 0; i < 5; i++)
+//		//打印行
+//	{
+//		for (int line = 0; line <= (i*2); line += 2)
+//			//打印空格
+//		{
+//			printf(" ");
+//		 }
+//		for (int star = 0; star < 5; star++)
+//		{
+//			printf("* ");
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+////有一篇文章，共有三行文字，每行10个字符，统计各字符个数
+//
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int big_number = 0, litter = 0, num = 0, blank = 0, special = 0;
+//	char array[3][10] = { {'A','B','C','D','E','F','a','b','c','d'},{'e','f',1,2,3,4,5,6,'@','@',},{' ',' ',' ',' ',' ',' ','@','@','@','@'} };
+//	for (int i = 0; i <= 2; i++)
+//		//打印行数
+//	{
+//		for (int j = 0; j <= 9; j++)
+//			//打印列数
+//		{
+//			if (array[i][j] >= 'A'&&array[i][j] <= 'Z')
+//			{
+//                    big_number++;
+//			}
+//			else if (array[i][j] >= 'a'&&array[i][j] <= 'z')
+//			{
+//                     litter++;
+//			}
+//			else if (array[i][j] >= 0 && array[i][j] <= 9)
+//			{
+//			         num++;
+//			}
+//			else if (array[i][j] == ' ')
+//			{
+//				blank++;
+//			}
+//			else
+//			{
+//				special++;
+//			}
+//		}
+//	}
+//	printf("大写字母总数：%d 小写字母总数：%d 数字总数：%d 空格总数：%d 其它总数：%d ", big_number, litter, num, blank, special);
+//	return 0;
+//}
+
+////用折半法查找数组中元素
+//#include <stdio.h>
+//int main()
+//{
+//	int array[15] = { 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1 };//存放元素的数组
+//	int left, right;
+//	int n = 0;//输入一个元素
+//	scanf_s("%d", &n);
+//	//int sz = sizeof(array) / sizeof(array[0]);//计算元素个数
+//	for (int i = 0; i <= 14; i++)
+//	{
+//		left = array[i];//左侧的元素，第一是15
+//		right = array[14 - i];//右侧的元素，第一是1
+//		printf("%d\n", left);
+//		printf("%d\n", right);
+//		while (left > right)
+//		{
+//			if ((left+right) / 2 == n)
+//			{
+//				printf("%d", array[i]);
+//			}
+//		}
+//	}
+//	return 0;
+//}
