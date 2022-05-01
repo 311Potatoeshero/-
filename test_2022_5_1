@@ -1,0 +1,55 @@
+////用函数输入一段文字
+//
+//#include <stdio.h>
+//
+//void print_star()
+//{
+//	printf("****************\n");
+//} //定义print_star函数
+//
+//void print_massage()
+//{
+//	printf("How do you do!\n");
+//}//定义print_massage函数
+//
+//int main()
+//{
+//	void print_star(); //声明print_star函数
+//	void print_massage();//声明print_message函数
+//	print_star();//调用print_star函数
+//	print_massage();//调用print_massage函数
+//	print_star();
+//	return 0;
+//}
+
+
+////用函数求取两个数的最大值
+//
+//#include <stdio.h>
+//
+//int max(int x, int y) //定义函数，两个参数
+//{
+//	int z; //定义临时变量z
+//	z = x > y ? x : y;
+//	return z;
+//}
+//int main()
+//{
+//	int max(int x, int y); //对max函数的声明
+//	int a, b, c;
+//	printf("请输入两个数：>");
+//	scanf_s("%d%d", &a, &b); //输入两个整数
+//	c = max(a, b); //调用max函数，a,b为实参
+//	printf("最大值是：%d\n", c);
+//	return 0;
+//}
+
+
+package com.atguigu.java;
+
+public class HelloWorld {
+	public static void main(String[] args){
+		System.out.println("helloworld!");
+	}
+
+}
