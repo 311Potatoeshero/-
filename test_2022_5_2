@@ -1,0 +1,56 @@
+package com.atguigu.java;
+
+public class HelloWorld {
+	public static void main(String[] args){
+		System.out.println("helloworld!");
+		
+		
+		//超出整数表示范围的最大值，将出现溢出的现象
+		/*
+		int X = java.lang.Integer.MAX_VALUE; //得到整型的最大值
+		System.out.println(" x = " +X ); //""里的内容是标识符
+		System.out.println(" x+1 = " +(X+1) );
+		System.out.println(" X+2 = " +(X+2) );
+		*/
+		
+		
+		//超出整数值表示范围的最大值，将出现溢出现象
+		/*
+		int X = Integer.MAX_VALUE; //得到整型的最大值
+		System.out.println("x = " +X );
+		System.out.println("x + 1 = " +(X+1) );
+		System.out.println("x + 2 = " +(X+2) );
+		System.out.println("x + 3 = " + ( (long)X +3) ); //(long)X 强制类型转换
+		*/
+		
+		
+		//浮点数类型、单精度和双精度浮点数类型的最大、最小值的使用方法
+		float num = 3.0f;
+		System.out.println( num + " * " + num + " = " + ( num * num ) );
+		System.out.println( " float_max = " + Float.MAX_VALUE );
+		System.out.println( " float_min = " + Float.MIN_VALUE );
+		System.out.println( " double_max = " + Double.MAX_VALUE );
+		System.out.println( " double_min = " + Double.MIN_VALUE );
+		
+		
+		
+		//字符类型也可以直接赋予数值
+		char ch1 = 97; 
+		char ch2 = 'a';
+		System.out.println( "ch = " + ch1 );
+		System.out.println( "ch2 = " + ch2 );
+		
+		
+		//自动转换和强制转换
+		int a = 55;
+		int b = 9;
+		float g,h;
+		System.out.println( " a = " + a + " , b = " +b ); 
+		g = a / b;
+		System.out.println( "a / b = " + g + " \n " );
+		System.out.println( " a = " + a + " , b =" + b);
+		h = (float) a / b;
+		System.out.println( " a / b = " + h );
+	}
+
+}
