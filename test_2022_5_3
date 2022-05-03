@@ -1,0 +1,69 @@
+package com.atguigu.java;
+
+public class CharTest {
+	public static  void main(String[] args){
+		
+		
+		//布尔类型
+		/*
+		boolean isMarried = false;
+		if(isMarried){
+			System.out.println("你不能参加单身派对！");
+		}else{
+			System.out.println("你可以参加");
+		}
+		*/
+		
+		
+		//强制类型转换
+		/*
+		double d1 = 12.9;
+		
+		int i1 = (int)d1; //截断操作
+		System.out.println(i1); //12
+		*/
+		
+		
+		//String
+		/*
+		int number = 1001;
+		String numberStr = " 学号: ";
+		String info = numberStr + number;
+		//连接运算 
+		System.out.println(info);
+		*/
+		
+		
+		//运算符的优先级使用方法
+		/*
+		int a = 10;
+		int b = 8;
+		boolean t = true;
+		System.out.println( a > 0 && a < b || t );
+		System.out.println( a < b || !t );
+		System.out.println( a == 10 && b != 8 );
+		*/
+		
+		
+		//if语句
+		/*
+		int a = 6;
+		int b = 5;
+		System.out.println( " a = " + a + " , b = " + b );
+		if( a > b )
+			System.out.println(" a - b = " + ( a - b ) );
+		System.out.println(" a * b = " + (a * b));
+		*/
+		
+		
+		
+		//if...else语句
+		/*
+		int a =  5;
+		if(a % 2 == 1)
+			System.out.println( a + " 是奇数!" );
+		else
+			System.out.println( a + " 是偶数！" );
+		*/
+	}
+}
