@@ -1,0 +1,138 @@
+package com.atguigu.java;
+
+import java.util.Scanner;
+public class Conditional {
+
+	public static void main(String[] args) {
+		
+		//例题1
+		/*
+		Scanner Scan = new Scanner (System.in);
+		System.out.println("请输入该考生的期末成绩（1~100）：");
+		int grade = Scan.nextInt();
+		if(grade == 100){
+			System.out.println(" 奖励一辆BWM ");
+		}else if(grade >= 80 && grade <= 99){
+			System.out.println(" 奖励一台iphone xs max");
+		}else if(grade > 60 && grade <= 80){
+			System.out.println(" 奖励一台ipad ");
+		}else{
+			System.out.println(" 什么都没有 ");
+		}
+		*/
+
+		
+		
+		//由键盘输入三个整数分别存入变量num1、num2、num3，用if-else排序
+		
+		/*
+		Scanner scan  = new Scanner(System.in);
+		System.out.println(" 请输入第一个整数： ");
+		int num1 = scan.nextInt();
+		System.out.println(" 请输入第二个整数： ");
+		int num2 = scan.nextInt();
+		System.out.println(" 请输入第三个整数： ");
+		int num3 = scan.nextInt();
+			
+		
+		if(num1 > num2 && num1 > num3){
+			if(num2 > num3){
+			System.out.println(" 排序为：  " + num1 + num2 + num3 );}
+			else{
+				System.out.println(" 排序为：  " + num1 + num3 + num2 );
+			}
+		}else if(num2 > num1 && num2 > num3){
+			if(num1 > num3){
+			System.out.println(" 排序为：  " + num2 + num1 + num3 );}
+			else{
+				System.out.println(" 排序为：  " + num2 + num3 + num1 );
+			}
+		}else{
+			if(num1 > num2){
+				System.out.println(" 排序为：  " + num3 + num1 + num2 );
+			}else{
+				System.out.println(" 排序为：  " + num3 + num2 + num1 );
+			}
+		}
+		*/
+		
+		
+		
+		//笔试题1
+		
+		/*
+		int x = 4;
+		int y = 1;
+		if(x > 2){
+			if(y > 2)
+				System.out.println(x + y);
+				System.out.println("atguigu");
+		}else{
+			System.out.println(" x is " + x );
+		}
+		*/
+		
+		
+		//笔试题2
+		
+		/*
+		boolean b = true;
+		if(b = false)
+			System.out.println("a");
+		else if(b) //此时b还是false
+			System.out.println("b");
+		else if(!b)
+			System.out.println("c");
+		else
+			System.out.println("d");
+		*/
+		
+		
+		
+		//test2
+		/*
+		int num1 = 25;
+		int num2 = 30;
+		if(num1 + num2 > 50){
+			System.out.println("Hello World!");
+		}
+		*/
+		
+		
+		//test3
+		
+		/*
+		Scanner scan = new Scanner(System.in);
+		System.out.println("请输入num1的数值：");
+		double num1 = scan.nextDouble();
+		System.out.println("请输入num1的数值：");
+		double num2 = scan.nextDouble();
+		
+		if(num1 > 10.0 && num2 < 20.0){
+			System.out.println("两数之和是：" + (num1+num2));
+		}else{
+			System.out.println("两束的乘积是： " + (num1*num2));
+		}
+		*/
+		
+		
+		
+		//test4
+		
+		/*
+		Scanner scan = new Scanner(System.in);
+		System.out.println("请输入人的年龄： ");
+		double num1 = scan.nextDouble();
+		
+		if(num1 < 0){	
+			System.out.println("输入错误");
+		}
+		if(num1 >= 1 && num1 <= 2){
+			System.out.println("小狗的年龄为： " + (10.5 * num1));
+		}else{
+			System.out.println("小狗的年龄为： " + (21.0 + 4 * (num1 - 2)));
+		}
+		*/
+	}
+
+}
