@@ -1,0 +1,72 @@
+package com.atguigu.java;
+
+public class WhileTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		//打印99乘法表
+		
+		/*
+		int i ,j;
+		for(i = 1;i <= 9;i++){
+			//打印行
+			for(j = 1;j <= i;j++){
+				System.out.print(i+ " * " +j+ " = " + (i * j) + " \t " );
+			}
+			   	System.out.print(" \n ");
+		}
+		*/
+		
+		
+		
+		//打印菱形
+		
+		/*
+		for(int i = 1;i <= 4;i++){
+			for(int j = 1;j <= i;j++){
+				System.out.print(" * ");	
+			}
+			System.out.println();
+		}
+		*/
+		
+		
+		//打印1~100的质数
+		
+		/*
+		boolean isFlag = true;
+		for(int i = 2;i <= 100; i++){
+			//遍历100以内的自然数
+			for(int j = 2;j < i;j++){
+				
+				if(i % j == 0){
+					isFlag = false;
+				}
+			}
+			if(isFlag == true)
+				System.out.println(i);
+		}
+		isFlag = true;
+		*/
+		
+		
+		/*
+		int i;
+		for( i = 1;i <= 50;i++){
+			if(i % 2 != 0)
+				continue;
+			System.out.print(i + "");
+			if( i % 10 == 0)
+				System.out.println();
+		*/
+		
+		
+		
+		
+		}
+	}
+
+}
