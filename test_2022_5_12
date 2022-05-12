@@ -1,0 +1,160 @@
+package com.atguigu.java;
+
+import java.util.Scanner;
+
+public class ArrayDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//键盘读入学生成绩，找出最高分
+		
+		/*
+		//1,使用Scanner，读取学生个数
+		//crtl+shift+o
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("请输入学生人数： ");
+		int number = scanner.nextInt();
+		
+		//2,创建数组，存储学生成绩
+		int[] scores = new int[number];
+		
+		//3,给数组中的元素赋值
+		System.out.println("请输入" + number + "个学生成绩： ");
+		for(int i = 0;i < scores.length;i++){
+			scores[i] = scanner.nextInt();
+		}
+		
+		//4,获取数组中的元素的最大值、最高分
+		int maxScores = 0;
+		for(int i = 0;i < scores.length;i++){
+			if(maxScores < scores[i]){
+				maxScores = scores[i];
+			}
+		}
+		
+		//5,根据每个学生成绩与最高分的差值，得到等级
+		char level;
+		for(int i = 0;i < scores.length;i++){
+			if(maxScores - scores[i] <= 10){
+				level = 'A';
+			}else if(maxScores - scores[i] <= 20){
+				level = 'B';
+			}else if(maxScores - scores[i] <= 30){
+				level = 'C';
+			}else{
+				level = 'D';
+			}
+			
+			System.out.println("student " + i + "score is" + scores[i] + ",grade is " + level);
+		}		
+		*/
+		
+		//获取数组中的元素
+		
+		/*
+		int sum = 0;
+		int[][] arr = new int[][]{{3,5,8},{12,9},{7,0,6,4}};
+		for(int i = 0;i < arr.length;i++){
+			for(int j = 0;j < arr[i].length;j++){
+			//arr[i].length是
+				sum += arr[i][j];
+			}
+		}
+		
+		System.out.println(sum);
+		*/
+		
+		
+		//打印杨辉三角
+		
+		/*
+		//1,初始化常量
+		
+		int[][] yangHui = new int[10][];
+		
+		//2,给常量赋值
+		
+		for(int i = 0;i < yangHui.length;i++){
+			yangHui[i] = new int[i + 1]; //每一行的首元素大小相等都是1
+			yangHui[i][0] = 1;
+			 //首元素赋值
+			yangHui[i][i] = 1;
+			 //末元素赋值
+			if(i > 1){
+				for(int j = 1;j < yangHui[i].length - 1;j++){
+					//yangHui[i].length-1 倒数第二个元素
+					yangHui[i][j] = yangHui[i - 1][j - 1] + yangHui[i - 1][j];
+				}
+			}
+		}
+		
+		
+		//遍历杨辉三角
+		
+		for(int i = 0;i < yangHui.length;i++){
+			for(int j = 0;j < yangHui[i].length;j++){
+				System.out.print(yangHui[i][j] + " ");
+			}
+			System.out.println();
+		}
+		*/
+		
+		
+		//求一个10~100中10个随机数中的最大值、最小值、总和和平均数
+		
+		//初始化数组 元素
+		int[] array = new int[10];
+		
+		//赋随机值
+		for(int i = 0;i < array.length;i++){
+			array[i] = (int)(Math.random() * (99 - 10 + 1) + 10); //生成10~100随机数
+		}
+		
+		for(int i = 0;i < array.length;i++){
+			System.out.print(array[i] + " ");
+		}
+			System.out.println();
+		
+		//打印最大值
+		int maxValue = array[0];
+		for(int i = 0;i < array.length;i++){
+			if(maxValue < array[i]){
+				maxValue = array[i];
+			}
+		}
+		System.out.println("最大值是:" + maxValue);
+		
+		
+		//打印最小值
+		int minValue = array[0];
+		for(int i = 0;i < array.length;i++){
+			if(minValue  > array[i]){
+				minValue  = array[i];
+			}
+		}
+		System.out.println("最小值是:" + minValue);
+			
+			
+		//打印总和
+		int sumValue = array[0];
+		for(int i = 0;i < array.length;i++){
+			sumValue += array[i];
+		}
+		System.out.println("总和是:" + sumValue);
+		
+		
+		
+		//打印平均值
+		int meanValue = array[0];
+		for(int i = 0;i < array.length;i++){
+			meanValue = sumValue / array.length;
+		}
+		System.out.println("平均值是:" + meanValue);
+		
+		
+		
+		
+	}
+
+}
