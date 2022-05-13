@@ -1,0 +1,78 @@
+package com.atguigu.java;
+
+import java.util.Arrays;
+public class ArrayDome1 {
+
+	public static void main(String[] args) {
+		
+		
+		/*
+		//对比静态二维数组与动态数组定义形式的不同
+		int a[][] = {{30,26,35,32},{33,34,30,29}};
+		for(int i = 0;i < a.length;i++){
+			for(int j = 0;j < a[i].length;j++ ){
+				System.out.print(a[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		char[][] num = new char[3][3]; 
+		//动态定义一个3行3列的二维数组
+		num[0][0] = 'a';
+		num[0][1] = 'p';
+		num[0][2] = 'p';
+		num[1][0] = 'b';
+		num[1][1] = 'l';
+		num[1][2] = 'u';
+		num[2][0] = 'b';
+		num[2][1] = 'l';
+		num[2][2] = 'u';
+		
+		for(int i = 0;i < num.length;i++){
+			for(int j = 0;j < num[i].length;j++){
+				System.out.print(num[i][j] + " ");
+			}
+			System.out.println();
+		}
+		*/
+		
+		
+		/*
+		//三维数组的使用
+		int i,j,k,sum = 0;
+		
+		//声明数组并设置初值
+		int a[][][] = { { {5,1},{6,7} },{ {9,4},{8,3} } };
+		
+		for(i = 0;i < a.length;i++){
+			for(j = 0;j < a[i].length;j++){
+				for(k = 0;k < a[i][j].length;k++){
+					
+					System.out.print(" a [" +i+ "] [" +j+ "] [" +k+ "]");
+					System.out.println(a[i][j][k]);
+					sum += a[i][j][k];
+					
+				}
+			System.out.println("sum = " + sum);
+			}
+		}
+		*/
+		
+		
+		
+		
+		/*
+		//对数组进行排序
+		
+		int a[] = {22,35,17,39,3,1,8,2};
+		//声明数组并赋初值
+		Arrays.sort(a);
+		for(int j = 0;j < a.length;j++){
+			System.out.print( a[j] + " ");
+		}
+		*/
+		
+		
+	}
+
+}
