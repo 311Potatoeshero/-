@@ -1,0 +1,94 @@
+package com.atguigu.java;
+
+import java.util.Scanner;
+
+public class DailyTest2 {
+
+	public static void main(String[] args) {
+		
+		/*
+		 //1.接收用户输入的要测试的数字
+		
+        System.out.println("请输入你要判断的数字：");
+        double input = new Scanner(System.in).nextDouble();
+        
+        //2.调用求绝对值的方法并拿到方法执行后的结果（返回值）
+         
+        double result = getAbsNum(input);
+        
+        //3.打印求出的结果
+         
+        System.out.println(input+"的绝对值是："+result);
+        }
+
+        private static double getAbsNum(double input) {
+        if(input >=0){//如果是非负数
+            return input;//返回本身的值
+        }else{//如果是负数
+            return -input;//则值取反
+        }
+		*/
+
+		
+		/*
+		//练习题: BMI 指数测试 BMI = 体重 (kg) / 身高² (m)
+		
+        //1.提示并接收用户输入的身高与体重信息
+		
+        System.out.print("请输入您的身高(单位为m)：");
+        double height = new Scanner(System.in).nextDouble();
+        System.out.print("请输入您的体重(单位为kg)：");
+        double weight = new Scanner(System.in).nextDouble();
+
+        //2.调用getBMI()方法，根据身高和体重信息,输出结果
+         
+        getBMI(height, weight);
+        }
+
+         public static void getBMI(double h, double w) {
+        //求出BMI指数
+        double bmi = w / (h * h);
+        //定义一个变量r来保存最终结果
+        String r = "";
+
+        //根据 bmi 指数范围，来给r重新赋值
+        if (bmi < 18.5) {
+            r = "过轻";
+        } else if (bmi <= 22.9) {
+            r = "正常";
+        } else if (bmi <= 24.9) {
+            r = "偏胖";
+        } else if (bmi <= 29.9) {
+            r = "肥胖";
+        } else if (bmi <= 40) {
+            r = "重度肥胖";
+        } else {
+            r = "极度肥胖";
+        }
+        //打印最终结果
+        System.out.println("您的BMI指数：" + bmi);
+
+        System.out.println("您的体重属于：" + r);
+        
+		*/
+		
+		/*
+		//练习题：接收用户输入的数据，判断是奇数还是偶数
+		 
+		  //1.提示并接收用户输入的数据
+		
+			System.out.println("请输入您要判断的数据");
+			int input = new Scanner(System.in).nextInt();
+			//2.判断用户输入的数据
+			if(input % 2 == 0) {
+				System.out.println(input+"是偶数");
+			}else {
+				System.out.println(input+"是奇数");
+			}
+
+		*/
+		
+		
+	}
+
+}
