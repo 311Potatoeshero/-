@@ -1,0 +1,56 @@
+
+
+package cn.cxy.exec;
+
+public class ForBreak {
+    public static void main(String[] args) {
+      /*
+
+        //多次生成随机数,并打印第一次出现大于0.999 时的次数与生成的随机数
+        // Math.random()可以产生[0,1)的随机浮点数
+        // >0.999
+        //写一个死循环, i变量用来计次
+        for(int i=1; ;i++) {
+            double d = Math.random();
+            if(d>0.999) {
+                System.out.println("第"+i+"次产生了目标值,值为:"+d);
+                break;
+            }
+        }
+     */
+      
+
+      /*
+      //打印100以内除了尾数为3,5,7的所有数
+        for(int i=1;i<=100;i++) {
+            int y = i%10;//100以内的数,通过取余求出尾数
+            if(y==3 || y==5 || y==7) {
+                continue;//如果尾数为3 5 7 ,则跳过后面的打印,进行下一轮循环
+            }
+            System.out.println(i);
+        }
+
+       */
+
+
+       //求数字的绝对值
+
+        //1.接收用户输入的要测试的数字
+        System.out.println("请输入你要判断的数字：");
+        double input = new Scanner(System.in).nextDouble();
+        //2.调用求绝对值的方法并拿到方法执行后的结果（返回值）
+        double result = getAbsNum(input);
+        //3.打印求出的结果
+        System.out.println(input+"的绝对值是："+result);
+    }
+
+    private static double getAbsNum(double input) {
+        if(input >=0){//如果是非负数
+            return input;//返回本身的值
+        }else{//如果是负数
+            return -input;//则值取反
+        }
+
+
+    }
+}
