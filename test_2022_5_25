@@ -1,0 +1,105 @@
+//类型之间的转换与字面值规则
+
+
+/*
+package cn.tedu.basic;
+/*本类用来测试类型转换
+* 1.byte1--short char2--int4--long8--float4--double8
+* 2.小到大 直接转:隐式转换,可以直接转换
+*   大到小 强制转:显式转换,需要强转,注意发生数据溢出的问题
+*   浮变整 小数没:小数部分直接被舍弃
+* 3.强制类型转换的格式:目标类型 变量名 = (目标类型)要转换类型的数据;
+* */
+public class TestTypeChage {
+    public static void main(String[] args) {
+
+        /*
+        byte a = 10;
+        short b = a;//不会报错,小转大
+
+        int c = 1;
+        long d = c;//不会报错,小转大
+
+        float f = 3.1415f;
+        double e = f;//不会报错,小转大
+
+        long g = 8274624867L;
+        float h = g;//不会报错,小转大
+        System.out.println(h);
+
+        char i = 'a';
+        int j = i;//不会报错,小转大
+        System.out.println(j);//97
+
+        int a1 = 1;
+        byte b1 = 2;
+        //byte c1 = a1+b1;会报错,大转小
+        byte c1 = (byte) (a1+b1);//需要强制类型转换
+
+        byte d1 = (byte) 128;
+        System.out.println(d1);//-128,需要强转,注意发生数据溢出的问题
+
+        short e1 = 'a';
+        char f1 = 120;
+        System.out.println(e1);//97,打印的是编码值
+        System.out.println(f1);//'x',打印是根据编码找到的字符
+
+        float h1 = 32874.435F;
+        int i1 = (int) h1;//大转小 强制转
+        System.out.println(i1);//32874 浮变整 小数没
+ 
+        */
+
+
+
+
+         /*
+                //1.提示并接收用户输入的月份
+        System.out.println("请输入您要查看的月份:");
+        int month = new Scanner(System.in).nextInt();
+
+        //2.对用户输入的数据进行合法性检测
+        /*如果if后的语句只有一句,大括号可以省略不写*/
+        /*return关键字除了可以帮我们返回方法的返回值以外
+        * 还可以直接结束当前的方法,如果遇到了return,本方法会直接结束*/
+//        if(month <0 || month >12) return;
+//        System.out.println("今天天气真不错");//这句话是用来检测main()有没有结束
+        if(month <= 0 || month >12){
+            System.out.println("您输入的月份不正确!应该是1-12月以内");
+        }else{
+            //3.判断接收到的合法数据属于哪个季节,并将结果输出
+            if(month >=3 && month <=5){
+                System.out.println(month+"月是春天");
+            }else if(month >=6 && month <=8){
+                System.out.println(month+"月是夏天~");
+            }else if(month >=9 && month <=11){
+                System.out.println(month+"月是秋天");
+            }else{
+                System.out.println("冬天就要来啦,春天还会远吗?");
+            }
+        }
+        */
+
+
+
+       //switch语句
+             //需求:接收用户今天输入的颜色,推荐菜品
+        //1.提示并接收用户输入的颜色
+        System.out.println("请输入您今天心情的颜色:");
+        String color = new Scanner(System.in).nextLine();
+        //2.完成选择结构
+        switch (color) {
+            case "红":
+                System.out.println("红烧鱼");
+                break;//为了避免穿透
+            case "黄":
+                System.out.println("菠萝炒饭");
+                break;
+            case "橙":
+                System.out.println("水煮肉片");
+                break;
+            default:
+                System.out.println("哎呀,没有识别到这个功能呢,正在开发中...");
+        }
+    }
+}
