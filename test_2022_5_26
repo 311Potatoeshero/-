@@ -1,0 +1,117 @@
+package cn.tedu.oopexec;
+
+import java.util.Arrays;
+
+/*本类用于实现宠物商店设计案例*/
+public class TestAnimalShop {
+    public static void main(String[] args) {
+        //开始测试
+        //1.创建宠物商店对象
+        AnimalShop shop = new AnimalShop();
+        //2.给宠物店起名字
+        shop.shopName = "爱宠宠物店";
+        //3.查看宠物店现在所有的宠物
+        System.out.println(Arrays.toString(shop.animals));//[null, null, null, null, null]
+
+        //4.1创建动物对象--叫小白的3岁的小猫
+        Cat cat = new Cat();
+        cat.name = "小白";
+        cat.age = 3;
+        //4.2将第一只创建好的小动物放到数组里
+        shop.animals[0] = cat;
+
+        //5.1创建一只叫罗小黑的5岁的猫
+        Cat cat1 = new Cat();
+        cat1.name = "罗小黑";
+        cat1.age = 5;
+        //5.2将第二只创建好的小动物放到数组里
+        shop.animals[1] = cat1;
+
+        //6.1创建一只叫旺财的4岁的狗
+        Dog dog = new Dog();
+        dog.name = "旺财";
+        dog.age = 4;
+        //6.2将第三只创建好的小动物放到数组里
+        shop.animals[2] = dog;
+
+        //7.1创建一只叫银子的100岁的鸟
+        Bird bird = new Bird();
+        bird.name = "银子";
+        bird.age = 100;
+        //7.2将第四只创建好的小动物放到数组里
+        shop.animals[3] = bird;
+
+        //8.1创建一只叫大米的7岁的狗
+        Dog dog1 = new Dog();
+        dog1.name = "大米";
+        dog1.age = 7;
+        //8.2将第五只创建好的小动物放到数组里
+        shop.animals[4] = dog1;
+
+        //9.通过遍历数组，查看所有的动物的名字与年龄
+        for(int i = 0;i < 5; i++){
+            System.out.println(shop.animals[i].name + shop.animals[i].age);
+        }
+
+        //10.调用动物们各自的功能
+        shop.animals[0].eat();//小猫爱吃小鱼干~重写后的功能
+        shop.animals[4].eat();//小动物Animal吃啥都行~继承自父类的功能
+
+        //11.调用查询动物的方法
+        Animal animal = shop.query(2);
+        System.out.println(animal.name+animal.age);
+
+        //12.调用购买动物的方法
+        shop.buy(cat1);
+        shop.buy(bird);
+    }
+}
+
+//1.创建动物类的父类Animal
+class Animal{
+    //2.定义动物类的属性
+    public String name;
+    public int age;
+
+    //3.定义动物类的方法
+    public void eat(){
+        System.out.println("小动物Animal吃啥都行~");
+    }
+}
+//4.创建子类小猫类
+class Cat extends Animal{
+    //5.重写继承自父类的方法 两同 两小 一大
+    @Override //添加注解，标记当前是一个重写的方法
+    public void eat(){
+        System.out.println("小猫爱吃小鱼干~");
+    }
+    //6.添加子类的特有方法
+    public void miaoMiao(){
+        System.out.println("小猫开始喵喵叫啦...");
+    }
+}
+
+//7.创建子类小鸟类
+class Bird extends Animal{}
+//8.创建子类小狗类
+class Dog extends Animal{}
+
+//9.创建宠物商店类
+class AnimalShop{
+    //10.定义宠物商店的属性
+    public String shopName;//商店名
+    //准备一个Animal类型的数组，用来存放小动物对象，长度为5
+    public Animal[] animals = new Animal[5];
+
+    //11.1定义宠物商店的方法1--查询小动物
+    public Animal query(int i){
+        //传入编号，也就是数组下标，返回数组中对应的小动物对象
+        return animals[i];
+    }
+    //11.2定义宠物商店的方法2--购买小动物
+    /*此处方法的参数是多态的体现，不管传入的是具体的什么小动物，都看作Animal类型*/
+    public void buy(Animal animal){
+        System.out.println("恭喜你要带："+animal.name+"回家啦~，它"+animal.age+"岁啦，要好好照顾它哦~");
+    }
+
+}
