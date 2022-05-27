@@ -1,0 +1,116 @@
+package cn.cxy.exec;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class TestMethod {
+    public static void main(String[] args) {
+
+        //练习1
+       
+        /*
+        //传入一个随机数组，进行排序，然后将排好序的数组返回
+        //1.用来生成一个随机数组
+        int[] a = createArray();
+        System.out.println(Arrays.toString(a));
+        //2.传入刚刚生成的随机数组，排序，将排序后的数组返回
+        int[] b = sortArray(a);
+        System.out.println(Arrays.toString(b));
+    }
+    public static int[] sortArray(int[] a){
+        //需要对传入的数组进行排序
+        Arrays.sort(a);
+        return a;
+    }
+    //修饰符 返回值类型 方法名(参数列表){方法体}
+    public static int[] createArray(){
+        //生成一个随机数组，并将结果返回
+        //1.动态创建一个长度随机的数组
+        //int length = new Random().nextInt(10);//[0,10)
+        int length = new Random().nextInt(5)+5;//[0,5)->[0+5,5+5)->[5,10)
+        int[] a = new int[length];//数组的长度是生成的随机长度length
+        /**数组长度可以为0*/
+        //2.遍历数组，依次向数组中的每个位置存入随机值
+        for(int i = 0;i<=a.length-1;i++) {
+            a[i] = new Random().nextInt(100);
+        }
+        return a;
+        */
+
+
+        //练习2
+
+        /*
+        //传入一个随机数组，进行排序，然后将排好序的数组返回
+        //1.用来生成一个随机数组
+        Integer[] a = createArray();
+        System.out.println(Arrays.toString(a));
+        //2.传入刚刚生成的随机数组，排序，将排序后的数组返回
+        Integer[] b = sortArray(a);
+        System.out.println(Arrays.toString(b));
+    }
+    public static Integer[] sortArray(Integer[] a){
+        //需要对传入的数组进行排序
+        //Arrays.sort(a);
+        Arrays.sort(a,Collections.reverseOrder());
+        return a;
+    }
+    //修饰符 返回值类型 方法名(参数列表){方法体}
+    public static Integer[] createArray(){
+        //生成一个随机数组，并将结果返回
+        //1.动态创建一个长度随机的数组
+        //int length = new Random().nextInt(10);//[0,10)
+        int length = new Random().nextInt(5)+5;//[0,5)->[0+5,5+5)->[5,10)
+        Integer[] a = new Integer[length];//数组的长度是生成的随机长度length
+        /**数组长度可以为0*/
+        //2.遍历数组，依次向数组中的每个位置存入随机值
+        for(int i = 0;i<=a.length-1;i++) {
+            a[i] = new Random().nextInt(100);
+        }
+        return a;
+       */
+
+      //练习3
+
+		while(true) {
+			//完成实现一个计算器的功能
+			//1.提示并接收用户要计算的两个数
+			System.out.println("请您输入要计算的第一个数：");
+			int a = new Scanner(System.in).nextInt();
+			System.out.println("请您输入要计算的第二个数：");
+			int b = new Scanner(System.in).nextInt();
+			
+			//2.提示并接收用户输入的运算符
+			System.out.println("请输入您要计算的运算符：支持 + - * / ");
+			String s = new Scanner(System.in).nextLine();
+			
+			//3.根据运算符调用不同的方法给出结果
+			switch(s) {
+				case "+" : f1(a,b);break; 
+				case "-" : f2(a,b);break; 
+				case "*" : f3(a,b);break; 
+				case "/" : f4(a,b);break; 
+				default :System.out.println("输入的运算符不正确！");
+			}
+			//4.询问用户是否想继续运算
+			System.out.println("如果想退出，请输入1，继续请输入2");
+			int flag = new Scanner(System.in).nextInt();
+			if(flag==1) break;//如果if后只有一句话，大括号可以省略，break退出死循环
+			
+		}
+		
+	}
+	private static void f4(int a,int b) {//进行除法运算
+		System.out.println(a+"与"+b+"的除法运算结果为："+(a/b));
+	}
+	private static void f3(int a,int b) {//进行乘法运算
+		System.out.println(a+"与"+b+"的乘法运算结果为："+(a*b));
+	}
+	private static void f2(int a,int b) {//进行减法运算
+		System.out.println(a+"与"+b+"的减法运算结果为："+(a-b));
+	}
+	private static void f1(int a,int b) {//做加法运算的方法
+		System.out.println(a+"与"+b+"的加法运算结果为："+(a+b));
+         
+    }
+}
