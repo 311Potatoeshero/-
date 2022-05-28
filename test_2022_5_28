@@ -1,0 +1,108 @@
+//实现二分法查找/折半查找
+
+/*
+package cn.cxy.exec;
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class BinarySearch {
+   public static void main(String[] args) {
+      //从方法，获取一个乱序数组
+      int[] a = suiJi();
+      //对a数组排序
+      Arrays.sort(a);//优化的快速排序
+      System.out.println(Arrays.toString(a));
+      while(true) {
+         System.out.print("查找的目标值：");
+         int t = new Scanner(System.in).nextInt();
+         //二分法查找，
+         //从a数组中，查找t的位置
+         int index = binarySearch(a, t);
+         System.out.println(index);
+      }
+   }
+
+   private static int[] suiJi() {
+      //随机产生5+ [0,6)范围整数n
+      int n = 5+ new Random().nextInt(6);
+      //新建int[]数组，长度n
+      //再存到变量a
+      int[] a = new int[n];
+      //遍历数组，填入100内随机整数
+      for (int i = 0; i < a.length; i++) {
+         a[i] = new Random().nextInt(100);
+      }
+      //返回数组a
+      return a;
+   }
+
+   private static int binarySearch(int[] a, int t) {
+      /*
+       * t = 36
+       *              mid
+       * [16, 21, 30, 36, 39, 70, 70, 92]
+       *  lo
+       *                              hi
+       * *) lo和hi关系 lo<=hi
+       * *) 交叉就是找不到数据
+       * *) lo位置是插入点位置
+       *
+       * *)定义三个下标值
+       *   lo=0, hi=a.length-1
+       *   mid 只定义先不赋值
+       * *)循环，当lo<=hi
+       *     *)计算中间下表存到 mid
+       *     *)如果a[mid]<t，lo定位到mid+1
+       *     *)否则如果a[mid]>t，hi定义到mid-1
+       *     *)否则，返回mid的值
+       * *)lo、hi交叉结束
+       *   返回 -(lo+1)，表示-(插入点+1)
+       */
+
+
+
+      //二分法实现数据动态插入
+
+
+      /*
+      int lo = 0;
+      int hi = a.length-1;
+      int mid;
+      while(lo <= hi) {
+         mid = (lo+hi) / 2;
+         if(a[mid] < t) {
+            lo = mid+1;
+         } else if(a[mid] > t) {
+            hi = mid-1;
+         } else {
+            return mid;
+         }
+      }
+      //避免lo是0，加1后，再加负号
+      return -(lo+1); // -(插入点+1)
+      */
+  
+		/*
+		 * 集合、泛型，都不支持基本类型
+		 * 用基本类型的包装类
+		 */
+		ArrayList<Integer> list = new ArrayList<>();
+		System.out.println("回车继续");
+		while(true) {
+			new Scanner(System.in).nextLine();
+			int n = new Random().nextInt(100);
+			//二分法查找，在list中找n所在的位置
+			//找不到，返回 -(插入点+1)
+			int index = Collections.binarySearch(list, n);  
+			if(index < 0) {
+				index = (-index)-1;
+			}
+			list.add(index, n);
+			System.out.println(list.toString());
+		}
+               */
+
+   }
+}
