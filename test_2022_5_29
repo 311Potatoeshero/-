@@ -1,0 +1,77 @@
+//日期函数练习
+
+package cn.cxy.date;
+
+import java.util.Date;
+
+/*本类用于Date的常用方法测试*/
+public class TestDate2 {
+    public static void main(String[] args) {
+        /*
+        //1.创建Date对象
+        Date d1 = new Date();
+        //2.获取从标准基准时间到现在时间的毫秒值，是一个时间差
+        System.out.println(d1.getTime());//1632404114206
+        //*1.0是为了变成浮点型，/1000变成秒，/60变成分，/60变成小时，/24变成天，/365变成年
+        System.out.println(d1.getTime() * 1.0 / 1000 / 60 / 60 / 24 / 365);//约等于51,从1970到2021
+
+        //3.打印d1就是当前的时间
+        System.out.println(d1);//Thu Sep 23 21:39:29 CST 2021
+        //4设置一个long值，作为毫秒为单位的时间差
+        long t = 1000*60*60;
+        d1.setTime(t);
+        System.out.println(d1);//打印的就是从标准基准时间经过时间差t的时间
+        */
+        
+        
+        //练习2
+        /*
+        /*01 格式化：从 Date 到 String*/
+        //1.创建日期类对象，包含当前的时间
+        Date d = new Date();
+        //2.创建日期转换工具类的对象，此时使用的是无参构造
+        //SimpleDateFormat sdf = new SimpleDateFormat();
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        //3.通过刚刚创建好的工具类对象转换日期的格式
+        String s = sdf2.format(d);
+        //4.打印转换好的时间字符串：
+        //默认时间格式：21-9-23 下午11:18
+        //自定义时间格式：2021/09/23 10:21:39
+        System.out.println(s);
+        
+        /*解析：从String到 Date*/
+        //1.定义一个时间字符串
+        String s2 = "2021/9/23 22:24:03";
+        //报错：ParseException解析异常: Unparseable date不可分割日期: "2021/9/23 22:24:03"
+        //SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+        //2.利用含参构造创建工具类对象，指定格式，注意必须是规定格式，否则会抛出异常
+        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        //3.利用工具类对象对日期进行转换
+        Date d2= sdf3.parse(s2);
+        //4.打印转换好的日期
+        System.out.println(d2);//Thu Sep 23 22:24:03 CST 2021
+        */
+        
+    //2.创建一个将日期转换为字符串的方法
+    //参数：日期对象Date  日期转换的格式：format 返回值类型：String
+    public static String dateToString(Date date, String format){
+        //1.通过传入的日期格式，创建指定的工具类对象
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        //2.通过工具类对象将字符串转换为对应的日期字符串，并拿到转换后的字符串结果
+        String s = sdf.format(date);/*转换*/
+        //3.将最终转换的字符串结果返回
+        return s;
+    }
+
+    //3.创建一个将字符串转换为日期的方法
+    //参数：字符串对象String  日期转换的格式：format 返回值类型：Date
+    public static Date stringToDate(String s, String format) throws ParseException {
+        //1.通过传入的日期格式，创建指定的工具类对象
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        //2.通过工具类对象将日期对象转换为对应的字符串，并拿到转换后的日期对象
+        Date d = sdf.parse(s);/*解析*/
+        //3.将最终转换的日期对象作为方法的结果返回
+        return d;
+
+    }
+}
