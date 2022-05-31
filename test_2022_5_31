@@ -1,0 +1,91 @@
+package july20th;
+
+import java.util.Scanner;
+
+public class Tourer {
+
+          //景区门票小练习
+          /*
+	String name;
+	int age;
+	String ticket;
+
+	public void info() {
+		ticket = age <= 12 ? "免费" : "价格为：20元";
+		System.out.println(name + "的年龄为：" + age + ",门票" + ticket+"\n");
+	}
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int age = 0;
+		String name = " ";
+		for (;;) {
+			Tourer person = new Tourer();
+			if (!name.equals("n")) {
+				System.out.print("请输入姓名:");
+				name = input.next();
+				if (name.equals("n")) {
+					System.out.println("退出程序");
+					break;
+				}
+				System.out.print("请输入年龄:");
+				age = input.nextInt();
+				person.name = name;
+				person.age = age;
+				person.info();
+			} else {
+				break;
+			}
+		}
+          */
+    
+
+  //用户登录
+public class Administrator {
+
+	String name;
+	int passWord;
+
+	public void adminInfo() {
+		System.out.println("姓名：" + name + ",密码：" + passWord);
+	}
+
+	public void modifyInfo() {
+
+	}
+
+	public static void main(String[] args) {
+		Administrator admin1 = new Administrator();
+		admin1.name = "admin1";
+		admin1.passWord = 111111;
+		admin1.adminInfo();
+
+		Administrator admin2 = new Administrator();
+		admin2.name = "admin2";
+		admin2.passWord = 222222;
+		admin2.adminInfo();
+
+		Administrator admin3 = new Administrator();
+		admin3.name = "admin3";
+		admin3.passWord = 333333;
+
+		Scanner input = new Scanner(System.in);
+		boolean isFlag = true;
+		while (isFlag) {
+			System.out.println("请输入用户名:");
+			String name = input.next();
+			System.out.println("请输入密码:");
+			int passWord = input.nextInt();
+			if (admin3.name.equals("admin3") && admin3.passWord == passWord) {
+				System.out.println("请输入新密码");
+				passWord = input.nextInt();
+				admin3.passWord = passWord;
+				System.out.println("密码修改成功，您的新密码为" + admin3.passWord);
+				isFlag = false;
+			} else {
+				System.out.println("用户名和密码不匹配！您没有权限更新管理员信息。");
+				break;
+			}
+		}
+	}
+}
