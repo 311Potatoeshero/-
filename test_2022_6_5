@@ -1,0 +1,109 @@
+class TestMain{
+	public static void main(String[] args){
+
+
+                    //质数输出
+                   /*
+		boolean isFlag=true;                          //标识**i**是否被**j**除尽
+		for(int i=2;i<=100000;i++){                 //为了证明是最优方法 所以取值100000       
+			for(int j=2;j<=Math.sqrt(i); j++){      //这里不优化用j<i的话程序运行速度明显变慢，**math.sqrt(i)**是对i开平方，只对质数本身起作用，所以程序运行会更快！
+			  	if(i%j==0){
+			  	isFlag=false;
+			  	break;
+			  	}
+			}
+			if(isFlag==true){
+			System.out.println(i);
+			}
+			isFlag=true;   //重置isFlag
+		}
+                    */
+
+                  
+                    //方法二
+                  /*
+		label:for(int i=2;i<=100000;i++){       
+			for(int j=2;j<=Math.sqrt(i);j++){
+				if(i%j==0){
+				continue label;            //标识外层循环
+				}				
+			}
+			System.out.println(i);
+		}
+                   */
+
+
+		//排序算法
+		//1，冒泡排序
+		
+		/*
+		int[] arr = new int[]{43,56,66,12,3,45,89,123,45};
+		
+		for(int i = 0;i < arr.length - 1;i++){
+			for(int j = 0;j < arr.length - 1 -i;j++){
+				if(arr[j] > arr[j + 1]){
+					int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+				}
+			}
+		}
+		
+		System.out.println("排序后的元素为：");
+		
+		for(int i = 0;i < arr.length;i++){
+			System.out.print(arr[i] + " ");
+		}
+		*/
+		
+		//2.快速排序
+		
+		
+		/*
+		//array工具类
+		//1,boolean equals(int[] a,int[] b); 判断两个数组是否相等
+		
+		int[] arr1 = new int[]{1,2,3,4};
+		int[] arr2 = new int[]{1,9,3,4};
+		boolean isEquals = Arrays.equals(arr1, arr2);
+		System.out.println(isEquals);
+		
+		//2,String toString(int[] a);输出数组信息
+		System.out.println(Arrays.toString(arr1));
+		
+		//3,void fill(int[] a,int val);将指定的值填充的数组之中,替换值
+		Arrays.fill(arr1,10);
+		System.out.println(Arrays.toString(arr1));
+		
+		//4,void sort(int[] a);排序
+		Arrays.sort(arr2);
+		System.out.println(Arrays.toString(arr2));
+		
+		//5,int binarySearch(int[] a,int key)；二分查找
+		int index = Arrays.binarySearch(arr2, 9);
+		System.out.println(index);
+		*/
+		
+		
+		
+		/*
+		double money[]=new double[5];
+		Scanner sc=new Scanner(System.in);
+		System.out.println("请输入会员本月的消费记录");
+		for(int i=0;i<money.length;i++){
+			System.out.println("请输入第"+(i+1)+"笔购物金额");
+			money[i]=sc.nextDouble();		
+		}
+		
+		System.out.println("");
+		int sum=0;
+		System.out.println("序号\t\t"+"金额(元)");
+		for(int i=0;i<money.length;i++){
+			System.out.println((i+1)+"\t\t"+money[i]);
+			sum+=money[i];
+		}
+		System.out.println("总金额\t\t"+sum);
+	}
+        */
+	}
+}
