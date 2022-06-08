@@ -1,0 +1,136 @@
+package com.atguigu.java;
+
+public class day01 {
+
+	public static void main(String[] args) {
+		//创建Person类的对象
+		Person p1 = new Person();
+		//Scanner scannner = new Scanner(System.in);
+		
+		//调用对象的结构、属性、方法
+		//调用属性：“对象。属性”
+		//属性赋值
+		p1.name = "Tom";
+		p1.isMale = true;
+		System.out.println(p1.name);
+		
+		//调用方法：“对象.方法”
+		p1.eat();
+		p1.sleep();
+		p1.talk("CHINESE");
+		
+		Person p2 = new Person();
+		System.out.println(p2.name);
+		System.out.println(p2.isMale);
+		
+		//将p1变量的对象地址值赋给p3，导致p1和p3指向了堆空间中的同一个对象实体
+		Person p3 = p1;
+		System.out.println(p1.name); //Tom
+		p3.age = 10;
+		System.out.println(p1.age); //10
+		
+	}
+
+}
+
+class Person{
+	
+	//属性 - 成员变量 - field - 域、字段
+	String name;
+	int age = 1;
+	boolean isMale;
+	
+	
+	//行为 - 函数 -
+	public void eat(){
+	    System.out.println("人可以吃饭");
+	}
+	
+	public void sleep(){
+		System.out.println("人可以睡觉");
+	}
+	
+	public void talk(String language){
+		System.out.println("人可以说话，使用的是：" + language);
+	}
+	
+	
+}
+
+package com.atguigu.java;
+
+public class UserTest {
+
+	public static void main(String[] args) {
+		User u1 = new User();
+		System.out.println(u1.name);
+		System.out.println(u1.age);
+		System.out.println(u1.isMale);
+		
+		u1.talk("中文");
+
+	}
+
+}
+
+
+class User{
+	// 属性（或成员变量）
+	String name;
+	int age;
+	boolean isMale;
+	
+	public void talk(String language){
+		//language:形参，也是局部变量
+		System.out.println("我们使用" + language + "进行交流");
+		
+	}
+	
+	public void eat(){
+		String food = "烙饼"; //局部变量
+		System.out.println("北方人喜欢吃" + food);
+	}
+}
+
+package com.atguigu.java;
+
+public class CustomerTest {
+
+	public static void main(String[] args) {
+		Customer cust = new Customer();
+		
+		cust.eat();
+
+	}
+
+}
+
+
+//客户类
+class Customer{
+	
+	//属性
+	String name;
+	int age;
+	boolean isMale;
+	
+	//方法
+	public void eat(){
+		//void 没有返回值
+		System.out.println("客户吃饭");
+	}
+	
+	public void sleep(int hour){ //带参数
+		System.out.println("休息了" + hour + "个小时");
+	}
+	
+	public String getName(){ //带返回值
+		return name;
+	}
+	
+	public String getNation(String nation){
+		String info = "我的国籍是" + nation;
+		return nation;
+	}
+	
+}
