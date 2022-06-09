@@ -1,0 +1,175 @@
+//面向对象小项目
+import java.util.Scanner;
+
+public class CMUtility {
+    private static Scanner scanner = new Scanner(System.in);
+
+    //用来客户选择系统开始界面列表：1-5
+    public static char readMenuSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false);
+            c = str.charAt(0);
+            if (c != '1' && c != '2' && c != '3' && c != '4' && c != '5') {
+                System.out.println("选择错误，请重新输入：");
+            } else break;
+        }
+        return c;
+    }
+
+    //从键盘读取一个字符，并将其作为方法的返回值
+    public static char readChar() {
+        String str = readKeyBoard(1, false);
+        return str.charAt(0);
+    }
+
+    //如果用户不输入字符而直接回车，方法以defaultValue作为返回值
+    public static char readChar(char defaultValue) {
+        String str = readKeyBoard(1, false);
+        return (str.length() == 0) ? defaultValue : str.charAt(0);
+    }
+
+    //从键盘读取一个长度不超过2位的整数，并作为其返回值
+    public static int readInt() {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(2, false);
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("数学输入错误，请重新输入：");
+            }
+        }
+        return n;
+    }
+
+    //从键盘读取一个长度不超过2位的整数，并将其作为该方法的返回值
+    public static int readInt(int defaultValue) {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(2, true);
+            if (str.equals("")) {
+                return defaultValue;
+            }
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("数学输入错误，请重新输入：");
+            }
+        }
+        return n;
+    }
+
+    //从键盘读取一个长度不超过limit的字符串，并将其作为方法的返回值
+    public static String readString(int limit) {
+        return readKeyBoard(limit, false);
+    }
+
+    //从键盘读取一个长度不超过limit的字符串，并将其作为方法的返回值，
+    //如果用户不输入字符而直接回车，方法以defaultValue作为返回值
+    public static String readString(int limit, String defaultValue) {
+        String str = readKeyBoard(limit, true);
+        return str.equals("") ? defaultValue : str;
+    }
+
+    //用于确认选择的输入，该方法从键盘读取Y或N，并将其作为方法的返回值
+    public static char readComfirmSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false).toUpperCase();
+            c = str.charAt(0);
+            if (c == 'Y' || c == 'N') {
+                break;
+            } else {
+                System.out.println("选择错误，请重新输入：");
+            }
+        }
+        return c;
+    }
+
+    private static String readKeyBoard(int limit, boolean blankReturn) {
+        String line = "";
+
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            if (line.length() == 0) {
+                if (blankReturn) return line;
+                else continue;
+            }
+
+            if (line.length() < 1 || line.length() > limit) {
+                System.out.println("输入的长度（不大于" + limit + "）错误，请重新输入：");
+                continue;
+            }
+            break;
+        }
+        return line;
+    }
+
+}
+
+
+
+//用户界面
+package Java.project;
+
+public class Customer {
+    private String name;//姓名
+    private char gender;//性别
+    private int age;//年龄
+    private String phone;//电话号码
+    private String email;//电子邮件
+
+    public Customer() {
+    }
+
+    public Customer(String name, char gender, int age, String phone, String email) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
