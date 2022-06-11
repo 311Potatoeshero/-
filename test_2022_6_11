@@ -1,0 +1,252 @@
+package com.atguigu.java;
+
+import java.util.Arrays;
+
+public class ArrayDemo1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		//排序算法
+		//1，冒泡排序
+		
+		/*
+		int[] arr = new int[]{43,56,66,12,3,45,89,123,45};
+		
+		for(int i = 0;i < arr.length - 1;i++){
+			for(int j = 0;j < arr.length - 1 -i;j++){
+				if(arr[j] > arr[j + 1]){
+					int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+				}
+			}
+		}
+		
+		System.out.println("排序后的元素为：");
+		
+		for(int i = 0;i < arr.length;i++){
+			System.out.print(arr[i] + " ");
+		}
+		*/
+		
+		//2.快速排序
+		
+		
+		/*
+		//array工具类
+		//1,boolean equals(int[] a,int[] b); 判断两个数组是否相等
+		
+		int[] arr1 = new int[]{1,2,3,4};
+		int[] arr2 = new int[]{1,9,3,4};
+		boolean isEquals = Arrays.equals(arr1, arr2);
+		System.out.println(isEquals);
+		
+		//2,String toString(int[] a);输出数组信息
+		System.out.println(Arrays.toString(arr1));
+		
+		//3,void fill(int[] a,int val);将指定的值填充的数组之中,替换值
+		Arrays.fill(arr1,10);
+		System.out.println(Arrays.toString(arr1));
+		
+		//4,void sort(int[] a);排序
+		Arrays.sort(arr2);
+		System.out.println(Arrays.toString(arr2));
+		
+		//5,int binarySearch(int[] a,int key)；二分查找
+		int index = Arrays.binarySearch(arr2, 9);
+		System.out.println(index);
+		*/
+		
+		
+		
+		/*
+		double money[]=new double[5];
+		Scanner sc=new Scanner(System.in);
+		System.out.println("请输入会员本月的消费记录");
+		for(int i=0;i<money.length;i++){
+			System.out.println("请输入第"+(i+1)+"笔购物金额");
+			money[i]=sc.nextDouble();		
+		}
+		
+		System.out.println("");
+		int sum=0;
+		System.out.println("序号\t\t"+"金额(元)");
+		for(int i=0;i<money.length;i++){
+			System.out.println((i+1)+"\t\t"+money[i]);
+			sum+=money[i];
+		}
+		System.out.println("总金额\t\t"+sum);
+	}
+        */
+		
+		
+		
+	}
+
+}
+
+
+
+package com.atguigu.java;
+
+public class ArrayTest {
+
+	public static void main(String[] args) {
+
+		
+		//String[] arr = new String[]{"JJ", "DD", "MM", "BB", "GG", "AA"};
+		
+		//数组的反转,反转操作
+		/*
+		//注：不能加=
+		for(int i = 0;i<arr.length / 2;i++){
+			String temp = arr[i];
+			arr[i] = arr[arr.length - i -1];
+			arr[arr.length - i -1] = temp;
+		}
+		*/
+		
+		/*
+		//方法二
+		for(int i =0,j = arr.length - 1;i < j;i++,j--){
+			//j = arr.length-1 是末尾元素的地址下标
+			String temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+		*/
+		
+		/*
+		//遍历
+		for(int i =0;i < arr.length;i++){
+			System.out.print(arr[i] + "\t");
+		}
+		*/
+		
+		//查找（或者搜索）
+		//线性查找
+		
+		/*
+		String dest = "BB";
+		
+		boolean isFlag = true;
+		
+		for(int i = 0;i < arr.length;i++){
+			
+			if(dest.equals(arr[i])){
+				//指示其他某个对象是否与此对象“相等”
+				System.out.println("找到了指定的元素，位置为： " +i);
+				isFlag = false;
+				break;
+			}
+		}
+		if(isFlag){
+			System.out.println("很遗憾，没有找到");
+		}
+		*/
+		
+		
+		/*
+		//二分法查找
+		//前提：所要查找的数组必须有序
+		int[] arr2 = new int[]{66,78,99,45,38,48,64,51,-987,-645,-22,654,984};
+		
+		int dest = 78;
+		int head = 0; //初始的首索引
+		int end = arr2.length -1; //初始的末索引
+		boolean isFlag = true;
+		
+		//将数组的元素排序
+		//冒泡排序
+		for(int i = 0;i < arr2.length - 1;i++){
+			for(int j = 0;j < arr2.length - 1 - i;j++){
+			if(arr2[j] > arr2[j + 1]){
+				int temp = arr2[j];
+				arr2[j] = arr2[j + 1];
+				arr2[j + 1] = temp;
+			}
+		    }
+		}
+		
+		for(int j = 0;j < arr2.length;j++){
+			System.out.print(arr2[j] + "\t");
+		}
+
+		
+		while(head <= end){
+			
+			int middle = (head + end) / 2;
+			
+			if( dest == arr2[middle] ){
+				System.out.println("找到了，这个元素的位置是： " + middle);
+				isFlag = false;
+				break;
+			}else if(arr2[middle] > dest){
+				end = middle - 1;
+			}else{
+				head = middle + 1;
+			}
+		}
+		
+		if(isFlag){
+			System.out.println("很遗憾，没有找到");
+		}
+		*/
+		
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+
+
+
+package com.atguigu.java;
+
+public class CustomerTest {
+
+	public static void main(String[] args) {
+		Customer cust = new Customer();
+		
+		cust.eat();
+
+	}
+
+}
+
+
+//客户类
+class Customer{
+	
+	//属性
+	String name;
+	int age;
+	boolean isMale;
+	
+	//方法
+	public void eat(){
+		//void 没有返回值
+		System.out.println("客户吃饭");
+	}
+	
+	public void sleep(int hour){ //带参数
+		System.out.println("休息了" + hour + "个小时");
+	}
+	
+	public String getName(){ //带返回值
+		return name;
+	}
+	
+	public String getNation(String nation){
+		String info = "我的国籍是" + nation;
+		return nation;
+	}
+	
+}
