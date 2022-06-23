@@ -1,0 +1,145 @@
+import java.util.Scanner;
+import java.util.Arrays;
+public class Question_twenty_eight {
+    public static void main(String[] args)
+    {
+        //数组初始化
+        //涉及到静态数组和动态数组
+        //静态数组可以直接赋值，动态数组不能直接赋值
+        //int[] arr = new int[]{2, 3, 1, 5, 4, 6, 7, 6, 8, 9};
+        Scanner input = new Scanner(System.in);
+
+        int[] arr = new int[10];
+        for(int i = 1; i <= 10; i++)
+            arr[i - 1] = input.nextInt();
+        System.out.println(Arrays.toString(arr));
+        //数组的赋值
+        //arr[] = {2,3, 1, 5, 2, 6, 2, 6,8,9};
+
+        //直接输出得到的是数组的首地址
+        //需要转换才能输出
+        System.out.println(Arrays.toString(sort(arr)));
+        input.close();
+    }
+    //如何定义返回和接收数组的函数
+    //直接选择排序，排序最直接的一种方式
+    private static int[] sort(int[] arr)
+    {
+        int length = arr.length;
+        for(int i = 0; i < length - 1; i++)
+        {
+            int Max = i;
+            for(int j = i + 1; j < length ; j++)
+            {
+                if(arr[j] >= arr[Max])
+                    Max = j;
+            }
+            if(i != Max)
+            {
+                int tmp = arr[i];
+                arr[i] = arr[Max];
+                arr[Max] = tmp;
+            }
+        }
+        return arr;
+    }
+
+}
+
+
+
+
+import java.util.Scanner;
+
+public class Question_twenty_nine {
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        //初始化二维数组怎么做
+        int[][] arr = new int[3][3];
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                arr[i][j] = input.nextInt();
+            }
+        }
+        int ans = 0;
+        for(int i = 0; i < 3; i++)
+        {
+            ans += arr[i][i];
+        }
+        System.out.println(ans);
+    }
+}
+
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Question_thirty {
+    public static void main(String[] args)
+    {
+        System.out.println("请输入一个数字");
+        Scanner input = new Scanner(System.in);
+
+        int[] arr = new int[]{2, 5, 12, 45, 63, 78, 90};
+        int length = arr.length;
+        int[] arrB = new int[length + 1];
+        int num = input.nextInt();
+        if(num > arr[length - 1])
+        {
+            for(int i = 0; i < length; i++)
+                arrB[i] = arr[i];
+            arrB[length] = num;
+        }
+        else
+        {
+            int j;
+            for(j = length - 1; j >= 0; j--)
+            {
+                if(arr[j] > num)
+                {
+                    arrB[j + 1] = arr[j];
+                }
+                else
+                    break;
+            }
+            arrB[j + 1] = num;
+            //这是定位到分界点的位置（快排的枢纽）,要特别注意下标之间的关系
+            for(j = j; j >= 0; j--)
+            {
+                arrB[j] = arr[j];
+            }
+        }
+        System.out.println(Arrays.toString(arrB));
+        input.close();
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class Question_twenty_five {
+    public static void main(String[] args)
+    {
+        System.out.println("Plz input a number with 5 digits :");
+        Scanner input = new Scanner(System.in);
+        int a = input.nextInt();
+        int[] arr = new int[5];//创建数组操作
+        int i = 0;
+        //这个题与上一个很相似，不过是用数组把计算得结果存储起来
+        while(a != 0)
+        {
+            arr[i] = a % 10;
+            a /= 10;
+            i++;
+        }
+        if(arr[0] == arr[4] && arr[1] == arr[3])
+            System.out.println("YES!!");
+        else
+            System.out.println("NO!!");
+    }
+}
