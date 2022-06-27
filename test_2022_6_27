@@ -1,0 +1,102 @@
+public class JavaBasic29 {
+    public static void main(String[] args) {
+
+
+
+         /*
+        //闰年是指能被4整除，但是不能被100整除的年份 或者 能被400整除的年份
+        //平年2月有28天，闰年2月有29天
+        Scanner input = new Scanner(System.in);
+        System.out.print("请输入年份和月份:");
+        int year = input.nextInt();
+        int month = input.nextInt();
+        int day = 28;
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                day = 31;
+                break;
+            case 2:
+                if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+                    day = 29;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                break;
+        }
+        System.out.print("在 " + year + " 年 " + month + " 月一共有 " + day + " 天。");
+        input.close();
+        */
+
+
+         //点餐优惠
+        /*
+        int moneyPreferential = 16 + 8 + 3;
+        double moneyDiscount = 24 + 8 + 3 > 30 ? (24 + 8 + 3) * 0.8 : 24 + 8 + 3;
+        double result = moneyPreferential < moneyDiscount ? moneyPreferential : moneyDiscount;
+        System.out.print("这个小伙要点这三样东西，最小要花 " + result + " 元");
+         */
+
+
+           //分数累加
+           /*
+        System.out.print("请输入n的值：");
+        int n = input.nextInt();
+        double result = 0;
+        double denominator = n % 2 ==0 ? 2 :1;      //如果n是偶数，第一个相加的分数的分母为2，如果n是奇数，则第一个相加的分母为1
+        for (double i = denominator;i <= n; i = i +2)
+        result += 1 / i;
+        System.out.print("函数运算的结果是：" + String.format("%.2f", result));      //保留两位小数
+        input.close();
+        */
+
+
+、
+         //去除7倍数和包含7
+         /*
+        System.out.print("请输入判断区间的上界(不包括此数)：");
+        int max = input.nextInt();
+        int sum = 0;
+
+        //因为知道上界是三位数，也可以分别求出 个、十、百 位置上的数字 于 7 进行比较
+        //下面采用求素数的思想
+        boolean[] arr = new boolean[max];
+        for (int i = 0;i < arr.length;i ++)
+            arr[i] = true;
+
+        for (int j = 7;j < max;j ++) {
+            if (j % 7 == 0)       //去掉是7的倍数的数
+                arr[j] = false;
+            else {
+                int temp = j;
+                while (j != 0) {
+                    if (j % 10 == 7)   //去掉包含7的数字
+                        arr[temp] = false;
+                    j /= 10;
+                }
+                j = temp;
+            }
+        }
+
+        for (int k = 1;k < arr.length;k ++)
+            if (arr[k]) {
+                System.out.print(k + "   ");
+                sum += k;
+            }
+        System.out.println();
+        System.out.print("1 - " + max + " 之间所有不是7的倍数和不包含7的数字 之和是：" + sum);
+        input.close();
+        */
+
+
+
+
+   }
+}
