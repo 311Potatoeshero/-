@@ -1,0 +1,199 @@
+package com.atguigu.java;
+/*
+ * 一、理解“万事万物皆对象”
+ * 1，在java语言范畴中，我们都将功能、结构等封装到类中，通过类的实例化，来调用具体的功能结构
+ *    》Scanner，String等
+ *    》文件，file
+ *    》网络资源：URL
+ * 2，涉及到Java语言与前端Html、后端的数据库交互时，前后端的结构在Java层面交互时，都体现为类、对象
+ * 
+ * 二、内存解析的说明
+ * 1，引用类型的变量，只能存储两类值：null 或 地址值（含变量的类型）
+ * 
+ * 三、匿名对象的使用
+ * 1,理解： 我们创建的对象，没有显示的赋给一个变量名。即为匿名对象
+ * 2，特征： 匿名对象只能调用一次
+ * 3，使用： 如下
+ * 
+ */
+public class InstanceTest {
+     public static void main(String[] args){
+    	 Phone p = new Phone();
+    	 // p = null;
+    	 System.out.println(p);
+    	 
+    	 p.sendEmail(); //调用方法
+    	 p.playGame();
+    	 
+    	 //匿名对象
+//         new Phone().sendEmail();
+//         new Phone().playGame();
+    	 
+    	 new Phone().price = 1999;
+    	 new Phone().showPrice(); //0.0
+    	 
+    	 PhoneMall mall = new PhoneMall();
+    	 //匿名对象的使用
+    	 mall.show(new Phone());
+     }
+	
+}
+
+class PhoneMall{
+	
+	
+	public void show(Phone phone){ //方法
+		phone.sendEmail();
+		phone.playGame();
+	}
+}
+
+class Phone{
+	double price; //价格
+	
+	public void sendEmail(){ //方法
+		System.out.println("发送邮件");
+	}
+	
+	public void playGame(){
+		System.out.println("玩游戏");
+	}
+	
+	public void showPrice(){
+		System.out.println("手机的价格是： ");
+	}
+	
+}
+
+
+
+
+package com.atguigu.java;
+/*
+ *  自定义数组的工具
+ */
+public class ArraysUtil {
+	
+		//求数组的最大值
+		public int getMax(int[] arr){
+			int maxValue = arr[0];
+			for(int i = 1;i < arr.length;i++){
+				if(maxValue < arr[i]){
+					maxValue = arr[i];
+				}
+			}
+			return maxValue;
+		}
+		
+		//求数组的最小值
+		public int getMin(int[] arr){
+			int minValue = arr[0];
+			for(int i = 1;i < arr.length;i++){
+				if(minValue > arr[i]){
+					minValue = arr[i];
+				}
+			}
+			return minValue;
+		}
+		
+		//求数组的总和
+		public int getSum(int[] arr){
+			int sum = 0;
+			for(int i = 0;i < arr.length;i++){
+				sum += arr[i];
+			}
+			return sum;
+		}
+		
+		//求数组的平均值
+		public int getAvg(int[] arr){
+			
+			return getSum(arr) / arr.length;
+			// 方法中调方法  getSum(arr)-数组总和，arr.length-数组长度
+		}
+		//反转数组
+		public void reverse(int[] arr){
+			for(int i = 0;i < arr.length / 2;i++){
+				int temp = arr[i];
+				arr[i] = arr[arr.length - i -1];
+				arr[arr.length - i - 1] = temp;
+			}
+
+		}
+		
+		//复制数组
+		public int[] copy(int[] arr){
+			int[] arr1 = new int[arr.length];
+			for(int i = 0;i < arr1.length;i++){
+				arr1[i] = arr[i];
+			}
+			return arr1;
+		}
+		
+		//数组排序
+		public void sort(int[] arr){
+			for(int i = 0;i < arr.length - 1;i++ ){
+				for(int j = 0;j < arr.length - 1 -i;j++){
+					if(arr[j] > arr[j + 1]){
+						int temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+				}
+			}
+		}
+		//遍历数组
+		public void print(int[] arr){
+			for(int i =0;i < arr.length;i++){
+				System.out.print(arr[i] + "\t");
+			}
+			System.out.println();
+		}
+		
+		//查找指定元素
+		public int getIndex(int[] arr,int dest){
+			for(int i = 0;i < arr.length;i++){
+				if(dest == arr[i]){
+					return i;
+				}
+			}
+			return -1; //返回负数，表示没有找到
+		}
+
+	}
+
+
+
+
+
+package com.atguigu.java;
+
+public class ArraysUtilTest {
+
+	public static void main(String[] args) {
+		
+		ArraysUtil util =new ArraysUtil();
+		int[] arr = new int[]{23,4,55,623,34,-24,356,-643,-211,29,56,99};
+		int max = util.getMax(arr);
+		System.out.println("最大值为： " + max);
+		
+		System.out.println("排序前: ");
+		util.print(arr);
+		
+		util.sort(arr);
+		
+		System.out.println("排序后: ");
+		util.print(arr);
+		
+		System.out.println("查找: ");
+		int index = util.getIndex(arr, 55);
+		if(index >= 0){
+			System.out.println("找到了，索引地址为： " + index);
+		}else{
+			System.out.println("未找到");
+		}
+
+	}
+
+}
+
