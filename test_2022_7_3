@@ -1,0 +1,164 @@
+public class JavaExtend03 {
+
+    //输出数组中的元素
+    public static void print(int[] arr) {       //这里一定要是static
+        for (int i = 0;i < arr.length;i++)
+            System.out.print(arr[i] + "   ");
+        System.out.println();
+    }
+
+
+    //获取一个打乱的数组
+    public static int[] getRandomArr(int num) {
+        int[] arr = new int[num];
+        for (int i = 0;i < arr.length;i ++)
+            arr[i] = new Random().nextInt(arr.length);
+        return arr;
+    }
+
+
+    //1、对数组中的元素进行 直接插入排序
+    public static void Insertsort(int[] arr) {    //这里一定要是static
+        if (arr.length >= 2) {              //数组长度为1时，没有必要进行排序
+
+            //不采用哨兵，数组中元素从0位置开始存放，如果采用哨兵，数组中元素从1位置开始存放，则arr[0]为哨兵
+            for (int i = 1; i < arr.length; i++) {      //从数组的第二个元素开始处理
+                int x = arr[i];         //用x存放现在处理的数据，以便后面进行数据的插入操作。
+                int j = i -1 ;
+                for (;j >= 0 && arr[j] > x;j --)   //将待处理的元素与这一元素前面的元素进行比较，这里循环中的x不可以写成arr[i],因为此时arr[i]上的元素可能已经变化，不是原来的值
+                    arr[j + 1] = arr[j];                //进行数据的移动操作
+                arr[j + 1] = x;         //将处理的这个元素插入到合适的位置
+            }
+        }
+    }
+
+
+    //2、对数组中的元素进行 冒泡排序
+    public static void Bubblesort(int[] arr) {
+        for (int i = 0;i < arr.length - 1 ;i ++) {
+            boolean flag = false;   //表示本趟冒泡是否发生交换的标志
+            for (int j = arr.length - 1 ;j > i ;j --)   //一趟冒泡过程
+                if (arr [j - 1] > arr [j]) {            //若为逆序
+                    //swap (arr[j-1],arr[j]) 交换
+                    int temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+
+                    flag = true;
+                }
+            if (flag == false)      //本趟遍历后没有发生交换，说明表已经有序
+                break;  //或者return;
+        }
+    }
+
+
+    //3、对数组中的元素进行 快速排序
+    public static void Quicksort(int[] arr,int low,int high) {
+        if (low < high){        //递归跳出的条件
+            int pivotpos = Partition(arr,low,high);     //划分
+            Quicksort(arr,low,pivotpos - 1);
+            Quicksort(arr,pivotpos + 1 ,high);
+        }
+
+    }
+
+    //划分元素操作，将表arr[low...high]划分为满足上述条件的两个子表
+    public static int Partition(int[] arr,int low,int high) {  //一趟划分
+        int pivot = arr[low];   //设当前表中第一个元素为枢轴，对表进行划分
+        while(low < high) {       //循环跳出条件
+
+            while (low < high && arr[high] >= pivot)   --high;
+            arr[low] = arr[high];   //将比枢轴小的元素移动到左端
+
+            while (low < high && arr[low] <= pivot)   ++low;
+            arr[high] = arr[low];   //将比枢轴大的元素移动到右端
+        }//while
+
+        arr[low] = pivot;   //枢轴元素存放到最终位置
+        return low;     //返回存放枢轴的最终位置
+    }
+
+
+    //4、对数组中的元素进行 简单选择排序
+    public static void Selectsort(int[] arr) {
+        for (int i = 0; i < arr.length - 1 ;i ++){  //一共进行 n - 1 趟
+            int min = i;                            //记录最小元素位置
+            for (int j = i + 1 ;j < arr.length;j ++)    //在arr[i...n-1]中选择最小的元素
+                if (arr[j] < arr[min])
+                    min = j;                    //更新最小元素位置
+            if (min != i) {
+                //swap (arr[i],arr[min]) 交换
+                int temp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = temp;
+            }
+        }
+    }
+
+
+    //5、对数组中的元素进行 归并排序
+    public static void Mergesort(int[] arr,int low,int high) {
+        if (low < high){        //递归跳出的条件
+            int mid = (low + high) / 2; //从中间划分两个子序列
+            Mergesort(arr,low,mid);          //对左侧子序列进行递归排序
+            Mergesort(arr,mid+1,high);   //对右侧子序列进行递归排序
+            Merge(arr,low,mid,high);    //归并
+        }
+
+    }
+
+    //Merge（）的功能是将前后相邻的两个有序表归并为一个有序表。
+    //设两段有序表arr[low...mid]、arr[mid+1...high]存放在同一顺序表中的相邻位置，先将它们复制到辅助数组temp中。
+    //每次从对应temp数组中的两个段取出一个记录进行关键字比较，将较小者放入arr中，
+    //当辅助数组temp中有一段的下标超出其对应的表长（即该段的所有元素都已经复制到数组arr中）时，将另一段中的剩余部分直接复制到arr数组中。
+    public static void Merge(int[] arr,int low,int mid,int high) {
+        //表arr的两段A[low...mid]和arr[mid+1...high]各自有序，将它们合并成一个有序表
+
+        //Java中没有malloc对内存进行直接操作的函数，直接使用new来申请。
+        int[] temp = new int[arr.length+1];     //创建一个辅助数组temp
+        int i,j,k;
+        for (k = low;k <= high; k ++)
+            temp[k] = arr[k];   ///将arr中所有元素复制到temp中
+        for (i =low,j = mid + 1,k = i;i <= mid && j <= high ;k ++) {
+            if (temp[i] <= temp[j])    //比较temp的左右两段中的元素
+                arr[k] = temp[i++];     //将较小值复制到arr数组中
+            else
+                arr[k] = temp[j++];
+        }//for
+
+        //下面的两个while循环只有1个会执行
+        while (i <= mid)
+            arr[k++] = temp[i ++];      //若第一个表未检测完，复制
+        while (j <= high)
+            arr[k++] = temp[j++];       //若第二个表未检测完，复制
+
+    }
+
+
+    //测试
+    public static void main(String[] args) {
+        int[] arr = getRandomArr(10);
+
+        System.out.print("直接插入排序后：");
+        Insertsort(arr);
+        print(arr);
+
+        System.out.print("冒泡排序后：");
+        Bubblesort(arr);
+        print(arr);
+
+        System.out.print("快速排序后：");
+        Quicksort(arr,0,arr.length - 1);
+        print(arr);
+
+        System.out.print("简单选择排序后：");
+        Selectsort(arr);
+        print(arr);
+
+        System.out.print("归并排序后：");
+        Mergesort(arr,0,arr.length - 1);
+        print(arr);
+        //也可以采用Arrays.sort(arr)对数组进行排序
+        //或者采用Arrays.sort(arr,int fromIndex, int toIndex)对数组的下标从fromIndex 到 toIndex - 1进行排序，toIndex元素不参与排序。
+    }
+}
