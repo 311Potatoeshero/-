@@ -1,0 +1,186 @@
+package com.atguigu.exer;
+
+public class Kids extends ManKind{
+
+	private int yearsOld;
+	
+	public Kids() {
+		 
+	}
+	
+	public Kids(int yearsOld) {
+		this.yearsOld = yearsOld;
+	}
+	
+	public void printAge(){
+		System.out.println("I am" +		yearsOld	+ "years old");
+	}
+	
+	public int getYearsold() {
+		return yearsOld;
+	}
+	
+	public void setYearsold() {
+		this.yearsOld = yearsOld;
+	}
+}
+
+
+package com.atguigu.exer;
+
+public class KidsTest {
+
+	public static void main(String[] args) {
+		
+		Kids somekid = new Kids(12);
+		
+		somekid.printAge();
+		
+		somekid.setSarlary();
+		somekid.setsex(1);
+		
+		somekid.employeed();
+		somekid.manOrWoman();
+
+	}
+
+}
+
+
+
+package com.atguigu.exer;
+
+public class ManKind {
+
+	//成员变量
+	private int sex;
+	private int sarlary;
+	
+	//构造器
+	public ManKind() {
+		
+	}
+	
+	public ManKind(int sex,int sarlary) {
+		this.sarlary = sarlary;
+		this.sex = sex;
+	}
+	
+	//方法
+	public void manOrWoman(){
+		if( sex == 1){
+			System.out.println("man");
+		}else if(sex == 0){
+			System.out.println("Woman");
+		}
+	}
+	
+	public void employeed(){
+		
+//		if( sarlary == 0){
+//			System.out.println("no job");
+//		}else if( sarlary == 1){
+//			System.out.println(" job ");
+//		}
+		String jobInfo = (sarlary == 0) ? "no job" : "job";
+		System.out.println(jobInfo);
+	}
+	
+	// getSex/setSex方法
+	public int getSex(){
+		return sex;
+	}
+	
+	public void setsex(int sex){
+		this.sex = sex;
+	}
+	
+	public int getSarlary(){
+		return sarlary;
+	}
+	
+	public void setSarlary(){
+		this.sarlary = sarlary;
+	}
+}
+
+
+
+package com.atguigu.exer1;
+
+public class Circle {
+
+	double radius = 1.0;
+	
+	public Circle(){
+		
+	}
+	
+	public Circle(double radius){
+		this.radius = radius;
+	}
+	
+	public double findArea(){
+		return 3.14 * radius * radius;
+	}
+	
+	public double getRadius(){
+		return radius;
+	}
+	
+	public void setRadius(double radius){
+		this.radius = radius;
+	}
+}
+
+
+
+package com.atguigu.exer1;
+
+public class Cylinder extends Circle {
+
+	double length = 1;
+	
+	public Cylinder(){
+		
+	}
+	
+	public Cylinder(double length){
+		this.length = length;
+	}
+	
+	public double findVolume(){
+		return (2 * 3.14 * length * radius) + 2 * 3.14  * (radius * radius); 
+	}
+	
+	public double getLength(){
+		return length;
+	}
+	
+	public void setLength(double length){
+		this.length = length;
+	}
+}
+
+
+
+package com.atguigu.exer1;
+
+public class CylinderTest {
+
+	public static void main(String[] args) {
+		
+		Cylinder cy = new Cylinder();
+		
+	    cy.setRadius(2.1);
+	    cy.setLength(3.4);
+	    double volume = cy.findVolume();
+	    System.out.print("圆柱的体积为：" + volume);
+	    
+	    double area = cy.findArea();
+	    System.out.println("圆柱的底面积：" + area);
+
+	}
+
+}
+
