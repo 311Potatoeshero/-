@@ -1,0 +1,484 @@
+package com.atguigu.p2.bean;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+/**
+ * Customer为实体对象，用来封装客户信息
+ * @author 86166
+ *
+ */
+public class Customer {
+
+	public static void main(String[] args) {
+		
+	}
+	//客户信息的属性
+	private String name; //客户姓名
+	private char gender; //性别
+	private int age; //年龄
+	private String phone; //电话号码
+	private String email; //电子邮箱
+	
+	//提供属性的get/set方法  alt + shift + s
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	//构造器
+	public Customer(){
+		
+	}
+	
+	public Customer(String name,char gender,int age,String phone,String email){
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.phone = phone;
+		this.email = email;
+	}
+	
+}
+
+
+package com.atguigu.p2.service;
+
+import com.atguigu.p2.bean.Customer;
+
+/**
+ * CustomerList为Customer对象的管理模块
+ * 内部用数组管理一组CUstomer对象、并提供相应的添加、修改和遍历方法供CustomerView调用
+ * @author 86166
+ *
+ */
+public class CustomerList {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+	private Customer[] customers; //用来保存客户对象的数组
+	private int total = 0; //记录已保存客户对象的数量
+	
+	/**
+	 * 用来初始化customers数组的构造器
+	 * @param totalCustomer：指定数组的长度
+	 */
+	public CustomerList(int totalCustomer){
+		customers = new Customer[totalCustomer]; //数组动态初始化
+	}
+	
+	/**
+	 * 将指定的客户添加到数组中
+	 * @param customer
+	 * @return true:添加成功 false:添加失败
+	 */
+	public boolean addCustomer(Customer customer){
+		if(total >= customers.length){
+			return false;
+		}
+		
+//		customers[total] = customer;
+//		total++;
+		//或
+		customers[total++] = customer;
+		return true;
+	}
+	
+	/**
+	 * 修改指定索引位置的客户信息
+	 * @param index
+	 * @param cust
+	 * @return true:修改成功  false：修改失败
+	 */
+	public boolean replaceCustomer(int index,Customer cust){
+		if(index < 0 || index >= total){
+			return false;
+		}
+		
+		customers[index] = cust;
+		return true;
+	}
+	
+	/**
+	 * 删除指定位置上的客户
+	 * @param index
+	 * @return true：删除成功 false:删除失败
+	 */
+	public boolean deleteCustomer(int index){
+		if(index < 0 || index >= total){
+			return false;
+		}
+		for(int i = index ;i < total - 1;i++){
+			customers[i] = customers[i + 1];
+		}
+		
+//		//最后有数组的元素要置空
+//		customers[total - 1] = null;
+//		total--;
+		//或
+		customers[--total] = null;
+		return true;
+	}
+	
+	/**
+	 * 获取所有的客户信息
+	 * @return
+	 */
+	public Customer[] getAllCustomers(){
+		Customer[] custs = new Customer[total];
+		for(int i = 0;i < total;i++){
+			custs[i] = customers[i];
+		}
+		return custs;
+	}
+	
+	/**
+	 * 获取指定索引位置上的客户
+	 * @param index
+	 * @return 如果找到了元素则返回，如果没有找到则返回null
+	 */
+	public Customer getCustomer(int index){
+		if(index < 0 || index >= total){
+			return null;
+		}
+		
+		return customers[index];
+	}
+	
+	/**
+	 * 获取储存的客户的数量
+	 * @return
+	 */
+	public int getTotal(){
+		return total;
+	}
+}
+
+package com.atguigu.p2.uti;
+
+
+import java.util.*;
+/**
+CMUtility工具类：
+将不同的功能封装为方法，就是可以直接通过调用方法使用它的功能，而无需考虑具体的功能实现细节。
+*/
+public class CMUtility {
+    private static Scanner scanner = new Scanner(System.in);
+    /**
+	用于界面菜单的选择。该方法读取键盘，如果用户键入’1’-’5’中的任意字符，则方法返回。返回值为用户键入字符。
+	*/
+	public static char readMenuSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false);
+            c = str.charAt(0);
+            if (c != '1' && c != '2' && 
+                c != '3' && c != '4' && c != '5') {
+                System.out.print("选择错误，请重新输入：");
+            } else break;
+        }
+        return c;
+    }
+	/**
+	从键盘读取一个字符，并将其作为方法的返回值。
+	*/
+    public static char readChar() {
+        String str = readKeyBoard(1, false);
+        return str.charAt(0);
+    }
+	/**
+	从键盘读取一个字符，并将其作为方法的返回值。
+	如果用户不输入字符而直接回车，方法将以defaultValue 作为返回值。
+	*/
+    public static char readChar(char defaultValue) {
+        String str = readKeyBoard(1, true);
+        return (str.length() == 0) ? defaultValue : str.charAt(0);
+    }
+	/**
+	从键盘读取一个长度不超过2位的整数，并将其作为方法的返回值。
+	*/
+    public static int readInt() {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(2, false);
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("数字输入错误，请重新输入：");
+            }
+        }
+        return n;
+    }
+	/**
+	从键盘读取一个长度不超过2位的整数，并将其作为方法的返回值。
+	如果用户不输入字符而直接回车，方法将以defaultValue 作为返回值。
+	*/
+    public static int readInt(int defaultValue) {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(2, true);
+            if (str.equals("")) {
+                return defaultValue;
+            }
+
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("数字输入错误，请重新输入：");
+            }
+        }
+        return n;
+    }
+	/**
+	从键盘读取一个长度不超过limit的字符串，并将其作为方法的返回值。
+	*/
+    public static String readString(int limit) {
+        return readKeyBoard(limit, false);
+    }
+	/**
+	从键盘读取一个长度不超过limit的字符串，并将其作为方法的返回值。
+	如果用户不输入字符而直接回车，方法将以defaultValue 作为返回值。
+	*/
+    public static String readString(int limit, String defaultValue) {
+        String str = readKeyBoard(limit, true);
+        return str.equals("")? defaultValue : str;
+    }
+	/**
+	用于确认选择的输入。该方法从键盘读取‘Y’或’N’，并将其作为方法的返回值。
+	*/
+    public static char readConfirmSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false).toUpperCase();
+            c = str.charAt(0);
+            if (c == 'Y' || c == 'N') {
+                break;
+            } else {
+                System.out.print("选择错误，请重新输入：");
+            }
+        }
+        return c;
+    }
+
+    private static String readKeyBoard(int limit, boolean blankReturn) {
+        String line = "";
+
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            if (line.length() == 0) {
+                if (blankReturn) return line;
+                else continue;
+            }
+
+            if (line.length() < 1 || line.length() > limit) {
+                System.out.print("输入长度（不大于" + limit + "）错误，请重新输入：");
+                continue;
+            }
+            break;
+        }
+
+        return line;
+    }
+}
+
+
+package com.atguigu.p2;
+
+public class CustomerView {
+	private CustomerList customers = new CustomerList(10);
+
+	public CustomerView() {
+		Customer cust = new Customer("张三", '男', 30, "010-56253825",
+				"abc@email.com");
+		customers.addCustomer(cust);
+	}
+
+	public void enterMainMenu() {
+		boolean loopFlag = true;
+		do {
+			System.out
+					.println("\n-----------------客户信息管理软件-----------------\n");
+			System.out.println("                   1 添 加 客 户");
+			System.out.println("                   2 修 改 客 户");
+			System.out.println("                   3 删 除 客 户");
+			System.out.println("                   4 客 户 列 表");
+			System.out.println("                   5 退       出\n");
+			System.out.print("                   请选择(1-5)：");
+
+			char key = CMUtility.readMenuSelection();
+			System.out.println();
+			switch (key) {
+			case '1':
+				addNewCustomer();
+				break;
+			case '2':
+				modifyCustomer();
+				break;
+			case '3':
+				deleteCustomer();
+				break;
+			case '4':
+				listAllCustomers();
+				break;
+			case '5':
+				System.out.print("确认是否退出(Y/N)：");
+				char yn = CMUtility.readConfirmSelection();
+				if (yn == 'Y')
+					loopFlag = false;
+				break;
+			}
+		} while (loopFlag);
+	}
+
+	private void addNewCustomer() {
+		System.out.println("---------------------添加客户---------------------");
+		System.out.print("姓名：");
+		String name = CMUtility.readString(4);
+		System.out.print("性别：");
+		char gender = CMUtility.readChar();
+		System.out.print("年龄：");
+		int age = CMUtility.readInt();
+		System.out.print("电话：");
+		String phone = CMUtility.readString(15);
+		System.out.print("邮箱：");
+		String email = CMUtility.readString(15);
+
+		Customer cust = new Customer(name, gender, age, phone, email);
+		boolean flag = customers.addCustomer(cust);
+		if (flag) {
+			System.out
+					.println("---------------------添加完成---------------------");
+		} else {
+			System.out.println("----------------记录已满,无法添加-----------------");
+		}
+	}
+
+	private void modifyCustomer() {
+		System.out.println("---------------------修改客户---------------------");
+
+		int index = 0;
+		Customer cust = null;
+		for (;;) {
+			System.out.print("请选择待修改客户编号(-1退出)：");
+			index = CMUtility.readInt();
+			if (index == -1) {
+				return;
+			}
+
+			cust = customers.getCustomer(index - 1);
+			if (cust == null) {
+				System.out.println("无法找到指定客户！");
+			} else
+				break;
+		}
+
+		System.out.print("姓名(" + cust.getName() + ")：");
+		String name = CMUtility.readString(4, cust.getName());
+
+		System.out.print("性别(" + cust.getGender() + ")：");
+		char gender = CMUtility.readChar(cust.getGender());
+
+		System.out.print("年龄(" + cust.getAge() + ")：");
+		int age = CMUtility.readInt(cust.getAge());
+
+		System.out.print("电话(" + cust.getPhone() + ")：");
+		String phone = CMUtility.readString(15, cust.getPhone());
+
+		System.out.print("邮箱(" + cust.getEmail() + ")：");
+		String email = CMUtility.readString(15, cust.getEmail());
+
+		cust = new Customer(name, gender, age, phone, email);
+
+		boolean flag = customers.replaceCustomer(index - 1, cust);
+		if (flag) {
+			System.out
+					.println("---------------------修改完成---------------------");
+		} else {
+			System.out.println("----------无法找到指定客户,修改失败--------------");
+		}
+	}
+
+	private void deleteCustomer() {
+		System.out.println("---------------------删除客户---------------------");
+
+		int index = 0;
+		Customer cust = null;
+		for (;;) {
+			System.out.print("请选择待删除客户编号(-1退出)：");
+			index = CMUtility.readInt();
+			if (index == -1) {
+				return;
+			}
+
+			cust = customers.getCustomer(index - 1);
+			if (cust == null) {
+				System.out.println("无法找到指定客户！");
+			} else
+				break;
+		}
+
+		System.out.print("确认是否删除(Y/N)：");
+		char yn = CMUtility.readConfirmSelection();
+		if (yn == 'N')
+			return;
+
+		boolean flag = customers.deleteCustomer(index - 1);
+		if (flag) {
+			System.out
+					.println("---------------------删除完成---------------------");
+		} else {
+			System.out.println("----------无法找到指定客户,删除失败--------------");
+		}
+	}
+
+	private void listAllCustomers() {
+        System.out.println("---------------------------客户列表---------------------------");
+        Customer[] custs = customers.getAllCustomers();
+        if (custs.length == 0) {
+            System.out.println("没有客户记录！");
+        } else {
+            System.out.println("编号\t姓名\t性别\t年龄\t\t电话\t\t邮箱");
+            for (int i = 0; i < custs.length; i++) {
+//            System.out.println(i + 1 + "\t" + custs[i].getName() + "\t" + custs[i].getGender() + "\t" + custs[i].getAge() + "\t\t" + custs[i].getPhone() + "\t" + custs[i].getEmail());
+            	System.out.println((i+1) + "\t" + custs[i].getDetails());
+            }
+        }
+
+        System.out.println("-------------------------客户列表完成-------------------------");
+    }
+
+	public static void main(String[] args) {
+		CustomerView cView = new CustomerView();
+		cView.enterMainMenu();
+	}
+}
