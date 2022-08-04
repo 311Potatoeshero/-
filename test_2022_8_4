@@ -1,0 +1,156 @@
+package com.atguigu.java;
+
+public class Person {
+
+	String name;
+	int age;
+	
+	public Person(){
+		
+	}
+	
+	public Person(String name,int age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	public void eat(){
+		System.out.println("吃饭");
+	}
+	
+	public void walk(int distance){
+		System.out.println("走路，走得距离是： " + distance + "公里");
+	}
+}
+
+
+package com.atguigu.java;
+
+public class Student extends Person {
+	
+	String major;
+	
+	public Student(){
+		
+	}
+	
+	public Student(String major){
+		this.major = major;
+	}
+	
+	public void study(){
+		System.out.println("学习， 专业是 ： " + major);
+	}
+
+	//对子类方法的重写
+	public void eat(){
+		System.out.println("学生应该多吃有营养的食物");
+	}
+	
+}
+
+
+
+package com.atguigu.java;
+/*
+ * 方法的重写（override / overwrite)
+ * 
+ * 1.重写： 子类继承父类以后，可以对父类中同名同参的方法，进行覆盖操作
+ * 
+ * 2.应用： 重写以后，当创建子类对象以后，通过子类对象调用子父类中同名同参的方法时，实际执行的是子类重写父类的方法
+ * 
+ */
+
+public class PersonTest {
+
+	public static void main(String[] args) {
+		
+		Student s = new Student("计算机科学与技术");
+        s.eat();
+        s.walk(10);
+        
+        s.study();
+	
+		Person p1 = new Person();
+		p1.eat();
+
+	}
+
+}
+
+
+package com.atguigu.exer1;
+
+public class Circle {
+
+	double radius = 1.0;
+	
+	public Circle(){
+		
+	}
+	
+	public Circle(double radius){
+		this.radius = radius;
+	}
+	
+	public double findArea(){
+		return 3.14 * radius * radius;
+	}
+	
+	public double getRadius(){
+		return radius;
+	}
+	
+	public void setRadius(double radius){
+		this.radius = radius;
+	}
+}
+
+
+package com.atguigu.exer1;
+
+public class Cylinder extends Circle {
+
+	double length = 1;
+	
+	public Cylinder(){
+		
+	}
+	
+	public Cylinder(double length){
+		this.length = length;
+	}
+	
+	public double findVolume(){
+		return (2 * 3.14 * length * radius) + 2 * 3.14  * (radius * radius); 
+	}
+	
+	public double getLength(){
+		return length;
+	}
+	
+	public void setLength(double length){
+		this.length = length;
+	}
+}
+
+
+package com.atguigu.exer1;
+
+public class CylinderTest {
+
+	public static void main(String[] args) {
+		
+		Cylinder cy = new Cylinder();
+		
+	    cy.setRadius(2.1);
+	    cy.setLength(3.4);
+	    double volume = cy.findVolume();
+	    System.out.print("圆柱的体积为：" + volume);
+	    
+	    double area = cy.findArea();
+	    System.out.println("圆柱的底面积：" + area);
+
+	}
+
+}
