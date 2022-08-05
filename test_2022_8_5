@@ -1,0 +1,127 @@
+import java.util.*;
+
+
+public class Solution {
+    /**
+     * 
+     *
+     * 
+     * @param numbers int整型一维数组 
+     * @return int整型
+     */
+    public int duplicate (int[] numbers) {
+        // write code here
+        Arrays.sort(numbers);
+        for(int i = 1 ; i < numbers.length; i++)
+            if(numbers[i] == numbers[i - 1]) return numbers[i];
+        return -1;
+    }
+}
+
+
+
+public class Solution {
+    public boolean Find(int target, int [][] array) {
+        //优先判断特殊
+        if(array.length == 0) 
+            return false;
+        int n = array.length;
+        if(array[0].length == 0) 
+            return false;
+        int m = array[0].length;
+        //从最左下角的元素开始往左或往上
+        for(int i = n - 1, j = 0; i >= 0 && j < m; ){
+            //元素较大，往上走
+            if(array[i][j] > target)  
+                i--;
+            //元素较小，往右走
+            else if(array[i][j] < target)
+                j++;
+            else
+                return true;
+        }
+        return false;
+    }
+}
+
+
+
+import java.util.*;
+
+
+public class Solution {
+    /**
+     * 
+     *
+     * 
+     * @param s string字符串 
+     * @return string字符串
+     */
+   public String replaceSpace(String s) {
+    int length = s.length();
+    char[] array = new char[length * 3];
+    int index = 0;
+    for (int i = 0; i < length; i++) {
+        char c = s.charAt(i);
+        if (c == ' ') {
+            array[index++] = '%';
+            array[index++] = '2';
+            array[index++] = '0';
+        } else {
+            array[index++] = c;
+        }
+    }
+    String newStr = new String(array, 0, index);
+    return newStr;
+}
+}
+
+
+import java.util.*;
+import java.util.Stack;
+
+public class Solution {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    
+    public void push(int node) {
+        stack1.push(node);
+    }
+    
+    public int pop() {
+        if(stack2.size() <= 0){
+            while(stack1.size() != 0){
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+}
+
+
+
+import java.util.*;
+import java.util.ArrayList;
+public class Solution {
+    public int minNumberInRotateArray(int [] array) {
+          // 特殊情况判断
+        if (array.length== 0) {
+            return 0;
+        }
+        // 左右指针i j
+        int i = 0, j = array.length - 1;
+        // 循环
+        while (i < j) {
+            // 找到数组的中点 m
+            int m = (i + j) / 2;
+            // m在左排序数组中，旋转点在 [m+1, j] 中
+            if (array[m] > array[j]) i = m + 1;
+            // m 在右排序数组中，旋转点在 [i, m]中
+            else if (array[m] < array[j]) j = m;
+            // 缩小范围继续判断
+            else j--;
+        }
+        // 返回旋转点
+        return array[i];
+    }
+}
