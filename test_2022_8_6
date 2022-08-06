@@ -1,0 +1,133 @@
+package com.atguigu.java1;
+/*
+ * 
+ *  4种不同的权限修饰
+ */
+
+public class Order {
+	
+	private int orderPrivate;
+	int orderDefault;
+	protected int orderProtected;
+	public int orderPublic;
+	
+	private void methodPrivate(){
+		orderPrivate = 1;
+		orderDefault = 2;
+		orderProtected = 3;
+		orderPublic = 4;
+	}
+	
+	void methodDefault(){
+		orderPrivate = 1;
+		orderDefault = 2;
+		orderProtected = 3;
+		orderPublic = 4;
+	}
+	
+	protected void methodProtected(){
+		orderPrivate = 1;
+		orderDefault = 2;
+		orderProtected = 3;
+		orderPublic = 4;
+	}
+	
+	public void methodPublic(){
+		orderPrivate = 1;
+		orderDefault = 2;
+		orderProtected = 3;
+		orderPublic = 4;
+	}
+
+}
+
+
+
+package com.atguigu.java1;
+
+public class OrderTest {
+
+	public static void main(String[] args) {
+		Order order = new Order();
+		
+		order.orderDefault = 1;
+		order.orderProtected = 2;
+		order.orderPublic = 3;
+		
+		order.methodDefault();
+		order.methodProtected();
+		order.methodPublic();
+
+		//同一个包中的其他类，不可以调用Oredr类中私有的属性、方法
+//		order.orderPrivate = 4;
+//		order.methodPrivate();
+
+	}
+
+}
+
+
+package com.atguigu.java2;
+
+import java.beans.MethodDescriptor;
+
+import com.atguigu.java1.Order;
+
+public class SubOrder extends Order {
+	
+	public void method(){
+		orderProtected = 1;
+		orderPublic = 2;
+		
+		methodProtected();
+		methodPublic();
+		
+		//在不同包的子类中，不能调用Order类中声明为Private和缺省权限的属性、方法
+//		orderDefault = 3;
+//		orderPrivate = 4;
+//		
+//		methodDefault();
+//		methodPrivate();
+	}
+
+}
+
+
+
+package com.atguigu.java2;
+
+import com.atguigu.java1.Order;
+
+public class OrderTest {
+	
+	public static void main(String[] args){
+		
+	
+	
+	Order order = new Order();
+	order.orderPublic = 1;
+	order.methodPublic();
+	
+	//不同包下的普通类（非子类）要使用调用声明为orivate、缺省、protected权限的属性、方法
+//	order.orderPrivate = 2;
+//	order.orderDefault = 3;
+//	order.orderprotected = 4;
+//	
+//	order.methodDefault();
+//	order.methodProtected();
+	}
+
+	public void show(Order order){
+		order.orderPublic = 1;
+		order.methodPublic();
+		
+		//不同包下的普通类（非子类）要使用调用声明为orivate、缺省、protected权限的属性、方法
+//		order.orderPrivate = 2;
+//		order.orderDefault = 3;
+//		order.orderprotected = 4;
+//		
+//		order.methodDefault();
+//		order.methodProtected();
+	}
+}
+
