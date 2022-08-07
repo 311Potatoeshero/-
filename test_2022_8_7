@@ -1,0 +1,322 @@
+package com.atguigu.exer2;
+
+public class Account {
+	
+	private int id; //账号
+	private double balance; //余额
+	private double annualInterestRate; //年利率
+	
+	public Account(){
+		
+	}
+	
+	public Account(int id,double banlance,double annualInterestRate){
+	this.id = id;
+	this.balance = banlance;
+	this.annualInterestRate = annualInterestRate;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public double getBalance(){
+		return balance;
+	}
+	
+	public void setBalance(double balance){
+		this.balance = balance;
+	}
+	
+	public double getAnnuallnterestRate(){
+		return annualInterestRate;
+	}
+	
+	public void setgetAnnuallnterestRate(double annualInterestRate){
+		this.annualInterestRate = annualInterestRate;
+	}
+	
+	//返回月利率
+	public double getMonthlyInterest(){
+		return annualInterestRate / 12;
+	}
+	
+	//取钱
+	public void withdraw (double amount){
+		if(balance >= amount){
+			balance -= amount;
+			return;
+		}
+		System.out.println("余额不足");
+	}
+	
+	//存钱
+	public void deposit (double amount){
+		if(amount > 0){
+			balance += amount;
+		}
+	}
+
+}
+
+
+package com.atguigu.exer2;
+/*
+ *写一个用户程序测试 Account 类。在用户程序中，创建一个账号为 1122、余额为 20000、
+ * 年利率 4.5%的 Account 对象。使用 withdraw 方法提款 30000 元，并打印余额。
+ * 再使用 withdraw 方法提款 2500 元，使用 deposit 方法存款 3000 元，
+ * 然后打印余额和月利率。
+ */
+
+public class AccountTest {
+
+	public static void main(String[] args) {
+		
+		Account account = new Account(1122, 20000, 0.045);
+		
+		account.withdraw(30000);
+		System.out.println("您的账号余额为： " + account.getBalance());
+		account.withdraw(2500);
+		System.out.println("您的账号余额为： " + account.getBalance());
+		account.withdraw(3000);
+		System.out.println("您的账号余额为： " + account.getBalance());
+		
+		System.out.println("月利率为： " + (account.getMonthlyInterest() * 100) + "%");
+
+	}
+
+}
+
+
+
+package com.atguigu.exer2;
+/*
+ * 创建 Account 类的一个子类 CheckAccount 代表可透支的账户，该账户中定义一个属性
+ * overdraft 代表可透支限额。在 CheckAccount 类中重写 withdraw 方法，其算法如下：
+ * 如果（取款金额<账户余额），
+ * 可直接取款
+ * 如果（取款金额>账户余额），
+ * 计算需要透支的额度
+ * 判断可透支额 overdraft 是否足够支付本次透支需要，如果可以
+ * 将账户余额修改为 0，冲减可透支金额
+ * 如果不可以
+ * 提示用户超过可透支额的限额
+ * 
+ */
+
+public class CheckAccount extends Account{
+
+	private double overdraft; //可透支限额
+	
+	public CheckAccount(int id,double banlance,double annualInterestRate,double overdraft){
+		super(id,banlance,annualInterestRate);
+		this.overdraft = overdraft;
+	}
+	
+	public double getOverdraft() {
+		return overdraft;
+	}
+	
+	public void setOverdraft(double overdraft) {
+		this.overdraft = overdraft;
+	}
+	
+	@Override
+	public void withdraw (double amount){
+		//余额足够消费
+		if(getBalance() >= amount){ //余额足够消费，getBalance调用父类中的余额
+			//方法一
+//			setBanlance(getBanlance() - amount);
+			super.withdraw(amount);
+		}else if(overdraft >= amount - getBalance()){ //透支额度+余额足够消费
+			
+			overdraft -= (amount - getBalance());
+//			setBalance(0);
+			super.withdraw(getBalance());
+		}else{
+			System.out.println("超过可透支限额： ");
+		}
+		
+		
+	}
+}
+
+
+
+package com.atguigu.exer2;
+/*
+ * 写一个用户程序测试 CheckAccount 类。在用户程序中，创建一个账号为 1122、余
+ * 额为 20000、年利率 4.5%，可透支限额为 5000 元的 CheckAccount 对象。
+ * 使用 withdraw 方法提款 5000 元，并打印账户余额和可透支额。
+ * 再使用 withdraw 方法提款 18000 元，并打印账户余额和可透支额。
+ * 再使用 withdraw 方法提款 3000 元，并打印账户余额和可透支额。
+ */
+
+public class CheckAccountTest {
+
+	public static void main(String[] args) {
+		
+		CheckAccount acct = new CheckAccount(1122, 20000, 0.045, 5000);
+		
+		acct.withdraw(5000);
+		System.out.println("您的账户余额为： " + acct.getBalance());
+		System.out.println("您的可透支余额为： " + acct.getOverdraft());
+		
+		acct.withdraw(18000);
+		System.out.println("您的账户余额为： " + acct.getBalance());
+		System.out.println("您的可透支余额为： " + acct.getOverdraft());
+		
+		acct.withdraw(3000);
+		System.out.println("您的账户余额为： " + acct.getBalance());
+		System.out.println("您的可透支余额为： " + acct.getOverdraft());
+
+	}
+
+}
+
+
+package com.atguigu.java3;
+
+public class Person {
+	
+	String name;
+	int age;
+	int id = 1001;//身份证号
+	
+	public Person(){
+		
+	}
+	
+	public Person(String name){
+		this.name = name;
+	}
+	
+	public Person(String name,int age){
+		this(name);
+		this.age = age;
+	}
+	
+	public void eat(){
+		System.out.println("人，吃饭");
+	}
+	
+	public void walk(){
+		System.out.println("人，走路");
+	}
+
+}
+
+
+
+package com.atguigu.java3;
+
+public class Student extends Person{
+
+	String major;
+	int id = 1002;//学号
+	
+	public Student(){
+		
+	}
+	
+	public Student(String major){
+		this.major = major;
+	}
+	
+	public Student(String name,int age,String major){
+//		this.name = name;
+//		this.age = age;
+		super(name,age); //调用父类中Student的构造器
+		this.major = major;
+	}
+	
+	@Override
+	public void eat(){
+		System.out.println("学生，多吃有营养的食物");
+	}
+	
+	public void walk(){
+		System.out.println("学生，学习知识");
+		this.eat();
+		super.eat();
+	}
+	
+	//调用子类中的属性
+	public void show(){
+		System.out.println("name = " + name + ", age = " + age);
+		System.out.println("id = " + this.id);
+		System.out.println("id = " + super.id);
+	}
+}
+
+
+
+package com.atguigu.java3;
+/*
+ * super关键字的使用
+ * 1.super理解为： 父类的
+ * 2.super可以用来调用： 属性、方法、构造器
+ * 
+ * 3.super的使用
+ * 
+ * 	3.1   我们可以在子类的方法或构造器中。通过使用“super.属性”或者“super.方法"的方式。显式的调用
+ * 	父类中声明的属性或方法。但是，通常情况下，我们习惯省略“super.”
+ *  3.2 特殊情况，当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的
+ *  使用“super.属性”的方法，表明调用的是父类中声明的属性
+ *  3.3 特殊情况，当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的
+ *  使用“super.方法”的方式，表明调用的是父类中被重写的方法
+ *  
+ * 4.super调用构造器
+ * 
+ * 	4.1 我们可以在子类的构造器中显式的使用“super(形参列表)的方式，调用父类中声明的指定的构造器
+ *  4.2 “super(形成列表)”的使用，必须声明在子类构造器的首行
+ *  4.3 我们在类的构造器中针对于“this(形参列表)”或“super(形参列表)”只能选一
+ *  4.4 在构造器的首行没有显式的声明“this(形参列表)”或“super(形参列表)”，则默认调用的是父类中空参的构造器： super()
+ *  4.5 一个类若有N个构造器，最多有(N - 1)this，至少有一个super
+ * 
+ */
+
+public class SuperTest {
+
+	public static void main(String[] args) {
+		Student student = new Student();
+		student.show();
+		
+		student.walk();
+		
+		Student student1 = new Student("Tom",21,"软件工程");
+		student1.show();
+
+	}
+
+}
+
+
+package com.atguigu.java3;
+/*
+ *  子类对象实例化的全过程
+ *  
+ *  	1.从结果上来看：（继承性）
+ *  		子类继承父类以后，就获取了父类中声明的属性或方法
+ *  		创建子类的对象，在堆空间中，就会加载所有分类中声明的属性
+ *  
+ *  	2.从过程上来看：
+ *  		当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器
+ *  		进而调用父类的父类的构造器，直到调用了java.lang.object类中空参的构造器为止。
+ *  		正因为加载过所有的父类的结构，所以才可以看到内存中有父类中的结构，子类对象才可以
+ *  		考虑进行调用
+ *  
+ *  明确： 虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建一个对象，即为new的子类对象
+ * 
+ */
+
+public class InstanceTest {
+
+}
+
+
+
