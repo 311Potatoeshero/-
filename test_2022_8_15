@@ -1,0 +1,287 @@
+package com.atguigu.exer3;
+
+public class GeometricObject {
+	
+	protected String color;
+	protected double weight;
+	
+	//空构造器
+	public GeometricObject(){
+		super();
+		this.color = "white";
+		this.weight = 1.0;
+	}
+	
+	public GeometricObject(String color,double weight){
+		super();
+		this.color = color;
+		this.weight = weight;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	
+	
+
+}
+
+
+package com.atguigu.exer3;
+
+import com.atguigu.exer1.GeometricObject;
+
+public class Circle extends GeometricObject {
+	
+	private double radius;
+	
+	public Circle() {
+		super("white", 4.0);
+		radius = 1.0;
+	}
+	public Circle(double radius){
+		super("white",4.0);
+		this.radius = radius;
+		
+	}
+	public Circle(double radius,String color, double weight) {
+		super(color, weight);
+		this.radius = radius;
+	}
+	
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	
+	public double getRdius() {
+		return radius;
+	}
+	
+	//求圆的面积
+	public double findArea(){
+		return 3.14 * radius *radius;
+	}
+	
+	//比较两个圆的半径是否相等，如相等，返回true
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(this == obj){
+			return true;
+		}
+		
+		if(obj instanceof Circle) {
+			Circle circle = (Circle)obj;
+			return this.radius == circle.radius;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Circle [radius=" + radius + "]";
+	}
+}
+
+
+package com.atguigu.exer3;
+
+import com.atguigu.exer1.GeometricObject;
+
+public class Circle extends GeometricObject {
+	
+	private double radius;
+	
+	public Circle() {
+		super("white", 4.0);
+		radius = 1.0;
+	}
+	public Circle(double radius){
+		super("white",4.0);
+		this.radius = radius;
+		
+	}
+	public Circle(double radius,String color, double weight) {
+		super(color, weight);
+		this.radius = radius;
+	}
+	
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	
+	public double getRdius() {
+		return radius;
+	}
+	
+	//求圆的面积
+	public double findArea(){
+		return 3.14 * radius *radius;
+	}
+	
+	//比较两个圆的半径是否相等，如相等，返回true
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(this == obj){
+			return true;
+		}
+		
+		if(obj instanceof Circle) {
+			Circle circle = (Circle)obj;
+			return this.radius == circle.radius;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Circle [radius=" + radius + "]";
+	}
+}
+
+
+package com.atguigu.java2;
+
+import java.sql.Date;
+
+import org.junit.Test;
+
+/*
+ * Java中的单元测试
+ * 	步骤：
+ * 		1.选中当前工程点右键 -->BUild path -->Add Librarie -->JUnit -->Junit.4
+ * 		2.创建一个JAVA类进行单元测试
+ * 		  此时deJAVA类要求：① 此类是Public的
+ * 					   ② 此类提供公共的无参的构造器
+ * 		3.此类中声明单元测试方法
+ * 		  此时的单元测试方法：方法的权限是Public，没有返回值，没有形参
+ * 		4.此单元测试方法上需要声明注释:@Test,并在单元测试类中导入：import org.junit.Test;
+ * 		5.声明好单元测试方法以后。就可以在方法体内测试相关的代码
+ * 		6.写完代码以后，左键双击单元测试方法名，右键：run as - JUnit Test
+ * 
+ * 说明：
+ * 	1.如果执行结果没有任何异常：绿条
+ * 	2.如果执行结果出现异常：红条
+ * 
+ * 
+ */
+
+public class JUnitTest {
+	
+	@Test
+	public void testEquals() {
+		String s1 = "MM";
+		String s2 = "MM";
+		System.out.println(s1.equals(s2));
+		
+		//ClassCastException的异常
+		Object obj = new String("GG");
+		Date date = (Date)obj;
+	}
+
+}
+
+
+package com.atguigu.java2;
+/*
+ * 包装类的使用：
+ * 	1.JAVA提供了8种基本数据类型对应的包装类，使得基本数据类型的变量具有类的特征
+ * 	
+ * 	2.掌握的：基本数据类型、包装类、String三者之间的相互转换
+ * 
+ */
+
+import org.junit.Test;
+
+public class WeapperTest {
+
+	public static void main(String[] args) {
+		
+
+	}
+	/*
+	 *  JDK 5.0 新特性：自动装箱与自动拆箱
+	 */
+	@Test
+	public void test3(){
+//		int num1 = 10;
+//		//基本数据类型 --》 包装类的对象
+//		method(num1);
+		
+		//自动装箱：基本数据类型 ---》包装类
+		int num2 = 10;
+		Integer in1 = num2; //自动装箱
+		
+		boolean b1 = true;
+		Boolean b2 = b1; //自动装箱
+		
+		//自动装箱：包装类 ---》基本数据类型
+		System.out.println(in1.toString());
+		
+		int num3 = in1; //自动拆箱
+		
+	}
+
+	//包装类 --->基本数据类型:调用包装类Xxx的xxxvalue()
+	@Test
+	public void test2(){
+	Integer in1	= new Integer(12); //包装类
+	
+	int i1 = in1.intValue(); //i1此时转换为基本数据类型
+	System.out.println(i1 + 1); //13
+	
+	Float f1 = new Float(12.3);
+	float f2 = f1.floatValue();
+	System.out.println(f2 + 1); //13.3
+	}
+	
+	//基本数据类型 ---》 包装类:调用包装类的构造器
+	@Test
+	public void test1(){
+		
+		int num1 = 10;
+//		System.out.println(num1.toString);
+		Integer in1 = new Integer(num1);
+		System.out.println(in1.toString()); //重写toString方法
+		
+		Integer in2 = new Integer("123");
+		System.out.println(in2.toString());
+		
+		Float float1 = new Float(12.3f);
+		Float float2 = new Float("12.3");
+		System.out.println(float1);
+		System.out.println(float2);
+		
+		Boolean boolean1 = new Boolean(true);
+		Boolean boolean2 = new Boolean("true");
+		
+		Boolean boolean3 = new Boolean("true123");
+		System.out.println(boolean3); //false
+		
+		Order order = new Order();
+		System.out.println(order.isMale); //fasle
+		System.out.println(order.isFemale); //null Boolean的默认值
+		
+	}
+}
+
+class Order{
+	
+	boolean isMale;
+	Boolean isFemale;
+}
