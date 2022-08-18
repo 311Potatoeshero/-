@@ -1,0 +1,187 @@
+package com.atguigu.java;
+interface Product{
+	public double getPrice();
+	public String getName();
+}
+public class AnonymousTest{
+	public void test(Product p){
+		System.out.println("购买了一个" + p.getName() + "，花掉了" + p.getPrice());
+	}
+	public static void main(String[] args) {
+		AnonymousTest ta = new AnonymousTest();
+		//调用test方法时，需要传入一个Product参数，
+		//此处传入其匿名实现类的实例
+		ta.test(new Product(){
+			public double getPrice(){
+				return 567.8;
+			}
+			public String getName(){
+				return "AGP显卡";
+			}
+		});
+	}
+}
+
+package com.atguigu.java;
+interface USB{		// 
+	public void start() ;
+	public void stop() ;	
+}
+class Computer{
+	public static void show(USB usb){	
+		usb.start() ;
+		System.out.println("=========== USB 设备工作 ========") ;
+		usb.stop() ;
+	}
+};
+class Flash implements USB{
+	public void start(){	// 重写方法
+		System.out.println("U盘开始工作。") ;
+	}
+	public void stop(){		// 重写方法
+		System.out.println("U盘停止工作。") ;
+	}
+};
+class Print implements USB{
+	public void start(){	// 重写方法
+		System.out.println("打印机开始工作。") ;
+	}
+	public void stop(){		// 重写方法
+		System.out.println("打印机停止工作。") ;
+	}
+};
+public class InterfaceDemo{
+	public static void main(String args[]){
+		Computer.show(new Flash()) ;
+		Computer.show(new Print()) ;
+
+		c.show(new USB(){
+			public void start(){
+				System.out.println("移动硬盘开始运行");
+			}
+			public void stop(){
+				System.out.println("移动硬盘停止运行");
+			}
+		});
+	}
+};
+
+
+package com.atguigu.java;
+class Root{
+	static{
+		System.out.println("Root的静态初始化块");
+	}
+	{
+		System.out.println("Root的普通初始化块");
+	}
+	public Root(){
+		System.out.println("Root的无参数的构造器");
+	}
+}
+class Mid extends Root{
+	static{
+		System.out.println("Mid的静态初始化块");
+	}
+	{
+		System.out.println("Mid的普通初始化块");
+	}
+	public Mid(){
+		System.out.println("Mid的无参数的构造器");
+	}
+	public Mid(String msg){
+		//通过this调用同一类中重载的构造器
+		this();
+		System.out.println("Mid的带参数构造器，其参数值："
+			+ msg);
+	}
+}
+class Leaf extends Mid{
+	static{
+		System.out.println("Leaf的静态初始化块");
+	}
+	{
+		System.out.println("Leaf的普通初始化块");
+	}	
+	public Leaf(){
+		//通过super调用父类中有一个字符串参数的构造器
+		super("尚硅谷");
+		System.out.println("Leaf的构造器");
+	}
+}
+public class LeafTest{
+	public static void main(String[] args){
+		new Leaf(); 
+		//new Leaf();
+	}
+}
+
+
+
+package com.atguigu.java;
+
+public class ProductTest {
+
+	public static void main(String[] args) {
+		TestProduct tp = new TestProduct();
+		Product p = tp.getProduct();
+
+		System.out.println(p.getName());
+		System.out.println(p.getPrice());
+		// ----------------------
+		tp.showProduct(p);
+		// ------------------------
+		tp.showProduct(new Product() {// 创建了一个匿名类的对象。
+			public int getPrice() {
+				return 7899;
+			}
+
+			public String getName() {
+				return "iphone5s-土豪金";
+			}
+
+		});
+	}
+
+	public Product getProduct() {
+		// 创建了一个局部内部类的对象
+		// class MyProduct implements Product{
+		//
+		// @Override
+		// public int getPrice() {
+		// // TODO Auto-generated method stub
+		// return 3899;
+		// }
+		//
+		// @Override
+		// public String getName() {
+		// // TODO Auto-generated method stub
+		// return "ipad air";
+		// }
+		//
+		// }
+		// return new MyProduct();
+		return new Product() {// 创建了一个匿名内部类的对象。
+			public int getPrice() {
+				return 7899;
+			}
+
+			public String getName() {
+				return "iphone5s-土豪金";
+			}
+
+		};
+	}
+
+	public void showProduct(Product p) {
+		System.out.println(p.getName());
+		System.out.println(p.getPrice());
+	}
+}
+
+interface Product {
+	public abstract int getPrice();
+
+	public abstract String getName();
+}
+
