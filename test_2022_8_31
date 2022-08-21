@@ -1,0 +1,164 @@
+package com.atguigu.java;
+
+public class StaticProxyTest {
+
+	public static void main(String[] args) {
+		Star s = new Proxy(new RealStar());
+		s.confer();
+		s.signContract();
+		s.bookTicket();
+		s.sing();
+		s.collectMoney();
+	}
+}
+
+interface Star {
+	void confer();// 面谈
+
+	void signContract();// 签合同
+
+	void bookTicket();// 订票
+
+	void sing();// 唱歌
+
+	void collectMoney();// 收钱
+}
+
+class RealStar implements Star {
+
+	public void confer() {
+	}
+
+	public void signContract() {
+	}
+
+	public void bookTicket() {
+	}
+
+	public void sing() {
+		System.out.println("明星：歌唱~~~");
+	}
+
+	public void collectMoney() {
+	}
+}
+
+class Proxy implements Star {
+	private Star real;
+
+	public Proxy(Star real) {
+		this.real = real;
+	}
+
+	public void confer() {
+		System.out.println("经纪人面谈");
+	}
+
+	public void signContract() {
+		System.out.println("经纪人签合同");
+	}
+
+	public void bookTicket() {
+		System.out.println("经纪人订票");
+	}
+
+	public void sing() {
+		real.sing();
+	}
+
+	public void collectMoney() {
+		System.out.println("经纪人收钱");
+	}
+}
+
+
+
+package com.atguigu.java1;
+
+class Father {
+	static {
+		System.out.println("11111111111");
+	}
+	{
+		System.out.println("22222222222");
+	}
+
+	public Father() {
+		System.out.println("33333333333");
+
+	}
+
+}
+
+public class Son extends Father {
+	static {
+		System.out.println("44444444444");
+	}
+	{
+		System.out.println("55555555555");
+	}
+	public Son() {
+		System.out.println("66666666666");
+	}
+
+
+	public static void main(String[] args) { // 由父及子 静态先行
+		System.out.println("77777777777");
+		System.out.println("************************");
+		new Son();
+		System.out.println("************************");
+
+		new Son();
+		System.out.println("************************");
+		new Father();
+	}
+
+}
+
+
+
+package com.atguigu.java;
+//抽象类的应用：模板方法的设计模式
+public class TemplateMethodTest {
+
+	public static void main(String[] args) {
+		BankTemplateMethod btm = new DrawMoney();
+		btm.process();
+
+		BankTemplateMethod btm2 = new ManageMoney();
+		btm2.process();
+	}
+}
+abstract class BankTemplateMethod {
+	// 具体方法
+	public void takeNumber() {
+		System.out.println("取号排队");
+	}
+
+	public abstract void transact(); // 办理具体的业务 //钩子方法
+
+	public void evaluate() {
+		System.out.println("反馈评分");
+	}
+
+	// 模板方法，把基本操作组合到一起，子类一般不能重写
+	public final void process() {
+		this.takeNumber();
+
+		this.transact();// 像个钩子，具体执行时，挂哪个子类，就执行哪个子类的实现代码
+
+		this.evaluate();
+	}
+}
+
+class DrawMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要取款！！！");
+	}
+}
+
+class ManageMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要理财！我这里有2000万美元!!");
+	}
+}
