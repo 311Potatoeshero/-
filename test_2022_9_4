@@ -1,0 +1,194 @@
+package com.atguigu.java3;
+/*
+ * final:最终的
+ * 
+ * 1.final可以用来修饰的结构：类、方法、变量
+ * 
+ * 2.final 用来修饰一个类,不能被其他类所继承
+ * 		比如:String类、System类、StringBuffer类，功能齐全，不用在被继承使用
+ * 
+ * 3.final 用来修饰方法：表明此方法不可以被重写
+ * 		比如：Object类中的getClass();
+ * 
+ * 4.final 用来修饰变量，此时的“变量”就称为一个常量
+ * 		4.1 final修饰属性：可以考虑赋值的位置有：显示初始化、代码块中初始化、构造器中初始化
+ * 		4.2 final修饰局部变量：
+ * 			尤其是使用final修饰形参时，表明此形参是一个常量。当我们调用此方法时，给常量形参赋一个实参，
+ * 			一旦赋值以后，就只能在方法体内使用此形参，但不能进行重新赋值。
+ * 
+ * static final：用来修饰属性：全局常量
+ * 常量习惯定义为大写字母
+ */
+
+import javax.print.attribute.standard.MediaSize.Other;
+
+public class FinalTest {
+	
+	final int WIDTH = 0; //显示赋值
+	final int LEFT;
+	final int RIGHT;
+//	final int DOWN;
+	
+	{
+		LEFT = 1; //代码块赋值
+	}
+	
+	public FinalTest(){
+		 RIGHT = 2; //构造器中初始化
+	}
+	
+//	public FinalTest(int n){
+//		
+//	}
+	
+//	public void setDown(int down){
+//		this.DOWN = down;
+//	}
+	
+//	int width = 10;
+//	
+//	public void doWidth(){
+//		width = 20;
+//	}
+	
+//	final int width = 10;
+//	
+//	public void doWidth(){
+//		width = 20;
+//	}
+	
+	public int addOne(final int x){
+		return x + 1; //可以输出，X的值为改变
+//		return ++x; //报错，x的值发生改变
+	}
+	
+	public void show(){
+		final int NUM = 10; //常量
+//		NUM += 20;
+	}
+	
+	public void show(final int num){
+		
+	}
+
+	public static void main(String[] args) {
+		
+//		FinalTest DOWN = new FinalTest(3);
+		
+		FinalTest test = new FinalTest();
+		
+		test.show(10);
+		
+//		Other other = new Other();
+//		new FinalTest().addOne(other);
+
+	}
+	public void addOne(final Other other ){
+		// o = new Other();
+ 
+	}
+
+}
+
+class other{
+	public int i; //定义常量i
+}
+
+//最终类，不能被继承
+final class FinalA{
+	
+}
+
+//class B extends FinalA{
+//	
+//}
+
+class AA{
+	public final void show(){
+		
+	}
+	
+}
+
+class BB extends AA{
+	
+}
+
+
+
+package com.atguigu.java3;
+/*
+ * 对属性可以赋值的位置：
+ * ①默认初始化
+ * ②显示初始化 / ⑤在代码块中赋值
+ * ③构造器中初始化
+ * ④有了对象以后，可以通过“对象.属性”或“对象.方法”的方式，进行赋值
+ * 
+ * 
+ * 执行的先后顺序：① - ② / ⑤ - ③ - ④
+ * 
+ */
+
+public class orderTest {
+
+	public static void main(String[] args) {
+	
+		order order = new order();
+		System.out.println(order.orderId);
+
+	}
+
+}
+
+class order{
+	int orderId = 3;
+	
+	{
+		orderId = 4;
+	}
+	
+}
+
+
+package com.atguigu.java3;
+/*
+ * 类的成员之四：代码块（或初始化块）
+ * 
+ * 1.代码块的作用：用来初始化类、对象
+ * 2.
+ */
+
+public class BlockTest {
+
+}
+
+class Person{
+	//属性
+	String name;
+	int age;
+	static String desc = "我是一个人"; //描述
+	
+	//构造器
+	public Person(){
+		
+	}
+	public Person(String name,int age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	//代码块
+	{
+		
+	}
+	
+	//方法
+	public void eat(){
+		System.out.println("吃饭");
+	}
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + "]";
+	}
+	
+}
