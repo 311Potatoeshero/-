@@ -1,0 +1,334 @@
+package com.atguigu.java;
+
+public class SingletonTest {
+	public static void main(String[] args){
+		
+		Bank bank1 = Bank.instance;
+		Bank bank2 = Bank.instance;
+		
+		Bank bank3 = null;
+		
+		System.out.println(bank1 = bank2);
+	}
+
+}
+
+class Bank{
+	private Bank(){
+		
+	}
+	
+//	public static Bank instance = new Bank();//保存和修改的功能全部暴露
+	public static final Bank instance = new Bank(); //加final此时是单例模式
+}
+
+
+package com.atguigu.java;
+/*
+ *  abstract关键字的使用
+ *  1.abstract:抽象的
+ *  2.abstract可以用来修饰的结构：类、方法
+ * 
+ * 	3.abstract修饰类：抽象类
+ * 		> 此类不能实例化
+ * 		> 抽象类中一定有构造器，便于子类实例化时调用（涉及：子类对象实例化的全过程）
+ * 		> 开发中，都会提供抽象类的子类，让子类对象实例化，完成相关的操作	
+ * 
+ * 	4.abstract修饰方法：抽象方法
+ * 		> 抽象方法只有方法的声明，没有方法体
+ * 		> 包含抽象方法的类，一定是一个抽象类，反之抽象类中可以没有抽象方法
+ * 		> 若子类重写了父类中的所有的抽象方法后，此子类方可实例化
+ * 		     若子类没有重写了父类中的所有的抽象方法后，则此子类也是一个抽象类，需要使用abstract类修饰
+ */
+
+public class AbstractTest {
+	public static void main(String[] args){
+		
+		//一旦Person类抽象了，就不可以实例化了
+//		Person p1 = new Person();
+//		p1.eat();
+	}
+
+}
+
+abstract class Creature{
+	
+	public abstract void breath();
+}
+
+abstract class Person extends Creature{
+	String name;
+	int age;
+	
+	public Person(){
+		
+	}
+	
+	public Person(String name,int age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	//不是抽象方法
+//	public void eat(){
+//		System.out.println("人吃饭");
+//	}
+	
+	//抽象方法
+	public abstract void eat();
+	
+	public void walk(){
+		System.out.println("人走路");
+	}
+	
+}
+
+class Student extends Person{
+	
+	public Student(String name,int age){
+		super(name,age);
+	}
+	
+	public Student(){
+	
+	}
+	
+	public void eat(){
+		System.out.println("学生多吃有营养的食物");
+	}
+	
+	@Override
+	public void breath(){
+		System.out.println("学生应该呼吸新鲜的空气");
+	}
+}
+
+
+
+package com.atguigu.exer;
+/*
+ * 编写一个Employee类，声明为抽象类，包含如下三个属性：name，id,salary
+ * 提供必要的构造器和抽象方法：work()
+ * 
+ */
+
+public abstract class Employee {
+	
+	private String name;
+	private int id;
+	private double sarlary;
+	
+	//提供构造器
+	//空参的
+	public Employee(){
+		super();
+	}
+	
+	public Employee(String name,int id,double sarlary){
+		super();
+		this.name = name;
+		this.id = id;
+		this.sarlary = sarlary;
+	}
+	
+	public abstract void work();
+}
+
+
+
+package com.atguigu.exer;
+/*
+ * Manager有员工和奖金的属性
+ * 
+ */
+public class Manager extends Employee {
+
+	private double bonus; //特有属性-奖金
+	
+	
+	//构造器
+	public Manager(String name, int id, double sarlary, double bonus) {
+		super(name, id, sarlary);
+		this.bonus = bonus;
+	}
+
+	public Manager(double bonus) {
+		super();
+		this.bonus = bonus;
+	}
+
+
+
+	@Override
+	public void work(){
+		System.out.println("管理员工，提高工作效率");
+	}
+
+}
+
+
+
+package com.atguigu.exer;
+
+public class CommonEmployee extends Employee {
+
+	@Override
+	public void work() {
+		System.out.println("员工在一线车间生产产品");
+
+	}
+
+}
+
+
+
+package com.atguigu.exer;
+
+public class EmployeeTest {
+
+	public static void main(String[] args) {
+		
+		Manager manager = new Manager("库奇", 1001, 10000, 50000);
+		manager.work();
+		
+		//多态
+//		Employee manager = new Manager("库奇", 1001, 10000, 50000);
+//		manager.work();
+		
+		CommonEmployee commonEmployee = new CommonEmployee();
+		commonEmployee.work();
+		
+
+	}
+
+}
+
+
+
+package com.atguigu.java;
+/*
+ * 抽象类的匿名子类
+ */
+
+public class PersonTest {
+
+	public static void main(String[] args) {
+	
+		method(new Student()); //匿名对象
+		
+		Worker worker = new Worker();
+		method(worker); //非匿名的类非匿名的对象
+		
+		method(new Worker());//非匿名的类匿名的对象
+		
+		//创建了一个匿名类的对象：p --抽象类创建对象的方法
+		Person p = new Person(){
+
+			@Override
+			public void eat() {
+				System.out.println("吃东西");
+				
+			}
+
+			@Override
+			public void breath() {
+				System.out.println("呼吸");
+				
+			}
+			
+		};
+		
+		method(p);
+		System.out.println("**************");
+		//创建匿名子类的匿名对象
+		method(new Person() {
+			
+			@Override
+			public void breath() {
+				System.out.println("吃好东西");
+				
+			}
+			
+			@Override
+			public void eat() {
+				System.out.println("好好呼吸");
+				
+			}
+		});
+		
+	}
+	
+	public static void method(Person p){
+		p.eat();
+		p.breath();
+	}
+	
+	//method 非静态方法
+	public static void method(Student s){
+		
+	}
+
+}
+
+class Worker extends Person{
+	
+	@Override
+	public void eat(){
+		
+	}
+	
+	@Override
+	public void breath(){
+		
+	}
+}
+
+
+
+package com.atguigu.java;
+//抽象类的应用：模板方法的设计模式
+public class TemplateMethodTest {
+
+	public static void main(String[] args) {
+		BankTemplateMethod btm = new DrawMoney();
+		btm.process();
+
+		BankTemplateMethod btm2 = new ManageMoney();
+		btm2.process();
+	}
+}
+
+//银行操作的抽象类
+abstract class BankTemplateMethod {
+	// 具体方法
+	public void takeNumber() {
+		System.out.println("取号排队");
+	}
+
+	public abstract void transact(); // 办理具体的业务 //钩子方法
+
+	public void evaluate() {
+		System.out.println("反馈评分");
+	}
+
+	// 模板方法，把基本操作组合到一起，子类一般不能重写
+	public final void process() {
+		this.takeNumber(); //取号
+
+		this.transact();// 像个钩子，具体执行时，挂哪个子类，就执行哪个子类的实现代码
+
+		this.evaluate(); //评分
+	}
+}
+
+class DrawMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要取款！！！");
+	}
+}
+
+class ManageMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要理财！我这里有2000万美元!!");
+	}
+}
