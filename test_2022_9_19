@@ -1,0 +1,484 @@
+package com.atguigu.exer1;
+/*
+ * 定义一个Employee类，该类包含：
+ * private成员变量name,number,birthday，其中birthday 为MyDate类的对象；
+ * abstract方法earnings()；
+ * toString()方法输出对象的name,number和birthday。
+ */
+
+public abstract class Employee {
+	private String name;
+	private int number;
+	private MyDate birthday;
+	
+	public abstract double earnings();
+	
+	
+
+	public Employee(String name, int number, MyDate birthday) {
+		super();
+		this.name = name;
+		this.number = number;
+		this.birthday = birthday;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public int getNumber() {
+		return number;
+	}
+
+
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+
+
+	public MyDate getBirthday() {
+		return birthday;
+	}
+
+
+
+	public void setBirthday(MyDate birthday) {
+		this.birthday = birthday;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "name=" + name + ", number=" + number + ", birthday=" + birthday;
+	} 
+	
+	
+}
+
+
+package com.atguigu.exer1;
+/*
+ * MyDate类包含:private成员变量year,month,day ；
+ * toDateString()方法返回日期对应的字符串：xxxx年xx月xx日
+ */
+
+public class MyDate {
+	private int year;
+	private int month;
+	private int day;
+	
+	public MyDate(int year, int month, int day) {
+		super();
+		this.year = year;
+		this.month = month;
+		this.day = day;
+	}
+
+
+
+	public int getYear() {
+		return year;
+	}
+
+
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+
+
+	public int getMonth() {
+		return month;
+	}
+
+
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+
+
+	public int getDay() {
+		return day;
+	}
+
+
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+
+
+	public String toDateString(){
+		return year + "年" + month + "月" + day + "日";
+	}
+}
+
+
+package com.atguigu.exer1;
+/*
+ * 定义SalariedEmployee类继承Employee类，实现按月计算工资的员工处理。
+ * 该类包括：private成员变量monthlySalary；
+ * 实现父类的抽象方法earnings(),该方法返回monthlySalary值；
+ * toString()方法输出员工类型信息及员工的name，number,birthday。
+ */
+
+public  class SalariedEmployee extends Employee{
+	private double monthlySalary; //月工资
+	
+	public SalariedEmployee(String name, int number, MyDate birthday) {
+		super(name, number, birthday);
+	}
+	public SalariedEmployee(String name, int number, MyDate birthday,double monthlySalary) {
+		super(name, number, birthday);
+		this.monthlySalary = monthlySalary;
+	}
+
+	@Override
+	public double earnings() {
+		return monthlySalary;
+	}
+	
+	public double getMonthlySalary() {
+		return monthlySalary;
+	}
+
+	public void setMonthlySalary(double monthlySalary) {
+		this.monthlySalary = monthlySalary;
+	}
+
+	public String toString(){
+		return "SalariedEmployee[" + super.toString() + "]";
+	}
+	
+}
+
+
+package com.atguigu.exer1;
+/*
+ * 参照SalariedEmployee类定义HourlyEmployee类，实现按小时计算工资的员工处理。
+ * 该类包括：private成员变量wage和hour；
+ * 实现父类的抽象方法earnings(),该方法返回wage*hour值；
+ * toString()方法输出员工类型信息及员工的name，number,birthday。
+ */
+
+public class HourlyEmployee extends Employee{
+	private int wage; //每小时工资
+	private int hour; //月工作的小时数
+
+	public HourlyEmployee(String name, int number, MyDate birthday) {
+		super(name, number, birthday);
+	}
+	public HourlyEmployee(String name, int number, MyDate birthday,int wage,int hour) {
+		super(name, number, birthday);
+		this.hour = hour;
+		this.wage = wage;
+	}
+
+	public int getWage() {
+		return wage;
+	}
+	public void setWage(int wage) {
+		this.wage = wage;
+	}
+	public int getHour() {
+		return hour;
+	}
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+	@Override
+	public double earnings() {
+		return 0;
+	}
+	
+	public String toString(){
+		return "HourlyEmployee[" + super.toString() + "]";
+	}
+}
+
+
+package com.atguigu.exer1;
+
+import java.util.Calendar;
+import java.util.Scanner;
+
+/*
+ * 定义PayrollSystem类，创建Employee变量数组并初始化，该数组存放各类雇员对象的引用。
+ * 利用循环结构遍历数组元素，输出各个对象的类name,number,birthday。
+ * 当键盘输入本月月份值时，如果本月是某个Employee对象的生日，还要输出增加工资信息。
+ */
+
+public class PayrollSystem {
+
+	public static void main(String[] args) {
+		//方式一：
+//		Scanner scanner = new Scanner(System.in);
+//		int month = scanner.nextInt();
+		
+		//方式二：
+		Calendar calendar = Calendar.getInstance();
+		int month = calendar.get(Calendar.MONTH); //获取日历信息
+		System.out.println(month);
+		
+		Employee[] employees  = new Employee[2];
+		
+		employees[0] = new SalariedEmployee("泰森", 1002, new MyDate(2000, 01, 01),10000);
+		employees[1] = new HourlyEmployee("阿里", 2010, new MyDate(1998,03,24),60,240);
+		
+		for(int i = 0;i < employees.length;i++){
+			System.out.println(employees[i]);
+			double salary = employees[i].earnings();
+			System.out.println("月工资为：" + salary);
+		
+		if((month + 1) == employees[i].getBirthday().getMonth()){
+			System.out.println("生日快乐，奖励100元");
+			}
+		}
+	}
+
+}
+
+
+package com.atguigu.java1;
+/*
+ * 接口的使用
+ * 1.接口使用interface来定义
+ * 2.Java中，接口和类是并列的两个结构
+ * 3.如何定义接口：定义接口中的成员
+ * 		3.1 JDK7以及以前，只能定义全局常量和抽象方法
+ * 			>全局常量：public static final的
+ *      	>抽象方法：public abstract的
+ * 		3.2 JDK8,除了定义全局常量和抽象方法之外，还可以定义静态方法、默认方法
+ * 4.接口中不能定义构造器,即接口不能实例化
+ * 
+ * 5.JAVA开发中，接口都通过类去实现（implement）的方式去使用
+ * 	 如果实现类覆盖了接口中的所有抽象方法，则此实现类就可以实例化
+ * 	如果实现类没有覆盖接口所有的抽象方法，则此实现类仍为一个抽象类
+ * 
+ * 6.JAVA类可以实现多个接口 --> 弥补了JAVA单继承类的局限性
+ * 	格式： class AA extends BB implements CC,DD,EE
+ * 
+ * 7.接口与接口之间可以继承，并且可以多继承
+ * 
+ * *********************************
+ * 8.接口的具体使用，体现多态性
+ * 9.接口，实际上可以看做是一种规范
+ * 
+ * 面试题： 抽象类与接口有那些异同？
+ */
+
+public class InterfaceTest {
+
+	public static void main(String[] args) {
+		System.out.println(Flyable.MAX_SPEED);
+		System.out.println(Flyable.MIN_SPEED);
+//		Flyable.MIN_SPEED = 2;
+		
+		Plane plane = new Plane();
+		plane.fly();
+	}
+
+}
+
+interface Flyable{
+	
+	//全局常量
+	public static final int MAX_SPEED = 7900; //第一宇宙速度
+	int MIN_SPEED = 1; //public static final 
+	
+	//抽象方法
+	public abstract void fly();
+	
+	void stop(); //省略了 public abstract
+	
+//	public Flyable(){
+//		
+//	}
+	
+}
+
+interface Attackable{
+	
+	void attack();
+	
+}
+
+class Plane implements Flyable{
+	@Override
+	public void fly(){
+		System.out.println("通过引擎飞");
+	}
+	
+	@Override
+	public void stop(){
+		System.out.println("驾驶员减速停止");
+	}
+	
+}
+
+abstract class Kite implements Flyable{
+	
+	@Override
+	public void fly(){
+		
+	}
+}
+
+class Bullet implements Flyable,Attackable{ //Bullet若想实例化，需要实接口中的所有抽象类
+
+	@Override
+	public void attack() {
+		
+	}
+
+	@Override
+	public void fly() {
+		
+	}
+
+	@Override
+	public void stop() {
+		
+	}
+	
+}
+
+//*************************************
+interface AA{
+	void method1();
+}
+
+interface BB{
+	void method2();
+}
+
+interface CC extends AA,BB{
+	
+}
+
+
+package com.atguigu.java1;
+/*
+ * 接口的多态性
+ * 1.接口的使用上也满足多态性
+ * 2.接口，实际上就是定义了一种规范
+ * 3.开发中，体会面向接口编程
+ */
+public class USBTest {
+
+	public static void main(String[] args) {
+		Computer computer = new Computer();
+		Flash flash = new Flash();
+		computer.transferDate(flash);
+
+	}
+
+}
+
+interface USB{
+	//常量：定义了长、宽、最大最小的传输速度等
+	
+	void start();
+	
+	void stop();
+}
+
+class Computer{
+	
+	public void transferDate(USB usb){//USB usb = new USB(); 抽象类的实现方法
+		usb.start();
+		
+		System.out.println("具体传输数据的细节");
+		
+		usb.stop();
+		
+	}
+}
+
+class Flash implements USB{
+
+	@Override
+	public void start() {
+		System.out.println("U盘开始工作");
+		
+	}
+
+	@Override
+	public void stop() {
+		System.out.println("U盘结束工作");
+		
+	}
+	
+}
+
+package com.atguigu.java1;
+
+import java.awt.Checkbox;
+
+/*
+ * 接口的应用：代理模式
+ */
+
+public class NetWorkTest {
+
+	public static void main(String[] args) {
+		Server server = new Server();
+		ProxyServer proxyServer = new ProxyServer(server);
+		
+		proxyServer.browse();
+
+	}
+
+}
+
+interface NetWork{
+	
+	public void browse();
+}
+
+//被代理类
+class Server implements NetWork{
+	
+	@Override
+	public void browse(){
+		System.out.println("真实的服务器访问网络");
+	}
+}
+
+//代理类
+class ProxyServer implements NetWork{
+	
+	private NetWork work;
+	
+	public ProxyServer(NetWork work){
+		this.work = work;
+	}
+	
+	public void Check(){
+		System.out.println("联网之前的检查工作");
+	}
+	
+	@Override
+	public void browse(){
+		Check();
+		
+		work.browse();
+	}
+}
