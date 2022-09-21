@@ -1,0 +1,209 @@
+package com.atguigu.exer2;
+
+public interface CompareObject {
+	//若返回值是 0 , 代表相等; 若为正数，代表当前对象大；负数代表当前对象小
+	public int compareTo(Object o);
+	
+}
+
+package com.atguigu.exer2;
+/*
+ * 定义一个Circle类，声明redius属性，提供getter和setter方法
+ */
+
+public class Circle {
+	private double redius;
+
+	public Circle(){
+		super();
+	}
+	
+	public Circle(double redius) {
+		super();
+		this.redius = redius;
+	}
+
+	public double getRedius() {
+		return redius;
+	}
+
+	public void setRedius(double redius) {
+		this.redius = redius;
+	}
+	
+	
+}
+
+
+package com.atguigu.exer2;
+
+import javax.management.RuntimeErrorException;
+
+/*
+ * 定义一个ComparableCircle类，继承Circle类并且实现CompareObject接口。在
+ComparableCircle类中给出接口中方法compareTo的实现体，用来比较两个圆的半
+径大小。
+ */
+
+public class ComparableCircle extends Circle implements CompareObject{
+	
+	public ComparableCircle(double radius) {
+		super(radius);
+	}
+	@Override
+	public int compareTo(Object o){
+		if(this == o){
+			return 0;
+		}
+		if(o instanceof ComparableCircle){
+			ComparableCircle circle = (ComparableCircle)o; //强制转换
+			//错误的
+//			return (int) (this.getRedius() - circle.getRedius()); //强制转换
+			//正确的
+			if(this.getRedius() > circle.getRedius()){
+				return 1;
+			}else if(this.getRedius() < circle.getRedius()){
+				return -1;
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+//			throw new RuntimeErrorException("传入的数据类型不匹配");
+		}
+	}
+}
+
+
+
+package com.atguigu.exer2;
+
+public class ComparableCircleTest {
+
+	public static void main(String[] args) {
+		
+		ComparableCircle c1 = new ComparableCircle(3.4);
+		ComparableCircle c2 = new ComparableCircle(3.2);
+		
+		int compareValue = c1.compareTo(c2);
+		if(compareValue > 0){
+			System.out.println("c1对象大");
+		}else if(compareValue < 0){
+			System.out.println("c2对象大");
+		}else{
+			System.out.println("c1和c2对象一样大");
+		}
+
+	}
+
+}
+
+
+package com.atguigu.java2;
+
+import java.util.concurrent.BlockingDeque;
+
+/*
+ * 类的内部成员之五：内部类
+ * 1.Java中允许将一个类A声明在另一个类B中，类A是内部类，类B为外部类
+ * 
+ * 2.内部类的分类：成员内部类 VS 局部内部类（方法内、代码块内、构造器内）
+ * 
+ * 3.成员内部类：
+ * 		一方面:作为外部类的成员：
+ * 			》调用外部类的结构
+ * 			》可以被static修饰
+ * 			》可以被4不同的权限修饰
+ * 			
+ * 		另一方面：作为一个类：
+ * 			》类内可以定义属性、方法、构造器等
+ * 			》可以被final修饰，表示可以被继承，不适应final，可以被继承
+ * 			》可以被abstract修饰，不能被实例化
+ * 
+ * 4.三个问题：
+ * 	4.1 如何实例化成员内部类的对象
+ * 	4.2 如何在成员内部类中区分调用外部类的结构
+ * 	4.3 开发中局部内部类的使用
+ */
+public class InnerClassTest {
+
+	public static void main(String[] args) {
+		
+		//创建Dog实例(静态的成员内部类)
+	  Person.Dog dog= new Person.Dog();
+	  dog.show();
+	  	
+	  	//创建Bird实例(非静态的成员内部类)
+	  Person person = new Person();
+	  Person.bird bird1 = person.new bird();
+	  bird1.sing();
+	}
+
+}
+
+class Person{
+	String name;
+	int age;
+	
+	public void eat(){
+		System.out.println("人吃饭");
+	}
+	
+	//静态成员内部类
+	static class Dog{
+		String name;
+		int age;
+		
+		public void show(){
+			System.out.println("卡拉是条狗");
+		}
+		
+	}
+	
+	//非静态成员内部类
+	class bird{
+		String name;
+		
+		public bird(){
+			
+		}
+		
+		public void sing(){
+			System.out.println("我是一只小小鸟");
+		}
+		
+	}
+	
+	public void method(){
+		//局部内部类
+		class AA{
+			
+		}
+	}
+	
+	{
+		//局部内部类
+		class BB{
+			
+		}
+	}
+	
+	public Person(){
+		//局部内部类
+		class CC{
+			
+		}
+	}
+}
+
+
+package com.atguigu.java;
+
+public class ExceptionTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
