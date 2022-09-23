@@ -1,0 +1,179 @@
+package com.atguigu.team.domain;
+
+
+public class Architect extends Designer {
+    private int stock;
+
+    public Architect() {
+    }
+
+    public Architect(int id, String name, int age, double salary,
+                      Equipment equipment, double bonus, int stock) {
+        super(id, name, age, salary, equipment, bonus);
+        this.stock = stock;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getDetailsForTeam() {
+        return getMemberDetails() + "\t架构师\t" + 
+               getBonus() + "\t" + getStock();
+    }
+
+    @Override
+    public String toString() {
+        return getDetails() + "\t架构师\t" + getStatus() + "\t" +
+               getBonus() + "\t" + getStock() + "\t" + getEquipment().getDescription();
+    }
+}
+
+
+package com.atguigu.team.domain;
+
+public class Designer extends Programmer{
+    private double bonus;
+
+    public Designer() {
+    }
+
+    public Designer(int id, String name, int age, double salary, 
+                     Equipment equipment, double bonus) {
+        super(id, name, age, salary, equipment);
+        this.bonus = bonus;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    public String getDetailsForTeam() {
+        return getMemberDetails() + "\t设计师\t" + getBonus();
+    }
+
+    @Override
+    public String toString() {
+        return getDetails() + "\t设计师\t" + getStatus() + "\t" +
+               getBonus() +"\t\t" + getEquipment().getDescription();
+    }
+}
+
+
+
+package com.atguigu.team.domain;
+
+public class Employee {
+    private int id;
+    private String name;
+    private int age;
+    private double salary;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name, int age, double salary) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    protected String getDetails() {
+        return id + "\t" + name + "\t" + age+ "\t" +salary;
+    }
+
+    @Override
+    public String toString() {
+        return getDetails();
+    }
+}
+
+
+package com.atguigu.team.domain;
+
+public class NoteBook implements Equipment{
+	private String model;//机器的型号
+	private double price;//价格
+	
+	
+	public NoteBook() {
+		super();
+	}
+
+
+	public NoteBook(String model, double price) {
+		super();
+		this.model = model;
+		this.price = price;
+	}
+
+
+	public String getModel() {
+		return model;
+	}
+
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+
+	@Override
+	public String getDescription() {
+		return model + "(" + price + ")";
+	}
+	
+	
+
+}
