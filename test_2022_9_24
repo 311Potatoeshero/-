@@ -1,0 +1,288 @@
+package com.atguigu.team.view;
+
+import java.util.*;
+
+public class TSUtility {
+    private static Scanner scanner = new Scanner(System.in);
+
+	public static char readMenuSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false);
+            c = str.charAt(0);
+            if (c != '1' && c != '2' &&
+                c != '3' && c != '4') {
+                System.out.print("选择错误，请重新输入：");
+            } else break;
+        }
+        return c;
+    }
+
+    public static void readReturn() {
+        System.out.print("按回车键继续...");
+        readKeyBoard(100, true);
+    }
+
+    public static int readInt() {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(2, false);
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("数字输入错误，请重新输入：");
+            }
+        }
+        return n;
+    }
+
+    public static char readConfirmSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1, false).toUpperCase();
+            c = str.charAt(0);
+            if (c == 'Y' || c == 'N') {
+                break;
+            } else {
+                System.out.print("选择错误，请重新输入：");
+            }
+        }
+        return c;
+    }
+
+    private static String readKeyBoard(int limit, boolean blankReturn) {
+        String line = "";
+
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            if (line.length() == 0) {
+                if (blankReturn) return line;
+                else continue;
+            }
+
+            if (line.length() < 1 || line.length() > limit) {
+                System.out.print("输入长度（不大于" + limit + "）错误，请重新输入：");
+                continue;
+            }
+            break;
+        }
+
+        return line;
+    }
+}
+
+
+package com.atguigu.team.view;
+
+import com.atguigu.team.domain.*;
+import com.atguigu.team.service.*;
+
+public class TeamView {
+	private NameListService listSvc = new NameListService();
+	private TeamService teamSvc = new TeamService();
+
+	public void enterMainMenu() {
+		boolean loopFlag = true;
+		char key = 0;
+
+		do {
+			if (key != '1') {
+				listAllEmployees();
+			}
+			System.out.print("1-团队列表  2-添加团队成员  3-删除团队成员 4-退出   请选择(1-4)：");
+			key = TSUtility.readMenuSelection();
+			System.out.println();
+			switch (key) {
+			case '1':
+				listTeam();
+				break;
+			case '2':
+				addMember();
+				break;
+			case '3':
+				deleteMember();
+				break;
+			case '4':
+				System.out.print("确认是否退出(Y/N)：");
+				char yn = TSUtility.readConfirmSelection();
+				if (yn == 'Y')
+					loopFlag = false;
+				break;
+			}
+		} while (loopFlag);
+	}
+
+	// 显示所有的员工成员
+	private void listAllEmployees() {
+		System.out
+				.println("\n-------------------------------开发团队调度软件--------------------------------\n");
+		Employee[] emps = listSvc.getAllEmployees();
+		if (emps.length == 0) {
+			System.out.println("没有客户记录！");
+		} else {
+			System.out.println("ID\t姓名\t年龄\t工资\t职位\t状态\t奖金\t股票\t领用设备");
+		}
+
+		for (Employee e : emps) {
+			System.out.println(" " + e);
+		}
+		System.out
+				.println("-------------------------------------------------------------------------------");
+	}
+
+	// 显示开发团队成员列表
+	private void listTeam() {
+		System.out
+				.println("\n--------------------团队成员列表---------------------\n");
+		Programmer[] team = teamSvc.getTeam();
+		if (team.length == 0) {
+			System.out.println("开发团队目前没有成员！");
+		} else {
+			System.out.println("TID/ID\t姓名\t年龄\t工资\t职位\t奖金\t股票");
+		}
+
+		for (Programmer p : team) {
+			System.out.println(" " + p.getDetailsForTeam());
+		}
+		System.out
+				.println("-----------------------------------------------------");
+	}
+
+	// 添加成员到团队
+	private void addMember() {
+		System.out.println("---------------------添加成员---------------------");
+		System.out.print("请输入要添加的员工ID：");
+		int id = TSUtility.readInt();
+
+		try {
+			Employee e = listSvc.getEmployee(id);
+			teamSvc.addMember(e);
+			System.out.println("添加成功");
+		} catch (TeamException e) {
+			System.out.println("添加失败，原因：" + e.getMessage());
+		}
+		// 按回车键继续...
+		TSUtility.readReturn();
+	}
+
+	// 从团队中删除指定id的成员
+	private void deleteMember() {
+		System.out.println("---------------------删除成员---------------------");
+		System.out.print("请输入要删除员工的TID：");
+		int id = TSUtility.readInt();
+		System.out.print("确认是否删除(Y/N)：");
+		char yn = TSUtility.readConfirmSelection();
+		if (yn == 'N')
+			return;
+
+		try {
+			teamSvc.removeMember(id);
+			System.out.println("删除成功");
+		} catch (TeamException e) {
+			System.out.println("删除失败，原因：" + e.getMessage());
+		}
+		// 按回车键继续...
+		TSUtility.readReturn();
+	}
+
+	public static void main(String[] args) {
+		TeamView view = new TeamView();
+		view.enterMainMenu();
+	}
+}
+
+
+package com.atguigu.team.service;
+
+import com.atguigu.team.domain.*;
+
+
+public class TeamService {
+    private static int counter = 1;//用于自动生成团队成员的memberId
+    private final int MAX_MEMBER = 5;//团队人数上限
+    private Programmer[] team = new Programmer[MAX_MEMBER];//保存当前团队成员
+    private int total = 0;//团队实际人数
+
+    public TeamService() {
+    }
+    //返回team中所有程序员构成的数组
+    public Programmer[] getTeam() {
+        Programmer[] team = new Programmer[total];
+
+        for (int i = 0; i < total; i++) {
+            team[i] = this.team[i];
+        }
+        return team;
+    }
+
+    public void addMember(Employee e) throws TeamException {
+        if (total >= MAX_MEMBER)
+            throw new TeamException("成员已满，无法添加");
+        if (!(e instanceof Programmer))
+            throw new TeamException("该成员不是开发人员，无法添加");
+
+        Programmer p = (Programmer)e;
+        
+        if (isExist(p))
+        	throw new TeamException("该员工已在本团队中");
+        
+        if(p.getStatus().getNAME().equals("BUSY")) {
+        	throw new TeamException("该员工已是某团队成员");
+        }else if(p.getStatus().getNAME().equals("VOCATION")) {
+        	throw new TeamException("该员正在休假，无法添加");
+        }
+
+//        switch (p.getStatus()) {
+//            case BUSY    :throw new TeamException("该员工已是某团队成员");
+//            case VOCATION:throw new TeamException("该员正在休假，无法添加");
+//        }
+        
+        int numOfArch = 0, numOfDsgn = 0, numOfPrg = 0;
+        for (int i = 0; i < total; i++) {
+            if (team[i] instanceof Architect) numOfArch++;
+            else if (team[i] instanceof Designer) numOfDsgn++;
+            else if (team[i] instanceof Programmer) numOfPrg++;
+        }
+
+        if (p instanceof Architect) {
+            if (numOfArch >= 1) throw new TeamException("团队中至多只能有一名架构师");
+        } else if (p instanceof Designer) {
+            if (numOfDsgn >= 2) throw new TeamException("团队中至多只能有两名设计师");
+        } else if (p instanceof Programmer) {
+            if (numOfPrg >= 3) throw new TeamException("团队中至多只能有三名程序员");
+        }
+        //添加到数组
+        p.setStatus(Status.BUSY);
+        p.setMemberId(counter++);
+        team[total++] = p;
+    }
+
+    private boolean isExist(Programmer p) {
+        for (int i = 0; i < total; i++) {
+            if (team[i].getId() == p.getId()) return true;
+        }
+
+        return false;
+    }
+    //删除指定memberId的程序员
+    public void removeMember(int memberId) throws TeamException {
+        int n = 0;
+        //找到指定memberId的员工，并删除
+        for (; n < total; n++) {
+            if (team[n].getMemberId() == memberId) {
+                team[n].setStatus(Status.FREE);
+                break;
+            }
+        }
+        //如果遍历一遍，都找不到，则报异常
+        if (n == total)
+            throw new TeamException("找不到该成员，无法删除");
+        //后面的元素覆盖前面的元素
+        for (int i = n + 1; i < total; i++) {
+            team[i - 1] = team[i];
+        }
+        team[--total] = null;
+    }
+}
+
