@@ -1,0 +1,202 @@
+package com.atguigu.java;
+
+/**
+ * 多线程的创建,方式一：继承ThreadTest类
+ * 1.创建一个继承于Thread类的子类
+ * 2.重写Thread类的run() --> 将此线程执行的操作声明在run()中
+ * 3.创建Thread类的子类的对象
+ * 4.通过此对象调用start()
+ * <p>
+ *     例子：遍历100以内的所有偶数
+ */
+
+//1.创建一个继承于Thread类的子类
+class MyThread extends Thread{
+    //2.重写Thread类的run()
+
+
+    @Override
+    public void run() {
+        for(int i = 0;i <= 100;i++){
+            if(i % 2 == 0){
+                System.out.println(i);
+            }
+        }
+    }
+}
+public  class ThreadTest {
+    public static void main(String[] args) {
+        //3.创建Thread类的子类的对象
+        MyThread t1 = new MyThread();
+
+        //4.通过此对象调用start()
+        t1.start();
+        //t1.start(); ①启动当前线程 ②调用当前线程的run()
+    }
+}
+
+
+package com.atguigu.java;
+
+/**
+ * 测试Thread中的常用方法：
+ * 1.start():启动当前线程；调用当前线程的run()
+ * 2.run():通常需要重写Thread类中的此方法，将创建的线程要执行的操作声明在此方法中
+ * 3.currentThread():静态方法，返回执行当前代码的线程
+ * 4.getName():获取当前线程的名字
+ * 5.setName():设置但概念线程的名字
+ * 6.yield():释放当前cpu的执行权
+ * 7.join():在线程a中调用线程b的join()，此时线程a就进入阻塞状态；
+ *      直到线程b完全执行完以后，线程a才能结束阻塞状态
+ * 8.stop():已过时当执行此方法时，强制结束当前线程
+ * 9.sleep(long millitime):让当前线程“睡眠”指定的millitime毫秒。
+ *      在指定的millitime毫秒时间内，当前线程时阻塞状态
+ * 10.isAlive:判断当前线程是否存活
+ *
+ *
+ * 线程的优先级：
+ * 1.
+ * MAX_PRIORITY：10
+ * MIN _PRIORITY：1
+ * NORM_PRIORITY：5  -->默认优先级
+ * 2.如何获取和设置当前线程的优先级：
+ *   getPriority():获取线程的优先级
+ *   setPriority(int p):设置线程的优先级
+ *
+ *   说明：高优先级的线程要抢占低优先级线程cpu的执行权。但是只是从概率上讲，高优先级的线程高概率的情况下被执行。并不意味着只当高优先级的线程执行完以后，低优先级的线程才执行。
+ *   线程通信：wait() / notify() / notifyAll() :此三个方法定义在Object类中的。
+ */
+
+public class ThreadMethodTest {
+}
+
+
+
+package com.atguigu.java;
+
+/**
+ * 例子：创建三个窗口卖票，总票数为100张
+ *
+ * 线程安全问题待解决
+ */
+
+class Window extends Thread{
+
+    private static int ticket = 100;//设置为静态变量，三个窗口共享
+
+    @Override
+    public void run() {
+        while(true){
+
+
+            if(ticket > 0 ){
+                System.out.println(getName() + ":卖票，票号为：" + ticket);
+                ticket--;
+            }else{
+                break;
+            }
+        }
+    }
+}
+
+public class WindowTest {
+    public static void main(String[] args) {
+        Window w1 = new Window();
+        Window w2 = new Window();
+        Window w3 = new Window();
+
+        w1.setName("窗口1");
+        w2.setName("窗口2");
+        w3.setName("窗口3");
+
+        w1.start();
+        w2.start();
+        w3.start();
+    }
+}
+
+
+package com.atguigu.java;
+
+/**
+ * 创建多线程的方式二：实现Runnable接口
+ * 1.创建一个实现了Runnable接口的类
+ * 2.实现类去实现Runnable中的抽象方法：run()
+ * 3.创建实现类的对象
+ * 4.将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象
+ * 5.通过Thread类的对象调用start()
+ */
+//1.创建一个实现了Runnable接口的类
+class MThread implements Runnable{
+//    2.实现类去实现Runnable中的抽象方法：run()
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            if(i % 2 == 0){
+                System.out.println(Thread.currentThread().getName() + ":" + i);
+            }
+        }
+    }
+}
+
+public class MThreadTest {
+
+public static void main(String[] args) {
+    //    3.创建实现类的对象
+    MThread mThread = new MThread();
+
+//    4.将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象
+    Thread t1 = new Thread(mThread);//多态性
+    Thread t2 = new Thread(mThread);
+
+    t1.setName("线程1");
+    t1.start();
+
+    //创建另外一个线程
+    t2.setName("线程2");
+    t2.start();
+}
+}
+
+
+package com.atguigu.java;
+
+/**
+ *  例子：创建三个窗口卖票，总票数为100张,通过Runnable接口的方法实现
+ */
+class Window1 implements Runnable{
+
+    private int ticket = 100;
+
+    @Override
+
+    public void run(){
+    while(true){
+        if(ticket > 0){
+            System.out.println(Thread.currentThread().getName() + ":" + ticket);
+            ticket--;
+        }else{
+            break;
+        }
+    }
+    }
+}
+public class WindowTest1 {
+    public static void main(String[] args) {
+        Window1  w = new Window1();
+
+        Thread t1 = new Thread(w);
+        Thread t2 = new Thread(w);
+        Thread t3 = new Thread(w);
+
+        t1.setName("线程一：");
+        t2.setName("线程二：");
+        t3.setName("线程三：");
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+}
