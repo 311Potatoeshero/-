@@ -1,0 +1,457 @@
+package com.atguigu.exer;
+
+/**
+ * @description:定义一个Employee类。
+*该类包含：private成员变量name,age,birthday，其中 birthday 为 MyDate 类的对象；
+*并为每一个属性定义 getter, setter 方法；
+*并重写 toString 方法输出 name, age, birthday
+ * @author:zyl
+ * @create:2022-10-18 19:54:00
+ */
+public class Employee implements Comparable<Employee>{
+    private String name;
+    private int age;
+    private MyDate birthday;
+
+    public Employee(String name, int age, MyDate birthday) {
+        this.name = name;
+        this.age = age;
+        this.birthday = birthday;
+    }
+
+    public Employee() {
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public MyDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(MyDate birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", birthday=" + birthday +
+                '}';
+    }
+
+    //指明泛型时的写法
+    @Override
+    public int compareTo(Employee o) {
+        return this.name.compareTo(o.name);
+    }
+
+    //没有指明泛型时的写法
+    //按 name 排序
+//    @Override
+//    public int compareTo(Object o) {
+//        if(o instanceof Employee){
+//            Employee e = (Employee)o;
+//            return this.name.compareTo(e.name);
+//        }
+////        return 0;
+//        throw new RuntimeException("传入的数据类型不一致！");
+//    }
+}
+
+
+package com.atguigu.exer;
+
+import org.testng.annotations.Test;
+
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+/**
+ * @description:
+ * 创建该类的 5 个对象，并把这些对象放入 TreeSet 集合中（下一章：TreeSet 需使用泛型来定义）
+分别按以下两种方式对集合中的元素进行排序，并遍历输出：
+
+1). 使Employee 实现 Comparable 接口，并按 name 排序
+2). 创建 TreeSet 时传入 Comparator对象，按生日日期的先后排序。
+ * @author:zyl
+ * @create:2022-10-18 19:56:00
+ */
+public class EmployeeTest {
+    //问题二：按生日日期的先后排序。
+    @Test
+    public void test2(){
+
+        TreeSet<Employee> set = new TreeSet<>(new Comparator<Employee>() {
+            //使用泛型以后的写法
+            @Override
+            public int compare(Employee o1, Employee o2) {
+                MyDate b1 = o1.getBirthday();
+                MyDate b2 = o2.getBirthday();
+
+                return b1.compareTo(b2);
+            }
+            //使用泛型之前的写法
+            //@Override
+//            public int compare(Object o1, Object o2) {
+//                if(o1 instanceof Employee && o2 instanceof Employee){
+//                    Employee e1 = (Employee)o1;
+//                    Employee e2 = (Employee)o2;
+//
+//                    MyDate b1 = e1.getBirthday();
+//                    MyDate b2 = e2.getBirthday();
+//                    //方式一：
+////                    //比较年
+////                    int minusYear = b1.getYear() - b2.getYear();
+////                    if(minusYear != 0){
+////                        return minusYear;
+////                    }
+////                    //比较月
+////                    int minusMonth = b1.getMonth() - b2.getMonth();
+////                    if(minusMonth != 0){
+////                        return minusMonth;
+////                    }
+////                    //比较日
+////                    return b1.getDay() - b2.getDay();
+//
+//                    //方式二：
+//                    return b1.compareTo(b2);
+//
+//                }
+////                return 0;
+//                throw new RuntimeException("传入的数据类型不一致！");
+//            }
+        });
+
+        Employee e1 = new Employee("liudehua",55,new MyDate(1965,5,4));
+        Employee e2 = new Employee("zhangxueyou",43,new MyDate(1987,5,4));
+        Employee e3 = new Employee("guofucheng",44,new MyDate(1987,5,9));
+        Employee e4 = new Employee("liming",51,new MyDate(1954,8,12));
+        Employee e5 = new Employee("liangzhaowei",21,new MyDate(1978,12,4));
+
+        set.add(e1);
+        set.add(e2);
+        set.add(e3);
+        set.add(e4);
+        set.add(e5);
+
+        Iterator<Employee> iterator = set.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+
+    //问题一：使用自然排序
+    @Test
+    public void test1(){
+        TreeSet<Employee> set = new TreeSet<Employee>();
+
+        Employee e1 = new Employee("liudehua",55,new MyDate(1965,5,4));
+        Employee e2 = new Employee("zhangxueyou",43,new MyDate(1987,5,4));
+        Employee e3 = new Employee("guofucheng",44,new MyDate(1987,5,9));
+        Employee e4 = new Employee("liming",51,new MyDate(1954,8,12));
+        Employee e5 = new Employee("liangzhaowei",21,new MyDate(1978,12,4));
+
+        set.add(e1);
+        set.add(e2);
+        set.add(e3);
+        set.add(e4);
+        set.add(e5);
+
+        Iterator<Employee> iterator = set.iterator();
+        while (iterator.hasNext()){
+            Employee employee = iterator.next();
+            System.out.println(employee);
+        }
+    }
+}
+
+
+package com.atguigu.java;
+
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @description:
+ * @author:zyl
+ * @create:2022-10-18 20:18:00
+ */
+public class GenericTest1 {
+    @Test
+    public void test1(){
+        //如果定义了泛型类，实例化没有指明类的泛型，则认为此泛型类型为Object类型
+        //要求：如果大家定义了类是带泛型的，建议在实例化时要指明类的泛型。
+        Order order = new Order();
+        order.setOrderT(123);
+        order.setOrderT("ABC");
+
+        //建议：实例化时指明类的泛型
+        Order<String> order1 = new Order<String>("orderAA",1001,"order:AA");
+
+        order1.setOrderT("AA:hello");
+
+    }
+
+    @Test
+    public void test2(){
+        SubOrder sub1 = new SubOrder();
+        //由于子类在继承带泛型的父类时，指明了泛型类型。则实例化子类对象时，不再需要指明泛型。
+        sub1.setOrderT(1122);
+
+        SubOrder1<String> sub2 = new SubOrder1<>();
+        sub2.setOrderT("order2...");
+    }
+
+    @Test
+    public void test3(){
+
+        ArrayList<String> list1 = null;
+        ArrayList<Integer> list2 = new ArrayList<Integer>();
+        //泛型不同的引用不能相互赋值。
+//        list1 = list2;
+
+        Person p1 = null;
+        Person p2 = null;
+        p1 = p2;
+
+
+    }
+
+    //测试泛型方法
+    @Test
+    public void test4(){
+        Order<String> order = new Order<>();
+        Integer[] arr = new Integer[]{1,2,3,4};
+        //泛型方法在调用时，指明泛型参数的类型。
+        List<Integer> list = order.copyFromArrayToList(arr);
+
+        System.out.println(list);
+    }
+}
+
+
+package com.atguigu.java;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @description:
+ * @author:zyl
+ * @create:2022-10-18 20:19:00
+ */
+public class SubOrder extends Order<Integer>{
+
+
+
+    public static <E> List<E> copyFromArrayToList(E[] arr){
+
+        ArrayList<E> list = new ArrayList<>();
+
+        for(E e : arr){
+            list.add(e);
+        }
+        return list;
+
+    }
+}
+
+
+package com.atguigu.java;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @description:
+ * @author:zyl
+ * @create:2022-10-18 20:22:00
+ */
+public class Order<T> {
+    String orderName;
+    int orderId;
+
+    //类的内部结构就可以使用类的泛型
+
+    T orderT;
+
+    public Order(){
+        //编译不通过
+//        T[] arr = new T[10];
+        //编译通过
+        T[] arr = (T[]) new Object[10];
+    }
+
+    public Order(String orderName,int orderId,T orderT){
+        this.orderName = orderName;
+        this.orderId = orderId;
+        this.orderT = orderT;
+    }
+
+    //如下的三个方法都不是泛型方法
+    public T getOrderT(){
+        return orderT;
+    }
+
+    public void setOrderT(T orderT){
+        this.orderT = orderT;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderName='" + orderName + '\'' +
+                ", orderId=" + orderId +
+                ", orderT=" + orderT +
+                '}';
+    }
+    //静态方法中不能使用类的泛型。
+//    public static void show(T orderT){
+//        System.out.println(orderT);
+//    }
+
+    public void show(){
+        //编译不通过
+//        try{
+//
+//
+//        }catch(T t){
+//
+//        }
+
+    }
+
+    //泛型方法：在方法中出现了泛型的结构，泛型参数与类的泛型参数没有任何关系。
+    //换句话说，泛型方法所属的类是不是泛型类都没有关系。
+    //泛型方法，可以声明为静态的。原因：泛型参数是在调用方法时确定的。并非在实例化类时确定。
+    public static <E> List<E> copyFromArrayToList(E[] arr){
+
+        ArrayList<E> list = new ArrayList<>();
+
+        for(E e : arr){
+            list.add(e);
+        }
+        return list;
+
+    }
+}
+
+
+package com.atguigu.exer;
+
+/**
+ * @description:
+ * MyDate类包含:
+private成员变量year,month,day；并为每一个属性定义 getter, setter 方法；
+ * @author:zyl
+ * @create:2022-10-18 19:57:00
+ */
+public class MyDate implements Comparable<MyDate>{
+    private int year;
+    private int month;
+    private int day;
+
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    public MyDate() {
+
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    @Override
+    public String toString() {
+        return "MyDate{" +
+                "year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                '}';
+    }
+
+
+//    @Override
+//    public int compareTo(Object o) {
+//        if(o instanceof MyDate){
+//            MyDate m = (MyDate)o;
+//
+//            //比较年
+//            int minusYear = this.getYear() - m.getYear();
+//            if(minusYear != 0){
+//                return minusYear;
+//            }
+//            //比较月
+//            int minusMonth = this.getMonth() - m.getMonth();
+//            if(minusMonth != 0){
+//                return minusMonth;
+//            }
+//            //比较日
+//            return this.getDay() - m.getDay();
+//        }
+//
+//        throw new RuntimeException("传入的数据类型不一致！");
+//
+//    }
+
+    @Override
+    public int compareTo(MyDate m) {
+        //比较年
+        int minusYear = this.getYear() - m.getYear();
+        if(minusYear != 0){
+            return minusYear;
+        }
+        //比较月
+        int minusMonth = this.getMonth() - m.getMonth();
+        if(minusMonth != 0){
+            return minusMonth;
+        }
+        //比较日
+        return this.getDay() - m.getDay();
+    }
+}
