@@ -1,0 +1,114 @@
+package at.guigu.java;
+
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ * @description:
+ * @author:zyl
+ * @create:2022-10-23 16:29:00
+ *
+ *  1.read()的理解：返回读到的第一个字符，如果达到文件末尾返回的是-1
+ *  2.异常的处理：为保证流资源一定可以执行关闭操作，需要使用try-catch-finally处理
+ *  3.读入的文件一定要存在，否则会报FileNotFoundException
+ */
+public class TestFileReader {
+    public static void main(String[] args) {
+        File file = new File("Hello.txt"); //相较于当前工程
+        System.out.println(file.getAbsolutePath());
+
+        File file1 = new File("day09\\Hello.txt"); //绝对地址
+        System.out.println(file1.getAbsolutePath());
+    }
+
+    @Test
+    public void test1() throws IOException {
+        FileReader fr = null;
+
+        try {
+            //1.实例化File类的对象，指明要操作的文件
+            File file = new File("Hello.txt"); //相当于当前Module
+            //2.提供具体的流
+            fr = new FileReader(file);
+
+            //3.数据的读入
+            //read():返回读到的第一个字符，如果达到文件末尾返回的是-1
+            int data = fr.read();
+            while(data != -1){
+                System.out.print((char)data);
+                data = fr.read();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //4.流的关闭操作
+            try {
+                if(fr != null)
+                fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    //对read()操作的升级，使用read的重载方法
+    @Test
+    public void testFileReader() throws FileNotFoundException {
+
+        //1.File类的实例化
+        File file = new File("Hello.txt");
+        //2.FileReader流的实例化
+        FileReader fr = new FileReader(file);
+        //3.读入操作
+        //read()
+        char[] cbuf = new char[5]; //创建cubf数组，一次读入多个字符,一次读5个
+        int len;
+        while((len = (fr.read(cbuf)) != -1){
+
+        }
+
+        //4.资源的关闭
+    }
+}
+
+
+
+package com.atguigu.java2;
+
+/**
+ * @description:
+ * @author:zyl
+ * @create:2022-10-23 14:24:00
+ */
+public class DailyTest {
+    //1.如何遍历Map的key集，value集，key-value集，使用上泛型
+
+//    Map<String,Integer> map = new HashMap<String,Integer>(); 创建map对象
+//    map.put();  添加key、value值
+    //遍历key
+//    Set<String> keySet = map.keySet();
+//    for(String key : keySet){
+//        System.out.println(key);
+//    }
+
+    //遍历value
+//    Collection<Integer> values = map.values();
+//    Iterator<Integer> iterator = values.iterator();
+//    while(iterator.hashNext){
+//        System.out.println(iterator.next());
+//    }
+
+    //遍历key-value
+//    Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+//    Iterator<Map.Entry<String,Integer>> iterator = entrySet.iterator();
+//    while(iterator.hashNext()){
+//        Map.Entry<String,Integer> entry = iterator.next();
+//        String key = entry.getKey();
+//        Integer value = entry.getValue();
+//        System.out.println(key + "---->" + value);
+//    }
+}
