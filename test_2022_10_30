@@ -1,0 +1,243 @@
+package com.atguigu.java;
+
+import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.*;
+import java.util.Iterator;
+
+/**
+ * Files工具类的使用：操作文件或目录的工具类
+ * @author shkstart
+ * @create 2019 下午 2:44
+ */
+public class FilesTest {
+
+	@Test
+	public void test1() throws IOException{
+		Path path1 = Paths.get("d:\\nio", "hello.txt");
+		Path path2 = Paths.get("atguigu.txt");
+		
+//		Path copy(Path src, Path dest, CopyOption … how) : 文件的复制
+		//要想复制成功，要求path1对应的物理上的文件存在。path1对应的文件没有要求。
+//		Files.copy(path1, path2, StandardCopyOption.REPLACE_EXISTING);
+		
+//		Path createDirectory(Path path, FileAttribute<?> … attr) : 创建一个目录
+		//要想执行成功，要求path对应的物理上的文件目录不存在。一旦存在，抛出异常。
+		Path path3 = Paths.get("d:\\nio\\nio1");
+//		Files.createDirectory(path3);
+		
+//		Path createFile(Path path, FileAttribute<?> … arr) : 创建一个文件
+		//要想执行成功，要求path对应的物理上的文件不存在。一旦存在，抛出异常。
+		Path path4 = Paths.get("d:\\nio\\hi.txt");
+//		Files.createFile(path4);
+		
+//		void delete(Path path) : 删除一个文件/目录，如果不存在，执行报错
+//		Files.delete(path4);
+		
+//		void deleteIfExists(Path path) : Path对应的文件/目录如果存在，执行删除.如果不存在，正常执行结束
+		Files.deleteIfExists(path3);
+		
+//		Path move(Path src, Path dest, CopyOption…how) : 将 src 移动到 dest 位置
+		//要想执行成功，src对应的物理上的文件需要存在，dest对应的文件没有要求。
+//		Files.move(path1, path2, StandardCopyOption.ATOMIC_MOVE);
+		
+//		long size(Path path) : 返回 path 指定文件的大小
+		long size = Files.size(path2);
+		System.out.println(size);
+
+	}
+
+	@Test
+	public void test2() throws IOException{
+		Path path1 = Paths.get("d:\\nio", "hello.txt");
+		Path path2 = Paths.get("atguigu.txt");
+//		boolean exists(Path path, LinkOption … opts) : 判断文件是否存在
+		System.out.println(Files.exists(path2, LinkOption.NOFOLLOW_LINKS));
+
+//		boolean isDirectory(Path path, LinkOption … opts) : 判断是否是目录
+		//不要求此path对应的物理文件存在。
+		System.out.println(Files.isDirectory(path1, LinkOption.NOFOLLOW_LINKS));
+
+//		boolean isRegularFile(Path path, LinkOption … opts) : 判断是否是文件
+
+//		boolean isHidden(Path path) : 判断是否是隐藏文件
+		//要求此path对应的物理上的文件需要存在。才可判断是否隐藏。否则，抛异常。
+//		System.out.println(Files.isHidden(path1));
+
+//		boolean isReadable(Path path) : 判断文件是否可读
+		System.out.println(Files.isReadable(path1));
+//		boolean isWritable(Path path) : 判断文件是否可写
+		System.out.println(Files.isWritable(path1));
+//		boolean notExists(Path path, LinkOption … opts) : 判断文件是否不存在
+		System.out.println(Files.notExists(path1, LinkOption.NOFOLLOW_LINKS));
+	}
+
+	/**
+	 * StandardOpenOption.READ:表示对应的Channel是可读的。
+	 * StandardOpenOption.WRITE：表示对应的Channel是可写的。
+	 * StandardOpenOption.CREATE：如果要写出的文件不存在，则创建。如果存在，忽略
+	 * StandardOpenOption.CREATE_NEW：如果要写出的文件不存在，则创建。如果存在，抛异常
+	 *
+	 * @author shkstart 邮箱：shkstart@126.com
+	 * @throws IOException
+	 */
+	@Test
+	public void test3() throws IOException{
+		Path path1 = Paths.get("d:\\nio", "hello.txt");
+
+//		InputStream newInputStream(Path path, OpenOption…how):获取 InputStream 对象
+		InputStream inputStream = Files.newInputStream(path1, StandardOpenOption.READ);
+
+//		OutputStream newOutputStream(Path path, OpenOption…how) : 获取 OutputStream 对象
+		OutputStream outputStream = Files.newOutputStream(path1, StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+
+
+//		SeekableByteChannel newByteChannel(Path path, OpenOption…how) : 获取与指定文件的连接，how 指定打开方式。
+		SeekableByteChannel channel = Files.newByteChannel(path1, StandardOpenOption.READ,StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+
+//		DirectoryStream<Path>  newDirectoryStream(Path path) : 打开 path 指定的目录
+		Path path2 = Paths.get("e:\\teach");
+		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path2);
+		Iterator<Path> iterator = directoryStream.iterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
+		}
+
+
+	}
+}
+
+
+
+package com.atguigu.java;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * @author shkstart
+ * @create 2019 上午 11:58
+ */
+public class FileUtilsTest {
+
+    public static void main(String[] args) {
+        File srcFile = new File("day10\\爱情与友情.jpg");
+        File destFile = new File("day10\\爱情与友情2.jpg");
+
+        try {
+            FileUtils.copyFile(srcFile,destFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+package com.atguigu.java;
+
+import org.junit.Test;
+
+import java.io.*;
+
+/**
+ * 对象流的使用
+ * 1.ObjectInputStream 和 ObjectOutputStream
+ * 2.作用：用于存储和读取基本数据类型数据或对象的处理流。它的强大之处就是可以把Java中的对象写入到数据源中，也能把对象从数据源中还原回来。
+ *
+ * 3.要想一个java对象是可序列化的，需要满足相应的要求。见Person.java
+ *
+ * 4.序列化机制：
+ * 对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种
+ * 二进制流持久地保存在磁盘上，或通过网络将这种二进制流传输到另一个网络节点。
+ * 当其它程序获取了这种二进制流，就可以恢复成原来的Java对象。
+
+ *
+ * @author shkstart
+ * @create 2019 上午 10:27
+ */
+public class ObjectInputOutputStreamTest {
+
+    /*
+    序列化过程：将内存中的java对象保存到磁盘中或通过网络传输出去
+    使用ObjectOutputStream实现
+     */
+    @Test
+    public void testObjectOutputStream(){
+        ObjectOutputStream oos = null;
+
+        try {
+            //1.
+            oos = new ObjectOutputStream(new FileOutputStream("object.dat"));
+            //2.
+            oos.writeObject(new String("我爱北京天安门"));
+            oos.flush();//刷新操作
+
+            oos.writeObject(new Person("王铭",23));
+            oos.flush();
+
+            oos.writeObject(new Person("张学良",23,1001,new Account(5000)));
+            oos.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(oos != null){
+                //3.
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+    }
+
+    /*
+    反序列化：将磁盘文件中的对象还原为内存中的一个java对象
+    使用ObjectInputStream来实现
+     */
+    @Test
+    public void testObjectInputStream(){
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("object.dat"));
+
+            Object obj = ois.readObject();
+            String str = (String) obj;
+
+            Person p = (Person) ois.readObject();
+            Person p1 = (Person) ois.readObject();
+
+            System.out.println(str);
+            System.out.println(p);
+            System.out.println(p1);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if(ois != null){
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+
+
+    }
+
+}
